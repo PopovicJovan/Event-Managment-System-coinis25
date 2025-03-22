@@ -1,7 +1,7 @@
 import { Card } from "../components/Card";
 import { useParties } from "../hooks/useParties";
 
-export const Parties = () => {
+export const PartiesPage = () => {
   const { parties } = useParties();
 
   return (

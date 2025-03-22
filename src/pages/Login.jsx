@@ -1,6 +1,6 @@
 import { useAuth } from "../hooks/useAuth";
 
-export const Login = () => {
+export const LoginPage = () => {
   const { user, setUser, message, login } = useAuth();
 
   return (

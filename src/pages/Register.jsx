@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useAuth } from "../hooks/useAuth";
 
-export const Register = () => {
+export const RegisterPage = () => {
   const { user, setUser, register, message } = useAuth();
   const [passwordConfirm, setPasswordConfirm] = useState("");
 
