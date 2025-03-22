@@ -1,40 +1,40 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 export const Navbar = () => {
   return (
     <nav className="bg-blue-600 p-4">
       <ul className="flex justify-center space-x-6">
         <li>
-          <Link
+          <NavLink
             to="/"
             className="text-white hover:text-gray-300 transition duration-300"
           >
             Home
-          </Link>
+          </NavLink>
         </li>
         <li>
-          <Link
+          <NavLink
             to="/parties"
             className="text-white hover:text-gray-300 transition duration-300"
           >
             Parties
-          </Link>
+          </NavLink>
         </li>
         <li>
-          <Link
+          <NavLink
             to="/login"
             className="text-white hover:text-gray-300 transition duration-300"
           >
             Login
-          </Link>
+          </NavLink>
         </li>
         <li>
-          <Link
+          <NavLink
             to="/register"
             className="text-white hover:text-gray-300 transition duration-300"
           >
             Register
-          </Link>
+          </NavLink>
         </li>
       </ul>
     </nav>
