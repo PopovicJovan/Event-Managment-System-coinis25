@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 
-export const Navbar = () => {
+export const NavbarComponent = () => {
   return (
     <nav className="bg-blue-600 p-4">
       <ul className="flex justify-center space-x-6">

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useAuth } from "../hooks/useAuth";
+import { useAuth } from "../hooks/use-auth";
 
 export const RegisterPage = () => {
   const { user, setUser, register, message } = useAuth();
