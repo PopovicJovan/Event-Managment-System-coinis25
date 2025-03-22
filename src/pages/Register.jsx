@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useAuth } from "../composable/useAuth";
+import { useAuth } from "../hooks/useAuth";
 
 export const Register = () => {
   const { user, setUser, register, message } = useAuth();

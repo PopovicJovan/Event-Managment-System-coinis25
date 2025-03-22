@@ -1,8 +1,8 @@
 import { Routes, Route } from "react-router-dom";
-import { Home } from "../views/Home";
-import { Login } from "../views/Login";
-import { Register } from "../views/Register";
-import { Parties } from "../views/Parties";
+import { Home } from "../pages/Home";
+import { Login } from "../pages/Login";
+import { Register } from "../pages/Register";
+import { Parties } from "../pages/Parties";
 
 export const AppRoutes = () => {
   return (

@@ -1,4 +1,4 @@
-import { useAuth } from "../composable/useAuth";
+import { useAuth } from "../hooks/useAuth";
 
 export const Login = () => {
   const { user, setUser, message, login } = useAuth();

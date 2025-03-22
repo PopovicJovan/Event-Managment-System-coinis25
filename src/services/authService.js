@@ -1,4 +1,4 @@
-import { apiClient } from "./axiosInstance";
+import { apiClient } from "../api/axiosInstance";
 
 export const authService = {
   async login(user) {

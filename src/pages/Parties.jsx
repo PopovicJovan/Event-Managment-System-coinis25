@@ -1,5 +1,5 @@
 import { Card } from "../components/Card";
-import { useParties } from "../composable/useParties";
+import { useParties } from "../hooks/useParties";
 
 export const Parties = () => {
   const { parties } = useParties();
