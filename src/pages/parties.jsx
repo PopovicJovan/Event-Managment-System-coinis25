@@ -1,4 +1,4 @@
-import { CardComponent } from "../components/card";
+import { CardComponent } from "../components/Card";
 import { useParties } from "../hooks/use-parties";
 
 export const PartiesPage = () => {
