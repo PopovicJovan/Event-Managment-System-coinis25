@@ -1,1 +1,25 @@
 @import "tailwindcss";
+
+:root {
+  --bgColor: #3f3f4e;
+  --darkGray: #1a1a1a;
+  --lightGray: #b0b0b0;
+  --primaryPurple: #8a42f4;
+  --white: #ffffff;
+}
+
+.bg-darkGray {
+  background-color: var(--darkGray);
+}
+
+.text-lightGray {
+  color: var(--lightGray);
+}
+
+.bg-primaryPurple {
+  background-color: var(--primaryPurple);
+}
+
+html {
+  background-color: var(--bgColor);
+}
