@@ -4,6 +4,8 @@ import { LoginPage } from "../pages/login";
 import { RegisterPage } from "../pages/register";
 import { PartiesPage } from "../pages/parties";
 import { RootLayout } from "../layouts/main";
+import {AdminLayout} from "../layouts/admin.jsx";
+import {AdminUsers} from "../pages/admin/admin-users.jsx";
 
 export const router = createBrowserRouter([
   {
@@ -28,4 +30,14 @@ export const router = createBrowserRouter([
       },
     ],
   },
+  {
+    path: "/admin",
+    element: <AdminLayout />,
+    children:[
+        {
+          path: "users",
+          element: <AdminUsers />
+        }
+    ]
+  }
 ]);
