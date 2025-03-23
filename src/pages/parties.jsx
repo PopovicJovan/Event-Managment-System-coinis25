@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { CardComponent } from "../components/card";
+import { CardComponent } from "../components/Card";
 import { useParties } from "../hooks/use-parties";
 import Pagination from "@mui/material/Pagination";
 
 export const PartiesPage = () => {
-  const { parties, isLoading } = useParties(); // Destructure isLoading from useParties
+  const { parties, isLoading } = useParties(); 
   const [page, setPage] = useState(1);
   const itemsPerPage = 6;
 
