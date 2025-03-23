@@ -1,4 +1,10 @@
-export const Card = ({ title, organizer, image, dateStart, dateEnd }) => {
+export const CardComponent = ({
+  title,
+  organizer,
+  image,
+  dateStart,
+  dateEnd,
+}) => {
   return (
     <div className="bg-white shadow-lg rounded-2xl overflow-hidden w-80">
       <img src={image} alt={title} className="w-full h-48 object-cover" />

@@ -1,4 +1,4 @@
-import { apiClient } from "../api/axiosInstance";
+import { apiClient } from "../api/axios-instance";
 export const partiesService = {
   async getParties() {
     try {

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { partiesService } from "../services/partiesService";
+import { partiesService } from "../services/parties-service";
 
 export const useParties = () => {
   const [parties, setParties] = useState([]);
