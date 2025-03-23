@@ -3,6 +3,8 @@ import { partiesService } from "../services/parties-service";
 
 export const useParties = () => {
   const [parties, setParties] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
   useEffect(() => {
     const fetchParties = async () => {
       try {
@@ -10,10 +12,12 @@ export const useParties = () => {
         setParties(data.partylist);
       } catch (err) {
         console.error(err);
+      } finally {
+        setIsLoading(false);
       }
     };
     fetchParties();
   }, []);
 
-  return { parties };
+  return { parties, isLoading };
 };
