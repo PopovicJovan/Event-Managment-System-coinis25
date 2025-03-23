@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import placeholderImage from "../assets/placeholder.png";
 export const CardComponent = ({
   title,
@@ -5,6 +6,7 @@ export const CardComponent = ({
   image,
   dateStart,
   dateEnd,
+  id,
 }) => {
   return (
     <div className="bg-darkGray shadow-lg rounded-2xl overflow-hidden w-80 p-4 mx-auto mt-4">
@@ -23,9 +25,11 @@ export const CardComponent = ({
           End Date: {new Date(dateEnd).toLocaleString()}
         </h4>
         <p className="text-xl text-lightGray mt-2">{organizer}</p>
-        <button className="mt-4 px-4 py-2 bg-primaryPurple text-white rounded-lg hover:bg-opacity-80 transition">
-          Learn More
-        </button>
+        <Link to={`/parties/${id}`}>
+          <button className="mt-4 px-4 py-2 bg-primaryPurple text-white rounded-lg hover:bg-opacity-80 transition cursor-pointer">
+            Learn More
+          </button>
+        </Link>
       </div>
     </div>
   );

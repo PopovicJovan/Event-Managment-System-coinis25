@@ -4,6 +4,7 @@ import { LoginPage } from "../pages/login";
 import { RegisterPage } from "../pages/register";
 import { PartiesPage } from "../pages/parties";
 import { RootLayout } from "../layouts/main";
+import { Party } from "../pages/party";
 
 export const router = createBrowserRouter([
   {
@@ -17,6 +18,10 @@ export const router = createBrowserRouter([
       {
         path: "/parties",
         element: <PartiesPage />,
+      },
+      {
+        path: "/parties/:id",
+        element: <Party />,
       },
       {
         path: "/login",
