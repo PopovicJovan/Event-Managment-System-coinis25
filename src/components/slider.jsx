@@ -50,7 +50,7 @@ export const Slider = ({ parties }) => {
 
   return (
     <div className="relative w-full lg:w-3/4 mx-auto">
-      <h2 className="text-2xl font-bold mb-6 text-white text-center">
+      <h2 className="text-2xl font-bold mb-6 text-purple-400 text-center">
         Featured Events
       </h2>
 
@@ -87,7 +87,7 @@ export const Slider = ({ parties }) => {
                     </p>
                     <button
                       onClick={() => openModal(party)}
-                      className="bg-purple-700 hover:bg-purple-800 text-white py-2 px-6 rounded-full transition duration-300 mt-4"
+                      className="bg-purple-700 hover:bg-purple-800 text-white py-2 px-6 rounded-full transition duration-300 mt-4 cursor-pointer"
                     >
                       Learn More
                     </button>

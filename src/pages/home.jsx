@@ -14,8 +14,8 @@ export const HomePage = () => {
     <div className="container mx-auto px-4 py-8 min-h-screen bg-black text-white">
       {/* Header */}
       <header className="mb-12">
-        <h1 className="text-4xl font-bold text-center mb-4">Event Management System</h1>
-        <p className="text-xl text-center text-purple-400">Discover amazing events happening worldwide</p>
+        <h1 className="text-4xl text-purple-400 font-bold text-center mb-4">Event Management System</h1>
+        <p className="text-xl text-center text-white-400">Discover amazing events happening worldwide</p>
       </header>
 
       {/* Slider & NewsFeed Section */}

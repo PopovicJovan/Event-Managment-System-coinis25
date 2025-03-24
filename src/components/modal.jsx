@@ -30,20 +30,37 @@ export const Modal = ({ isOpen, onClose, party }) => {
           <p className="text-sm text-gray-600 mb-1">
             <span className="text-purple-400">End: </span> {new Date(party.dateEnd).toLocaleString()}
           </p>
-          <p className="text-sm text-white-600 mb-1">
+          <p className="text-sm text-gray-600 mb-1">
             <span className="text-purple-400">Location: </span> {party.nameTown}, {party.nameCountry}
           </p>
   
           {party.urlOrganizer && (
+  <div className="mt-4">
+    <p className="text-sm font-semibold text-purple-700 mb-1">Web:</p>
+    <div className="flex flex-col gap-1">
+      {party.urlOrganizer
+        .split(",")
+        .map((url, idx) => {
+          const cleanUrl = url.trim();
+          const fullUrl = cleanUrl.startsWith("http")
+            ? cleanUrl
+            : `https://${cleanUrl}`;
+          return (
             <a
-              href={party.urlOrganizer}
+              key={idx}
+              href={fullUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-purple-700 underline mt-4 inline-block"
+              className="text-white-600 text-sm cursor-pointer"
             >
-              Visit Organizer Website
+              {cleanUrl}
             </a>
-          )}
+          );
+        })}
+    </div>
+  </div>
+)}
+
         </div>
       </div>
     );
