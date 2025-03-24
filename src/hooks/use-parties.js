@@ -7,13 +7,17 @@ export const useParties = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
   const [isFiltered, setIsFiltered] = useState(false);
+  const [organizerFilter, setOrganizerFilter] = useState("");
+  const [startDateFilter, setStartDateFilter] = useState("");
+  const [endDateFilter, setEndDateFilter] = useState("");
+  const [countryFilter, setCountryFilter] = useState("");
 
   useEffect(() => {
     const fetchParties = async () => {
       try {
         const data = await partiesService.getParties();
         setParties(data.partylist);
-        setFilteredParties(data.partylist); // Inicijalno postavljanje
+        setFilteredParties(data.partylist);
       } catch (err) {
         console.error(err);
       } finally {
@@ -24,16 +28,55 @@ export const useParties = () => {
   }, []);
 
   const applyFilter = () => {
-    const filtered = parties.filter((party) =>
-      party.nameParty.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+    let filtered = parties;
+
+    if (searchTerm) {
+      filtered = filtered.filter((party) =>
+        party.nameParty.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+    }
+
+    if (organizerFilter) {
+      filtered = filtered.filter((party) =>
+        party.nameOrganizer
+          .toLowerCase()
+          .includes(organizerFilter.toLowerCase())
+      );
+    }
+    if (countryFilter) {
+      filtered = filtered.filter((party) =>
+        party.nameCountry.toLowerCase().includes(countryFilter.toLowerCase())
+      );
+    }
+
+    if (startDateFilter) {
+      const startDate = new Date(startDateFilter);
+      startDate.setHours(0, 0, 0, 0);
+      filtered = filtered.filter(
+        (party) => new Date(party.dateStart) >= new Date(startDate)
+      );
+    }
+
+    if (endDateFilter) {
+      const endDate = new Date(endDateFilter);
+      endDate.setHours(23, 59, 59, 999);
+      filtered = filtered.filter(
+        (party) => new Date(party.dateEnd) <= new Date(endDate)
+      );
+    }
+
     setFilteredParties(filtered);
     setIsFiltered(true);
   };
+
   const deleteFilter = () => {
     setIsFiltered(false);
     setFilteredParties(parties);
     setSearchTerm("");
+    setOrganizerFilter("");
+    setStartDateFilter("");
+    setEndDateFilter("");
+    setCountryFilter("");
   };
 
   return {
@@ -45,5 +88,13 @@ export const useParties = () => {
     deleteFilter,
     isFiltered,
     parties,
+    organizerFilter,
+    setOrganizerFilter,
+    startDateFilter,
+    setStartDateFilter,
+    endDateFilter,
+    setEndDateFilter,
+    countryFilter,
+    setCountryFilter,
   };
 };

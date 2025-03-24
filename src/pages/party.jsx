@@ -1,13 +1,11 @@
-import { useParty } from "../hooks/use-party"; // Importujemo hook
+import { useParty } from "../hooks/use-party";
 import placeholderImage from "../assets/placeholder.png";
-
+import { PartyMap } from "../components/party-map";
 export const Party = () => {
-  const { party, loading, error } = useParty(); // Pozivamo hook
+  const { party, loading, error } = useParty();
 
   if (loading) {
-    return (
-      <h2 className="text-center text-xl text-primaryPurple">Loading...</h2>
-    );
+    return <h2 className="text-center text-xl text-purple-700">Loading...</h2>;
   }
 
   if (error) {
@@ -20,9 +18,7 @@ export const Party = () => {
 
   if (!party) {
     return (
-      <h2 className="text-center text-xl text-primaryPurple">
-        Party not found
-      </h2>
+      <h2 className="text-center text-xl text-purple-700">Party not found</h2>
     );
   }
 
@@ -42,19 +38,16 @@ export const Party = () => {
 
       {/* Party Details */}
       <div className="space-y-6 text-lg text-lightGray">
-        <div className="bg-darkGray p-6 rounded-xl shadow-lg">
-          <h2 className="text-2xl font-semibold text-primaryPurple">
-            Organizer
-          </h2>
-          <p>{party.nameOrganizer}</p>
-          <p className="text-base">{party.textOrganizer}</p>
+        <div className=" p-6 rounded-xl shadow-lg">
+          <h2 className="text-2xl font-semibold text-purple-700">Organizer</h2>
+          <p className="text-white">{party.nameOrganizer}</p>
         </div>
 
-        <div className="bg-darkGray p-6 rounded-xl shadow-lg">
-          <h2 className="text-2xl font-semibold text-primaryPurple">
-            Event Details
-          </h2>
-          <div className="space-y-3">
+        <div className="p-6 rounded-xl shadow-lg flex flex-col md:flex-row justify-between items-center">
+          <div className="space-y-3 text-white w-200">
+            <h2 className="text-2xl font-semibold text-purple-700">
+              Event Details
+            </h2>
             <p>
               <span className="font-semibold">Start Date:</span>{" "}
               {new Date(party.dateStart).toLocaleString()}
@@ -76,14 +69,20 @@ export const Party = () => {
               {party.textEntryFee || "To be announced"}
             </p>
           </div>
+          <PartyMap
+            latitude={party.geoLat}
+            longitude={party.geoLon}
+            name={party.nameParty}
+            location={`${party.nameTown}, ${party.nameCountry}`}
+          />
         </div>
 
         {/* Description */}
         <div className="bg-darkGray p-6 rounded-xl shadow-lg">
-          <h3 className="text-2xl font-semibold text-primaryPurple">
+          <h3 className="text-2xl font-semibold text-purple-700">
             About the Event:
           </h3>
-          <p className="text-lightGray">
+          <p className="text-white">
             {party.textMore
               ? party.textMore
               : "There is no text for this event"}
@@ -92,9 +91,7 @@ export const Party = () => {
 
         {/* Links */}
         <div className="mt-8 space-y-3 text-center">
-          <h3 className="text-2xl font-semibold text-primaryPurple">
-            More Info:
-          </h3>
+          <h3 className="text-2xl font-semibold text-white">More Info:</h3>
           <div className="space-y-4">
             <a
               href={party.urlOrganizer}
