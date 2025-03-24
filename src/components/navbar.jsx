@@ -72,21 +72,30 @@ export const NavbarComponent = () => {
               </li>
             ))}
           </ul>
-
-          <ul className="secondary-nav-list hidden md:block">
-            <li className="inline">
-              <NavLink className="nav-item" to="/">
-                <i className="fa-solid fa-toggle-off text-xl"></i>
-              </NavLink>
-            </li>
-            <li className="inline">
-              <NavLink className="nav-item" to="/">
-                <i className="fa-solid fa-user text-xl"></i>
-              </NavLink>
-            </li>
-          </ul>
         </div>
       </nav>
+
+      <div
+        className={`mobile-nav bg-gray-800 transition-all duration-300 ease-in-out ${
+          isBurgerVisible ? "max-h-64 opacity-100" : "max-h-0 opacity-0"
+        } md:hidden`}
+      >
+        <ul className="py-4 px-12">
+          {navItems.map((item) => (
+            <li key={item.path} className="py-2">
+              {renderNavLink(item.path, item.label, "block")}
+            </li>
+          ))}
+          <li className="py-2 flex space-x-4">
+            <NavLink className="nav-item" to="/" onClick={handleBurgerClick}>
+              <i className="fa-solid fa-toggle-off text-xl"></i>
+            </NavLink>
+            <NavLink className="nav-item" to="/" onClick={handleBurgerClick}>
+              <i className="fa-solid fa-user text-xl"></i>
+            </NavLink>
+          </li>
+        </ul>
+      </div>
 
       <div
         className={`mobile-nav bg-gray-800 transition-all duration-300 ease-in-out ${
@@ -109,8 +118,6 @@ export const NavbarComponent = () => {
           </li>
         </ul>
       </div>
-
-      <div className="nav-border pb-1"></div>
 
       <button
         onClick={scrollToTop}
