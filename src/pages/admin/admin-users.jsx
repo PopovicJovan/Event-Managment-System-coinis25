@@ -56,12 +56,31 @@ export const AdminUsers = () => {
                     </tbody>
                 </table>
                 <div className="flex justify-center my-6 text-white">
-                    <Pagination
-                        count={Math.ceil(users.length / itemsPerPage)}
-                        page={page}
-                        onChange={(_, v) => handlePageChange(_, v)}
-                        color="secondary"
-                    />
+                    <div className="flex justify-center my-6 text-white">
+                        <Pagination
+                            count={Math.ceil(users.length / itemsPerPage)}
+                            page={page}
+                            onChange={(_, v) => handlePageChange(_, v)}
+                            color="secondary"
+                            className={"my-5"}
+                            sx={{
+                                "& .MuiPaginationItem-root": {
+                                    backgroundColor: "purple", // Normal background color
+                                    color: "white", // Text color for pagination items
+                                    "&:hover": {
+                                        backgroundColor: "darkviolet", // Darker purple on hover
+                                    },
+                                },
+                                "& .MuiPaginationItem-root.Mui-selected": {
+                                    backgroundColor: "darkviolet", // Darker purple when active
+                                    color: "white", // Text color when active
+                                    "&:hover": {
+                                        backgroundColor: "purple", // On hover, keep the dark violet background
+                                    },
+                                },
+                            }}
+                        />
+                    </div>
                 </div>
                 </>
                 }
