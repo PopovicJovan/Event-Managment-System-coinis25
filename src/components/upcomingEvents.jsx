@@ -17,8 +17,8 @@ export const UpcomingEvents = ({ parties }) => {
             </div>
             <div className="p-4">
               <h3 className="font-bold text-lg mb-2">{party.nameParty}</h3>
-              <p className="text-purple-400">{party.nameOrganizer}</p>
-              <p className="text-gray-400">{new Date(party.dateStart).toLocaleDateString()}</p>
+              <p className="text-purple-400">{party.nameOrganizer} - {party.nameCountry}, {party.nameTown}</p>
+              <p className="text-gray-400 mb-1.5">{new Date(party.dateStart).toLocaleDateString()}</p>
               <Link to={`/parties/${party.id}`}>
                 <button className="bg-purple-700 hover:bg-purple-800 text-white py-2 px-4 rounded-full transition duration-300 w-full cursor-pointer">
                   View Details

@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { Modal } from "./modal"; // Adjust path if needed
 
 export const Slider = ({ parties }) => {
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
   const [visibleSlides, setVisibleSlides] = useState(3);
+  const [selectedParty, setSelectedParty] = useState(null); // Modal state
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     const handleResize = () => {
@@ -34,6 +36,16 @@ export const Slider = ({ parties }) => {
     setCurrentSlideIndex((prev) =>
       prev >= parties.length - visibleSlides ? 0 : prev + 1
     );
+};
+
+  const openModal = (party) => {
+    setSelectedParty(party);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setSelectedParty(null);
+    setIsModalOpen(false);
   };
 
   return (
@@ -41,6 +53,7 @@ export const Slider = ({ parties }) => {
       <h2 className="text-2xl font-bold mb-6 text-white text-center">
         Featured Events
       </h2>
+
       {parties.length > 0 ? (
         <div className="relative">
           <div className="overflow-hidden">
@@ -69,17 +82,21 @@ export const Slider = ({ parties }) => {
                   >
                     <h4 className="text-lg font-medium">{party.nameOrganizer}</h4>
                     <h3 className="text-2xl font-bold my-2">{party.nameParty}</h3>
-                    <p className="text-sm">{party.nameCountry}, {party.nameTown}</p>
-                    <Link to={`/parties/${party.id}`} className="mt-auto">
-                      <button className="bg-purple-700 hover:bg-purple-800 text-white py-2 px-6 rounded-full transition duration-300 mt-4 cursor-pointer">
-                        Learn More
-                      </button>
-                    </Link>
+                    <p className="text-sm">
+                      {party.nameCountry}, {party.nameTown}
+                    </p>
+                    <button
+                      onClick={() => openModal(party)}
+                      className="bg-purple-700 hover:bg-purple-800 text-white py-2 px-6 rounded-full transition duration-300 mt-4"
+                    >
+                      Learn More
+                    </button>
                   </div>
                 </div>
               ))}
             </div>
           </div>
+
           {parties.length > visibleSlides && (
             <>
               <button
@@ -102,6 +119,9 @@ export const Slider = ({ parties }) => {
           No events available.
         </div>
       )}
+
+      {/* Modal */}
+      <Modal isOpen={isModalOpen} onClose={closeModal} party={selectedParty} />
     </div>
   );
 };
