@@ -41,11 +41,6 @@ html {
   );
 }
 
-.navbar {
-  background-color: #1a1a1a;
-  border-bottom: solid 2px var(--primaryPurple);
-}
-
 .nav-item {
   padding: 10px 20px;
   color: var(--lightGray);
@@ -137,6 +132,7 @@ html {
     color: var(--white);
     background-color: var(--secondaryPurple);
     transition: background 0.3s ease;
+    z-index: 1000;
   }
 
   .arrow-up:hover {
