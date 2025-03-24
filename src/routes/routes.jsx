@@ -9,6 +9,7 @@ import {AdminLayout} from "../layouts/admin.jsx";
 import {AdminUsers} from "../pages/admin/admin-users.jsx";
 import {AdminEvents} from "../pages/admin/admin-events.jsx";
 import {AdminRolesCategories} from "../pages/admin/admin-roles-categories.jsx";
+import {AdminUsersChart} from "../pages/admin/admin-users-chart.jsx";
 
 export const router = createBrowserRouter([
   {
@@ -56,6 +57,10 @@ export const router = createBrowserRouter([
         {
           path: "roles",
           element: <AdminRolesCategories />
+        },
+        {
+          path: "users/chart",
+          element: <AdminUsersChart />
         }
     ]
   }

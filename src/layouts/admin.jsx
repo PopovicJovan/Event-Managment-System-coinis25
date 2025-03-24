@@ -40,7 +40,7 @@ export const AdminLayout = () => {
             {
                 open && (
                     <div id={"side-bar"}
-                         className={"fixed start-0 top-0 w-3xs h-full px-2 py-5 bg-neutral-800 flex flex-col gap-3 "}>
+                         className={"fixed start-0 top-0 w-3xs h-full px-2 py-5 bg-neutral-800 flex flex-col gap-3 z-10 "}>
                         <span className="text-2xl font-bold tracking-wide text-white mx-auto">ADMIN</span>
                         <AdminSideBarButton
                             label="Users"
@@ -66,25 +66,25 @@ export const AdminLayout = () => {
                         <AdminSideBarButton
                             className={"mt-2"}
                             label={"Users chart"}
-                            onClick={() => {}}
+                            onClick={(e) => {handleButtonClick(e, "/admin/users/chart")}}
                             color={"danger"}
                         />
                         <AdminSideBarButton
                             label={"Events chart"}
-                            onClick={() => {}}
+                            onClick={(e) => {handleButtonClick(e, "/admin/events/chart")}}
                             color={"danger"}
                         />
                         <AdminSideBarButton
                             label={"User activity chart"}
                             className={"mb-2"}
-                            onClick={() => {}}
+                            onClick={(e) => {handleButtonClick(e, "/admin/users/chart")}}
                             color={"danger"}
                         />
                         <hr />
                         <AdminSideBarButton
                             className={"mt-2"}
                             label={"Events map tracking"}
-                            onClick={() => {}}
+                            onClick={(e) => {handleButtonClick(e, "/admin/map")}}
                             color={"black"}
                         />
                     </div>
@@ -100,7 +100,7 @@ export const AdminLayout = () => {
                     <FontAwesomeIcon icon={faComment}  size={"2xl"}/>
                 </div>
             </div>
-            <div className={`w-full pt-4 pe-6 ps-6 ${open ? "lg:ps-72" : undefined}`}>
+            <div className={`w-full pt-4 px-0 sm:px-6 ${open ? "lg:ps-72" : undefined}`}>
                 <Outlet/>
             </div>
         </div>

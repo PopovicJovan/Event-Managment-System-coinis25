@@ -1,5 +1,4 @@
 import {useRoles} from "../../hooks/use-roles.js";
-import {useEffect, useState} from "react";
 import {useCategories} from "../../hooks/use-categories.js";
 import {CategoryRoleAdminTable} from "../../components/CategoryRoleAdminTable.jsx";
 

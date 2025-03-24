@@ -23,3 +23,10 @@
 html {
   background-color: var(--bgColor);
 }
+
+
+.user-activity-graph{
+  width: 1000px !important;
+  max-width: 100% !important;
+  margin: 0 auto 0 auto;
+}
