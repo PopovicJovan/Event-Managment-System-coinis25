@@ -20,7 +20,7 @@ export const UpcomingEvents = ({ parties }) => {
               <p className="text-purple-400">{party.nameOrganizer}</p>
               <p className="text-gray-400">{new Date(party.dateStart).toLocaleDateString()}</p>
               <Link to={`/parties/${party.id}`}>
-                <button className="bg-purple-700 hover:bg-purple-800 text-white py-2 px-4 rounded-full transition duration-300 w-full">
+                <button className="bg-purple-700 hover:bg-purple-800 text-white py-2 px-4 rounded-full transition duration-300 w-full cursor-pointer">
                   View Details
                 </button>
               </Link>
