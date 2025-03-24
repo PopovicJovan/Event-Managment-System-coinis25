@@ -8,4 +8,13 @@ export const partiesService = {
       console.error(error);
     }
   },
+  async getPartiesById(id) {
+    try {
+      const response = await apiClient.get(`${id}`);
+      return response.data;
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  },
 };

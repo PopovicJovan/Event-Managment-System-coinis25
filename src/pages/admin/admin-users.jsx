@@ -22,7 +22,7 @@ export const AdminUsers = () => {
         <>
             <div className={"w-full overflow-x-auto"}>
                 {!loading && <>
-                    <table className="w-full border-collapse rounded-lg shadow-lg table-auto ">
+                    <table className="w-full border-collapse rounded-lg shadow-lg table-auto bg-white ">
                         <thead>
                             <tr className="bg-green-600 text-white text-left">
                                 <th className="px-6 py-3">ID</th>
