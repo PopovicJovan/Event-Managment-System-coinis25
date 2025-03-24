@@ -10,6 +10,7 @@ import {AdminUsers} from "../pages/admin/admin-users.jsx";
 import {AdminEvents} from "../pages/admin/admin-events.jsx";
 import {AdminRolesCategories} from "../pages/admin/admin-roles-categories.jsx";
 import {AdminUsersChart} from "../pages/admin/admin-users-chart.jsx";
+import { AboutUs } from "../pages/aboutUs";
 
 export const router = createBrowserRouter([
   {
@@ -27,6 +28,10 @@ export const router = createBrowserRouter([
       {
         path: "/parties/:id",
         element: <Party />,
+      },
+      {
+        path: "/about",
+        element: <AboutUs />
       },
       {
         path: "/login",
