@@ -68,7 +68,7 @@ export const NavbarComponent = () => {
       </nav>
       <div
         className={`mobile-nav bg-gray-800 transition-all duration-300 ease-in-out ${
-          isBurgerVisible ? "max-h-64 opacity-100" : "max-h-0 opacity-0"
+          isBurgerVisible ? "max-h-64 opacity-100" : "max-h-0 opacity-0 hidden"
         } md:hidden`}
       >
         <ul className="py-4 px-12">
@@ -92,7 +92,7 @@ export const NavbarComponent = () => {
       <button
         onClick={scrollToTop}
         className={`arrow-up m-5 text-l p-3 rounded ${
-          isArrowVisible ? "opacity-100" : "opacity-0"
+          isArrowVisible ? "opacity-100" : "opacity-0 hidden"
         }`}
         aria-label="Scroll to top"
       >
