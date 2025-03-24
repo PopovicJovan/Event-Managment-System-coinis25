@@ -25,18 +25,17 @@ html {
   background-color: var(--bgColor);
 }
 
-
 .nav-border {
   background: linear-gradient(
     to right,
     oklch(0.381 0.176 304.987),
     var(--secondaryPurple)
   );
+}
 
 .navbar {
   background-color: #1a1a1a;
   border-bottom: solid 2px var(--primaryPurple);
-
 }
 
 .nav-item {

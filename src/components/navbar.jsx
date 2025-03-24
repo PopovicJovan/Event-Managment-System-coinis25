@@ -46,7 +46,6 @@ export const NavbarComponent = () => {
 
   return (
     <>
-
       <nav className="navbar m-auto px-12 pt-8 pb-7 bg-gray-900">
         <div className="list-container flex justify-between w-5/7 m-auto">
           <div className="logo-container flex justify-between">
@@ -72,37 +71,6 @@ export const NavbarComponent = () => {
                 {renderNavLink(item.path, item.label)}
               </li>
             ))}
-
-      <nav className="navbar m-auto px-12 pt-8 pb-7">
-        <div className="flex justify-between w-5/7 m-auto">
-          <img className="w-25" src={logoImage} alt="" />
-          <ul className="space-x-7">
-            <li className="inline">
-              <NavLink
-                className={({ isActive }) =>
-                  isActive
-                    ? "active-nav nav-item rounded-xl"
-                    : "inactive-nav nav-item rounded-xl"
-                }
-                to="/"
-              >
-                Home
-              </NavLink>
-            </li>
-            <li className="inline">
-              <NavLink
-                className={({ isActive }) =>
-                  isActive
-                    ? "active-nav nav-item rounded-xl"
-                    : "inactive-nav nav-item rounded-xl"
-                }
-                to="/parties"
-              >
-                Parties
-              </NavLink>
-            </li>
-
-
           </ul>
 
           <ul className="secondary-nav-list hidden md:block">
@@ -128,7 +96,7 @@ export const NavbarComponent = () => {
         <ul className="py-4 px-12">
           {navItems.map((item) => (
             <li key={item.path} className="py-2">
-              {renderNavLink(item.path, item.label, "block")}
+              {renderNavLink(item.path, item.label, "block", handleBurgerClick)}
             </li>
           ))}
           <li className="py-2 flex space-x-4">
