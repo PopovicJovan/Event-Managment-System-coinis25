@@ -1,3 +1,5 @@
+
+
 export const AboutUs = () => {
     return (
       <div className="min-h-screen bg-black text-white px-6 py-16">

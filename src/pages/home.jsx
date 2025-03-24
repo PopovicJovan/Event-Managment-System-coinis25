@@ -4,6 +4,7 @@ import { NewsFeed } from "../components/newsFeed.jsx";
 import { UpcomingEvents } from "../components/upcomingEvents.jsx";
 import { TopEvents } from "../components/topEvents.jsx";
 
+
 export const HomePage = () => {
   const { parties, isLoading } = useParties();
 
@@ -23,11 +24,11 @@ export const HomePage = () => {
         <Slider parties={parties} />
         <NewsFeed parties={parties} />
       </div>
+      {/* Top Events Section */}
       <TopEvents events={parties} />
       {/* Upcoming Events Section */}
       <UpcomingEvents parties={parties} />
 
-      {/* Top Events Section */}
       
     </div>
   );
