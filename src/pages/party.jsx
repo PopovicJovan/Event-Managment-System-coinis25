@@ -1,13 +1,11 @@
-import { useParty } from "../hooks/use-party"; // Importujemo hook
+import { useParty } from "../hooks/use-party";
 import placeholderImage from "../assets/placeholder.png";
-
+import { PartyMap } from "../components/party-map";
 export const Party = () => {
-  const { party, loading, error } = useParty(); // Pozivamo hook
+  const { party, loading, error } = useParty();
 
   if (loading) {
-    return (
-      <h2 className="text-center text-xl text-primaryPurple">Loading...</h2>
-    );
+    return <h2 className="text-center text-xl text-purple-700">Loading...</h2>;
   }
 
   if (error) {
@@ -20,9 +18,7 @@ export const Party = () => {
 
   if (!party) {
     return (
-      <h2 className="text-center text-xl text-primaryPurple">
-        Party not found
-      </h2>
+      <h2 className="text-center text-xl text-purple-700">Party not found</h2>
     );
   }
 
@@ -42,16 +38,16 @@ export const Party = () => {
 
       {/* Party Details */}
       <div className="space-y-6 text-lg text-lightGray">
-        <div className="bg-darkGray p-6 rounded-xl shadow-lg">
+        <div className=" p-6 rounded-xl shadow-lg">
           <h2 className="text-2xl font-semibold text-purple-700">Organizer</h2>
           <p className="text-white">{party.nameOrganizer}</p>
         </div>
 
-        <div className="bg-darkGray p-6 rounded-xl shadow-lg">
-          <h2 className="text-2xl font-semibold text-purple-700">
-            Event Details
-          </h2>
-          <div className="space-y-3 text-white">
+        <div className="p-6 rounded-xl shadow-lg flex flex-col md:flex-row justify-between items-center">
+          <div className="space-y-3 text-white w-200">
+            <h2 className="text-2xl font-semibold text-purple-700">
+              Event Details
+            </h2>
             <p>
               <span className="font-semibold">Start Date:</span>{" "}
               {new Date(party.dateStart).toLocaleString()}
@@ -73,6 +69,12 @@ export const Party = () => {
               {party.textEntryFee || "To be announced"}
             </p>
           </div>
+          <PartyMap
+            latitude={party.geoLat}
+            longitude={party.geoLon}
+            name={party.nameParty}
+            location={`${party.nameTown}, ${party.nameCountry}`}
+          />
         </div>
 
         {/* Description */}
