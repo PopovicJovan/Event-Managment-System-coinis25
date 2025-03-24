@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { CardComponent } from "../components/Card";
+import { CardComponent } from "../components/card";
 import { useParties } from "../hooks/use-parties";
 import Pagination from "@mui/material/Pagination";
 
