@@ -54,7 +54,7 @@ export const Slider = ({ parties }) => {
         Featured Events
       </h2>
 
-      {parties && parties.length > 0 ? (
+      {parties.length > 0 ? (
         <div className="relative">
           <div className="overflow-hidden">
             <div
