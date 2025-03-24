@@ -11,6 +11,7 @@ import {AdminEvents} from "../pages/admin/admin-events.jsx";
 import {AdminRolesCategories} from "../pages/admin/admin-roles-categories.jsx";
 import {AdminUsersChart} from "../pages/admin/admin-users-chart.jsx";
 import { AboutUs } from "../pages/aboutUs";
+import {AdminMap} from "../pages/admin/admin-map.jsx";
 
 export const router = createBrowserRouter([
   {
@@ -66,6 +67,10 @@ export const router = createBrowserRouter([
         {
           path: "users/chart",
           element: <AdminUsersChart />
+        },
+        {
+          path: "map",
+          element: <AdminMap />
         }
     ]
   }

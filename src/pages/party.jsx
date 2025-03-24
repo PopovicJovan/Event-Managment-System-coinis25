@@ -70,10 +70,9 @@ export const Party = () => {
             </p>
           </div>
           <PartyMap
-            latitude={party.geoLat}
-            longitude={party.geoLon}
-            name={party.nameParty}
-            location={`${party.nameTown}, ${party.nameCountry}`}
+            latLongs={[[party.geoLat,party.geoLon] ]}
+            names={[party.nameParty]}
+            locations={[`${party.nameTown}, ${party.nameCountry}`]}
           />
         </div>
 
