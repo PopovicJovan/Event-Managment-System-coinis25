@@ -50,7 +50,7 @@ export const Slider = ({ parties }) => {
 
   return (
     <div className="relative w-full lg:w-3/4 mx-auto">
-      <h2 className="text-2xl font-bold mb-6 text-purple-400 text-center">
+      <h2 className="text-2xl font-bold mb-6 text-white-400 text-center">
         Featured Events
       </h2>
 

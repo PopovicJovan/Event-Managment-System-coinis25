@@ -58,6 +58,7 @@ export const NavbarComponent = () => {
                 Parties
               </NavLink>
             </li>
+
           </ul>
           <ul>
             <li className="inline text-lg">
