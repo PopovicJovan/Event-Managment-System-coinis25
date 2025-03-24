@@ -2,10 +2,7 @@
 
 :root {
   --bgColor: #000;
-<<<<<<< HEAD
-=======
-  --darkGray: #1a1a1a;
->>>>>>> main
+
   --lightGray: #b0b0b0;
   --primaryPurple: #8a42f4;
   --white: #ffffff;
@@ -28,7 +25,7 @@ html {
 }
 
 .navbar {
-  background-color: var(--darkGray);
+  background-color: #1a1a1a;
   border-bottom: solid 2px var(--primaryPurple);
 }
 
