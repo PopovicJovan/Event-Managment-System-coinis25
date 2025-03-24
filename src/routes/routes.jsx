@@ -7,6 +7,8 @@ import { RootLayout } from "../layouts/main";
 import {Party} from "../pages/party.jsx";
 import {AdminLayout} from "../layouts/admin.jsx";
 import {AdminUsers} from "../pages/admin/admin-users.jsx";
+import {AdminEvents} from "../pages/admin/admin-events.jsx";
+import {AdminRolesCategories} from "../pages/admin/admin-roles-categories.jsx";
 
 export const router = createBrowserRouter([
   {
@@ -42,6 +44,18 @@ export const router = createBrowserRouter([
         {
           path: "users",
           element: <AdminUsers />
+        },
+        {
+          path: "events",
+          element: <AdminEvents />
+        },
+        {
+          path: "categories",
+          element: <AdminRolesCategories />
+        },
+        {
+          path: "roles",
+          element: <AdminRolesCategories />
         }
     ]
   }
