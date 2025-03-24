@@ -23,3 +23,42 @@
 html {
   background-color: var(--bgColor);
 }
+
+.navbar {
+  background-color: var(--darkGray);
+  border-bottom: solid 2px var(--primaryPurple);
+}
+
+.nav-item {
+  padding: 10px 20px;
+  color: var(--lightGray);
+  transition: opacity 0.3s ease;
+}
+
+.nav-item:hover {
+  opacity: 0.5;
+}
+
+.active-nav {
+  color: var(--color-white);
+  background: var(--primaryPurple);
+}
+
+.inactive-nav {
+  background-color: var(--darkGray);
+  border: solid 2px var(--primaryPurple);
+}
+
+.arrow-up {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  color: var(--white);
+  background-color: var(--primaryPurple);
+  transition: background 0.3s ease;
+}
+
+.arrow-up:hover {
+  background-color: #1a1a1a;
+  cursor: pointer;
+}
