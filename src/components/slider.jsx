@@ -36,7 +36,7 @@ export const Slider = ({ parties }) => {
     setCurrentSlideIndex((prev) =>
       prev >= parties.length - visibleSlides ? 0 : prev + 1
     );
-};
+  };
 
   const openModal = (party) => {
     setSelectedParty(party);
@@ -50,11 +50,11 @@ export const Slider = ({ parties }) => {
 
   return (
     <div className="relative w-full lg:w-3/4 mx-auto">
-      <h2 className="text-2xl font-bold mb-6 text-purple-400 text-center">
+      <h2 className="text-2xl font-bold mb-6 text-white-400 text-center">
         Featured Events
       </h2>
 
-      {parties.length > 0 ? (
+      {parties && parties.length > 0 ? (
         <div className="relative">
           <div className="overflow-hidden">
             <div
@@ -80,8 +80,12 @@ export const Slider = ({ parties }) => {
                       color: "white",
                     }}
                   >
-                    <h4 className="text-lg font-medium">{party.nameOrganizer}</h4>
-                    <h3 className="text-2xl font-bold my-2">{party.nameParty}</h3>
+                    <h4 className="text-lg font-medium">
+                      {party.nameOrganizer}
+                    </h4>
+                    <h3 className="text-2xl font-bold my-2">
+                      {party.nameParty}
+                    </h3>
                     <p className="text-sm">
                       {party.nameCountry}, {party.nameTown}
                     </p>

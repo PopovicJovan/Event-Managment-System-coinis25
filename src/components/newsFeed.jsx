@@ -16,7 +16,7 @@ export const NewsFeed = ({ parties }) => {
                 </div>
                 <div className="p-4">
                   <h3 className="font-bold text-lg truncate">{party.nameParty}</h3>
-                  <p className="text-purple-400 text-sm">{party.nameOrganizer}</p>
+                  <p className="text-purple-400 text-sm">{party.nameOrganizer} - {party.nameCountry}, {party.nameTown}</p>
                   <p className="text-gray-400 text-xs mt-2">{new Date(party.dateStart).toLocaleDateString()}</p>
                 </div>
               </div>
