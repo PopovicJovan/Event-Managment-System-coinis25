@@ -12,7 +12,16 @@ export const PartiesPage = () => {
     searchTerm,
     deleteFilter,
     isFiltered,
+    organizerFilter,
+    setOrganizerFilter,
+    startDateFilter,
+    setStartDateFilter,
+    endDateFilter,
+    setEndDateFilter,
+    countryFilter,
+    setCountryFilter,
   } = useParties();
+
   const [page, setPage] = useState(1);
   const itemsPerPage = 6;
 
@@ -27,12 +36,13 @@ export const PartiesPage = () => {
 
   return (
     <div className="container mx-auto px-4">
-      {/* Search Bar */}
-      <div className="flex justify-center my-6">
+      {/* Search and Filter Bar */}
+      <div className="flex flex-wrap justify-center my-6 gap-4">
+        {/* Search Bar */}
         <input
           type="text"
           placeholder="Search for a party..."
-          className="w-full max-w-lg px-4 py-2 border border-gray-500 rounded-lg focus:outline-none focus:ring-2 focus:ring-primaryPurple bg-darkGray text-white"
+          className="w-full sm:max-w-xs px-4 py-2 border border-gray-500 rounded-lg focus:outline-none focus:ring-2 focus:ring-primaryPurple bg-darkGray text-white"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           onKeyDown={(e) => {
@@ -41,32 +51,90 @@ export const PartiesPage = () => {
             }
           }}
         />
-        {isFiltered ? (
-          <>
+
+        {/* Country Filter */}
+        <input
+          type="text"
+          placeholder="Search by Country..."
+          className="w-full sm:max-w-xs px-4 py-2 border border-gray-500 rounded-lg focus:outline-none focus:ring-2 focus:ring-primaryPurple bg-darkGray text-white"
+          value={countryFilter}
+          onChange={(e) => setCountryFilter(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              applyFilter();
+            }
+          }}
+        />
+
+        {/* Organizer Filter */}
+        <input
+          type="text"
+          placeholder="Search by Organizer..."
+          className="w-full sm:max-w-xs px-4 py-2 border border-gray-500 rounded-lg focus:outline-none focus:ring-2 focus:ring-primaryPurple bg-darkGray text-white"
+          value={organizerFilter}
+          onChange={(e) => setOrganizerFilter(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              applyFilter();
+            }
+          }}
+        />
+
+        {/* Start Date Filter */}
+        <input
+          type="date"
+          className="w-full sm:max-w-xs px-4 py-2 border border-gray-500 rounded-lg focus:outline-none focus:ring-2 focus:ring-primaryPurple bg-darkGray text-white"
+          value={startDateFilter}
+          onChange={(e) => setStartDateFilter(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              applyFilter();
+            }
+          }}
+        />
+
+        {/* End Date Filter */}
+        <input
+          type="date"
+          className="w-full sm:max-w-xs px-4 py-2 border border-gray-500 rounded-lg focus:outline-none focus:ring-2 focus:ring-primaryPurple bg-darkGray text-white"
+          value={endDateFilter}
+          onChange={(e) => setEndDateFilter(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              applyFilter();
+            }
+          }}
+        />
+
+        {/* Buttons */}
+        <div className="flex gap-4 items-center">
+          {isFiltered ? (
+            <>
+              <button
+                className="px-4 py-2 bg-primaryPurple text-white rounded-lg hover:bg-purple-700 transition"
+                onClick={applyFilter}
+              >
+                Apply Filter
+              </button>
+              <button
+                className="px-4 py-2 bg-primaryPurple text-white rounded-lg hover:bg-purple-700 transition"
+                onClick={deleteFilter}
+              >
+                Remove Filter
+              </button>
+            </>
+          ) : (
             <button
-              className="ml-4 px-4 py-2 bg-primaryPurple text-white rounded-lg hover:bg-purple-700 transition"
+              className="px-4 py-2 bg-primaryPurple text-white rounded-lg hover:bg-purple-700 transition"
               onClick={applyFilter}
             >
-              Search
+              Apply Filter
             </button>
-
-            <button
-              className="ml-4 px-4 py-2 bg-primaryPurple text-white rounded-lg hover:bg-purple-700 transition"
-              onClick={deleteFilter}
-            >
-              Remove Filter
-            </button>
-          </>
-        ) : (
-          <button
-            className="ml-4 px-4 py-2 bg-primaryPurple text-white rounded-lg hover:bg-purple-700 transition"
-            onClick={applyFilter}
-          >
-            Search
-          </button>
-        )}
+          )}
+        </div>
       </div>
 
+      {/* Loading or Party Cards */}
       {isLoading ? (
         <h1 className="text-center text-white">Loading ...</h1>
       ) : (
@@ -82,6 +150,7 @@ export const PartiesPage = () => {
                   dateStart={party.dateStart}
                   dateEnd={party.dateEnd}
                   id={party.id}
+                  country={party.nameCountry}
                 />
               ))
             ) : (
@@ -101,17 +170,17 @@ export const PartiesPage = () => {
                 color="secondary"
                 sx={{
                   "& .MuiPaginationItem-root": {
-                    backgroundColor: "purple", // Normal background color
-                    color: "white", // Text color for pagination items
+                    backgroundColor: "purple",
+                    color: "white",
                     "&:hover": {
-                      backgroundColor: "darkviolet", // Darker purple on hover
+                      backgroundColor: "darkviolet",
                     },
                   },
                   "& .MuiPaginationItem-root.Mui-selected": {
-                    backgroundColor: "darkviolet", // Darker purple when active
-                    color: "white", // Text color when active
+                    backgroundColor: "darkviolet",
+                    color: "white",
                     "&:hover": {
-                      backgroundColor: "purple", // On hover, keep the dark violet background
+                      backgroundColor: "purple",
                     },
                   },
                 }}
