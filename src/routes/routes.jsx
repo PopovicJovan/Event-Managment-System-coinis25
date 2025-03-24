@@ -12,6 +12,7 @@ import {AdminRolesCategories} from "../pages/admin/admin-roles-categories.jsx";
 import {AdminUsersChart} from "../pages/admin/admin-users-chart.jsx";
 import { AboutUs } from "../pages/aboutUs";
 import {AdminMap} from "../pages/admin/admin-map.jsx";
+import {Error404} from "../pages/error/error-404.jsx";
 
 export const router = createBrowserRouter([
   {
@@ -42,6 +43,10 @@ export const router = createBrowserRouter([
         path: "/register",
         element: <RegisterPage />,
       },
+      {
+          path: "*",
+          element: <Error404 />
+      }
     ],
   },
   {

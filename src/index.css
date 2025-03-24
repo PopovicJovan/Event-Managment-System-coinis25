@@ -178,3 +178,25 @@ html {
     }
   }
 }
+
+.error-page{
+  width: 100%;
+  height: 100vh;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+@media (max-width: 400px) {
+  .error-page{
+    height: 45vh;
+  }
+}
+
+.error-404-page{
+  background-image: url("assets/404error.jpg");
+}
+
+.went-wrong{
+  background-image: url("assets/went-wrong.jpg");
+}
