@@ -8,9 +8,10 @@ export const CardComponent = ({
   dateStart,
   dateEnd,
   id,
+  country,
 }) => {
   return (
-    <div className="bg-darkGray shadow-lg rounded-2xl overflow-hidden w-80 p-4 mx-auto mt-4 flex flex-col h-full">
+    <div className="bg-gray-900 shadow-lg rounded-2xl overflow-hidden w-80 p-4 mx-auto mt-4 flex flex-col h-full">
       <img
         src={image ? image : placeholderImage}
         alt={title}
@@ -26,9 +27,10 @@ export const CardComponent = ({
           End Date: {new Date(dateEnd).toLocaleString()}
         </h4>
         <p className="text-xl text-lightGray mt-2">{organizer}</p>
+        <p className="text-xl text-lightGray mt-2">{country}</p>
         <div className="mt-auto">
           <Link to={`/parties/${id}`}>
-            <button className="w-full px-4 py-2 bg-primaryPurple text-white rounded-lg hover:bg-opacity-80 transition cursor-pointer">
+            <button className="w-full px-4 py-2 bg-purple-700 text-white rounded-lg hover:bg-opacity-80 transition cursor-pointer">
               Learn More
             </button>
           </Link>

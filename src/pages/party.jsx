@@ -27,7 +27,7 @@ export const Party = () => {
   }
 
   return (
-    <div className="max-w-screen-lg mx-auto px-6 py-10 bg-darkGray text-white rounded-xl shadow-xl mt-3">
+    <div className="max-w-screen-lg mx-auto px-6 py-10 bg-gray-900 text-white rounded-xl shadow-xl mt-3">
       {/* Party Title and Image */}
       <div className="text-center mb-8">
         <h1 className="text-4xl font-bold text-primaryPurple bg-clip-text text-transparent mb-4">

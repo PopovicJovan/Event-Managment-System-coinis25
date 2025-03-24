@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { CardComponent } from "../components/Card";
+import { CardComponent } from "../components/card";
 import { useParties } from "../hooks/use-parties";
 import Pagination from "@mui/material/Pagination";
 
@@ -99,6 +99,22 @@ export const PartiesPage = () => {
                 page={page}
                 onChange={handleChange}
                 color="secondary"
+                sx={{
+                  "& .MuiPaginationItem-root": {
+                    backgroundColor: "purple", // Normal background color
+                    color: "white", // Text color for pagination items
+                    "&:hover": {
+                      backgroundColor: "darkviolet", // Darker purple on hover
+                    },
+                  },
+                  "& .MuiPaginationItem-root.Mui-selected": {
+                    backgroundColor: "darkviolet", // Darker purple when active
+                    color: "white", // Text color when active
+                    "&:hover": {
+                      backgroundColor: "purple", // On hover, keep the dark violet background
+                    },
+                  },
+                }}
               />
             </div>
           )}
