@@ -58,18 +58,7 @@ export const NavbarComponent = () => {
                 Parties
               </NavLink>
             </li>
-            <li className="inline">
-              <NavLink
-                className={({ isActive }) =>
-                  isActive
-                    ? "active-nav nav-item rounded-xl"
-                    : "inactive-nav nav-item rounded-xl"
-                }
-                to="/about"
-              >
-                About Us
-              </NavLink>
-            </li>
+
           </ul>
           <ul>
             <li className="inline text-lg">
