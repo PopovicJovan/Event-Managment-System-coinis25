@@ -20,18 +20,18 @@ export const Modal = ({ isOpen, onClose, party }) => {
   
           {/* Details */}
           <h2 className="text-2xl font-bold mb-2 text-purple-600">{party.nameParty}</h2>
-          <p className="text-sm text-gray-600 mb-1">
-           <span className="text-purple-400"> Organized by: </span> <span className="font-semibold">{party.nameOrganizer}</span>
+          <p className="text-sm text-purple-400 mb-1">
+           <span className="text-gray-500"> Organized by: </span> <span className="font-semibold">{party.nameOrganizer}</span>
           </p>
-          <p className="text-sm text-gray-600 mb-1"><span className="text-purple-400">Type: </span>{party.nameType}</p>
-          <p className="text-sm text-gray-600 mb-1">
-            <span className="text-purple-400">Start: </span> {new Date(party.dateStart).toLocaleString()}
+          <p className="text-sm text-purple-400 mb-1"><span className="text-gray-500">Type: </span>{party.nameType}</p>
+          <p className="text-sm text-purple-400 mb-1">
+            <span className="text-gray-500">Start: </span> {new Date(party.dateStart).toLocaleString()}
           </p>
-          <p className="text-sm text-gray-600 mb-1">
-            <span className="text-purple-400">End: </span> {new Date(party.dateEnd).toLocaleString()}
+          <p className="text-sm text-purple-400 mb-1">
+            <span className="text-gray-500">End: </span> {new Date(party.dateEnd).toLocaleString()}
           </p>
-          <p className="text-sm text-gray-600 mb-1">
-            <span className="text-purple-400">Location: </span> {party.nameTown}, {party.nameCountry}
+          <p className="text-sm text-purple-400 mb-1">
+            <span className="text-gray-500">Location: </span> {party.nameTown}, {party.nameCountry}
           </p>
   
           {party.urlOrganizer && (
