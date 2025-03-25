@@ -45,7 +45,7 @@ export const CalendarPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-bgColor text-white p-6">
+    <div className="calendar min-h-screen bg-bgColor text-white p-6">
       <h1 className="text-3xl font-bold text-center text-purple-400 mb-8">
         Event Calendar
       </h1>
@@ -53,7 +53,7 @@ export const CalendarPage = () => {
       {isLoading ? (
         <p className="text-center text-white">Loading events...</p>
       ) : (
-        <div className="calendar bg-gray-900 rounded-lg p-4">
+        <div className="bg-gray-900 rounded-lg p-4">
   <Calendar
     localizer={localizer}
     events={events}
