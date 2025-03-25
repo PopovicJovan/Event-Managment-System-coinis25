@@ -2,6 +2,7 @@ import { useState } from "react";
 import { CardComponent } from "../components/card";
 import { useParties } from "../hooks/use-parties";
 import Pagination from "@mui/material/Pagination";
+import {PaginationComponent} from "../components/pagination-component.jsx";
 
 export const PartiesPage = () => {
   const {
@@ -163,28 +164,9 @@ export const PartiesPage = () => {
           {/* Pagination */}
           {filteredParties.length > itemsPerPage && (
             <div className="flex justify-center my-6 text-white">
-              <Pagination
-                count={Math.ceil(filteredParties.length / itemsPerPage)}
-                page={page}
-                onChange={handleChange}
-                color="secondary"
-                sx={{
-                  "& .MuiPaginationItem-root": {
-                    backgroundColor: "purple",
-                    color: "white",
-                    "&:hover": {
-                      backgroundColor: "darkviolet",
-                    },
-                  },
-                  "& .MuiPaginationItem-root.Mui-selected": {
-                    backgroundColor: "darkviolet",
-                    color: "white",
-                    "&:hover": {
-                      backgroundColor: "purple",
-                    },
-                  },
-                }}
-              />
+              <PaginationComponent totalLength={filteredParties.length}
+                                   perPage={itemsPerPage} handlePageChange={handleChange}
+                                   currentPage={page}  className={"mt-5"}/>
             </div>
           )}
         </>

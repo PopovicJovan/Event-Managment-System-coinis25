@@ -2,6 +2,7 @@ import {useParties} from "../../hooks/use-parties.js";
 import {useState} from "react";
 import {CardComponent} from "../../components/card.jsx";
 import Pagination from "@mui/material/Pagination";
+import {PaginationComponent} from "../../components/pagination-component.jsx";
 
 export const AdminEvents = () => {
     const {
@@ -95,29 +96,9 @@ export const AdminEvents = () => {
                     {/* Pagination */}
                     {filteredParties.length > itemsPerPage && (
                         <div className="flex justify-center my-6 text-white">
-                            <Pagination
-                                count={Math.ceil(filteredParties.length / itemsPerPage)}
-                                page={page}
-                                onChange={handleChange}
-                                color="secondary"
-                                className={"my-5"}
-                                sx={{
-                                    "& .MuiPaginationItem-root": {
-                                        backgroundColor: "purple", // Normal background color
-                                        color: "white", // Text color for pagination items
-                                        "&:hover": {
-                                            backgroundColor: "darkviolet", // Darker purple on hover
-                                        },
-                                    },
-                                    "& .MuiPaginationItem-root.Mui-selected": {
-                                        backgroundColor: "darkviolet", // Darker purple when active
-                                        color: "white", // Text color when active
-                                        "&:hover": {
-                                            backgroundColor: "purple", // On hover, keep the dark violet background
-                                        },
-                                    },
-                                }}
-                            />
+                            <PaginationComponent totalLength={filteredParties.length}
+                                                 perPage={itemsPerPage} handlePageChange={handleChange}
+                                                 currentPage={page} className={"my-5"} />
                         </div>
                     )}
                 </>

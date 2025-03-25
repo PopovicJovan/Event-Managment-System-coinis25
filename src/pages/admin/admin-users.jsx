@@ -3,6 +3,8 @@ import {useState} from "react";
 import Pagination from "@mui/material/Pagination";
 import {useNavigate} from "react-router-dom";
 import {usersService} from "../../services/users-service.js";
+import {SpinLoader} from "../../components/spin-loader.jsx";
+import {PaginationComponent} from "../../components/pagination-component.jsx";
 
 
 export const AdminUsers = () => {
@@ -18,9 +20,16 @@ export const AdminUsers = () => {
     const showDetails = (id) => navigate(`/admin/users/${id}`);
     const banUser = (id) => usersService.banUser(id);
 
+
+
+
     return (
         <>
             <div className={"w-full overflow-x-auto"}>
+                {loading && <SpinLoader spinning={loading} />}
+
+
+
                 {!loading && <>
                     <table className="w-full border-collapse rounded-lg shadow-lg table-auto bg-white ">
                         <thead>
@@ -57,29 +66,11 @@ export const AdminUsers = () => {
                 </table>
                 <div className="flex justify-center my-6 text-white">
                     <div className="flex justify-center my-6 text-white">
-                        <Pagination
-                            count={Math.ceil(users.length / itemsPerPage)}
-                            page={page}
-                            onChange={(_, v) => handlePageChange(_, v)}
-                            color="secondary"
-                            className={"my-5"}
-                            sx={{
-                                "& .MuiPaginationItem-root": {
-                                    backgroundColor: "purple", // Normal background color
-                                    color: "white", // Text color for pagination items
-                                    "&:hover": {
-                                        backgroundColor: "darkviolet", // Darker purple on hover
-                                    },
-                                },
-                                "& .MuiPaginationItem-root.Mui-selected": {
-                                    backgroundColor: "darkviolet", // Darker purple when active
-                                    color: "white", // Text color when active
-                                    "&:hover": {
-                                        backgroundColor: "purple", // On hover, keep the dark violet background
-                                    },
-                                },
-                            }}
-                        />
+                        <PaginationComponent totalLength={users.length}
+                                             perPage={itemsPerPage} handlePageChange={handlePageChange}
+                                             currentPage={page} className={"my-5"} />
+
+
                     </div>
                 </div>
                 </>
