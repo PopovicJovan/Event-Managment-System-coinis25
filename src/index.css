@@ -2,7 +2,7 @@
 @import "leaflet/dist/leaflet.css";
 
 :root {
-  --bgColor: #000;
+  --bgColor: #0d0c1d;
   --lightGray: #b0b0b0;
   --primaryPurple: #8a42f4;
   --secondaryPurple: oklch(0.496 0.265 301.924);
