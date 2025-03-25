@@ -42,31 +42,59 @@ export const TopEvents = ({ events }) => {
               {new Date(event.dateEnd).toLocaleString()}
             </p>
         
-            <div className="mt-auto">
+            <div className="ml-auto mt-auto">
 
               <Link to={`/parties/${event.id}`}>
                 <button className="glow-button w-full px-4 py-2 bg-purple-700 text-white rounded-lg hover:bg-opacity-80 transition cursor-pointer">
                   Learn More
                 </button>
               </Link>
+              
             </div>
+            
           </div>
+          
         </div>
         
         ))}
       </div>
 
       {/* Load More Button */}
-      {visibleCount < oddEvents.length && (
-        <div className="flex justify-center mt-6">
-          <button
-            onClick={handleLoadMore}
-            className="px-6 py-2 bg-purple-700 text-white rounded-lg hover:bg-opacity-80 transition cursor-pointer"
-          >
-            Load More
-          </button>
+{visibleCount < oddEvents.length && (
+  <div className="mt-6 flex flex-col items-center">
+    <button
+      onClick={handleLoadMore}
+      className="mb-4 px-6 py-2 bg-purple-700 text-white rounded-lg hover:bg-opacity-80 transition cursor-pointer"
+    >
+      Load More
+    </button>
+
+    {/* Fog Preview Section */}
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pointer-events-none opacity-40 blur-sm">
+      {oddEvents.slice(visibleCount, visibleCount + 3).map((event) => (
+        <div
+          key={`fog-${event.id}`}
+          className="bg-gray-800 rounded-lg h-16 overflow-hidden flex flex-col xl:flex-row items-center xl:items-start p-4"
+        >
+          <img
+            src={event.urlImageFull || placeholderImage}
+            alt={event.nameParty}
+            className="w-40 h-32 object-cover rounded-lg"
+          />
+          <div className="mt-4 xl:mt-0 xl:ml-4 text-white text-center xl:text-left">
+            <h3 className="text-lg font-bold">{event.nameParty}</h3>
+            <p className="text-sm text-gray-300">{event.nameType}</p>
+            <p className="text-sm">
+              {event.nameCountry}, {event.nameTown}
+            </p>
+          </div>
         </div>
-      )}
+      ))}
+    </div>
+  </div>
+)}
+
+      
     </div>
   );
 };
