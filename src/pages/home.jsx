@@ -11,14 +11,17 @@ import './home.css';
 export const HomePage = () => {
   const { parties, isLoading } = useParties();
 
-  if (isLoading)
-
-    return <SpinLoader />
-
- 
+  if (isLoading) {
+    return (
+      <div className="flex justify-center items-center min-h-screen bg-bgColor text-white">
+        <SpinLoader />
+      </div>
+    );
+  }
+  
 
   return (
-    <div className="container mx-auto px-4 py-8 min-h-screen bg-black text-white overflow-hidden">
+    <div className="container mx-auto px-4 py-8 min-h-screen bg-bgColor text-white overflow-hidden">
 
       {/* Header */}
       <header className="mb-12">

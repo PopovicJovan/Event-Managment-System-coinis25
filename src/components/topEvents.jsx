@@ -27,7 +27,7 @@ export const TopEvents = ({ events }) => {
             />
 
             {/* Event Details */}
-            <div className="mt-4 xl:mt-0 xl:ml-4 text-white text-center xl:text-left">
+            <div className="mt-4 xl:mt-0 xl:ml-4 text-white text-center xl:text-left ">
               <h3 className="text-lg font-bold">{event.nameParty}</h3>
               <p className="text-sm text-gray-300">{event.nameType}</p>
               <p className="text-sm">
