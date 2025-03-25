@@ -28,7 +28,7 @@ export const AdminUsers = () => {
         <>
 
             <div className={`w-full overflow-x-auto`}>
-                {userCreate && <RegisterPopup className={`bg-transparent fixed z-30 ${userCreate ? "backdrop-blur-md" : undefined}`}/>}
+                {userCreate && <RegisterPopup isAdmin={true} className={`bg-transparent fixed z-30 ${userCreate ? "backdrop-blur-md" : undefined}`}/>}
                 {userCreate && <Button className="my-5 z-50"  size={"large"} onClick={() => setUserCreate(false)}>EXIT</Button>}
                 {loading ? <SpinLoader spinning={loading} /> :
                 <>
