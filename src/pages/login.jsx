@@ -1,8 +1,43 @@
-import { useAuth } from "../hooks/use-auth";
+// import { useAuth } from "../hooks/use-auth";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuthContext } from "../context/auth-context";
 import loginImage from "../assets/undraw_login.svg";
 
 export const LoginPage = () => {
-  const { user, setUser, message, login } = useAuth();
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const { login, getUser } = useAuthContext();
+  const navigate = useNavigate();
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    setError("");
+
+    try {
+      const success = await login(username, password);
+      if (success) {
+        navigate("/parties");
+      } else {
+        setError("Invalid username or password");
+      }
+    } catch (err) {
+      setError("An error has occurred during login");
+    }
+  };
+
+  const test = async (e) => {
+    e.preventDefault();
+    try {
+      const user = await getUser(); // Note the await
+      if (user) {
+        console.log(user);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <div className="flex justify-center items-center h-screen bg-black">
@@ -14,31 +49,32 @@ export const LoginPage = () => {
           <h1 className="text-2xl font-bold text-center text-white mb-6 uppercase">
             Login
           </h1>
-          {message && (
-            <p className="text-center text-red-500 mb-4">{message}</p>
+          {error && (
+            <div className="text-red-500 text-center mb-5">{error}</div>
           )}
           <div>
             <input
               type="text"
               placeholder="Username"
-              value={user.username}
-              onChange={(e) => setUser({ ...user, username: e.target.value })}
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
               className="w-full p-3 border border-purple-700 rounded-md mb-4 text-white"
             />
             <input
               type="password"
               placeholder="Password"
-              value={user.password}
-              onChange={(e) => setUser({ ...user, password: e.target.value })}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               className="w-full p-3 border border-purple-700 rounded-md mb-4 text-white"
             />
           </div>
           <button
-            onClick={login}
+            onClick={handleLogin}
             className="w-full p-3 bg-purple-900 text-white rounded-md hover:bg-purple-800 transition-all duration-300 ease-in-out hover:cursor-pointer mb-4"
           >
             Login
           </button>
+          <button onClick={test}>Test</button>
         </div>
       </div>
     </div>
