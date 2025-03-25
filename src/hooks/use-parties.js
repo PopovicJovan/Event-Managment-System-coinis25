@@ -9,7 +9,7 @@ export const useParties = () => {
   const [isFiltered, setIsFiltered] = useState(false);
   const [organizerFilter, setOrganizerFilter] = useState("");
   const [startDateFilter, setStartDateFilter] = useState("");
-  const [endDateFilter, setEndDateFilter] = useState("");
+
   const [countryFilter, setCountryFilter] = useState("");
 
   useEffect(() => {
@@ -57,14 +57,6 @@ export const useParties = () => {
       );
     }
 
-    if (endDateFilter) {
-      const endDate = new Date(endDateFilter);
-      endDate.setHours(23, 59, 59, 999);
-      filtered = filtered.filter(
-        (party) => new Date(party.dateEnd) <= new Date(endDate)
-      );
-    }
-
     setFilteredParties(filtered);
     setIsFiltered(true);
   };
@@ -75,7 +67,7 @@ export const useParties = () => {
     setSearchTerm("");
     setOrganizerFilter("");
     setStartDateFilter("");
-    setEndDateFilter("");
+
     setCountryFilter("");
   };
 
@@ -92,8 +84,7 @@ export const useParties = () => {
     setOrganizerFilter,
     startDateFilter,
     setStartDateFilter,
-    endDateFilter,
-    setEndDateFilter,
+
     countryFilter,
     setCountryFilter,
   };
