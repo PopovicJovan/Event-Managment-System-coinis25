@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import placeholderImage from "../assets/placeholder.png";
 
 export const TopEvents = ({ events }) => {
   const oddEvents = events.filter((_, index) => index % 2 !== 0); // Get only odd-indexed events
@@ -11,8 +12,10 @@ export const TopEvents = ({ events }) => {
 
   return (
     <div className="container mx-auto px-4 mt-8">
-      <h2 className="text-2xl font-bold mb-6 text-white text-center">Top Events</h2>
-      
+      <h2 className="text-2xl font-bold mb-6 text-white text-center">
+        Top Events
+      </h2>
+
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {oddEvents.slice(0, visibleCount).map((event) => (
           <div
@@ -21,9 +24,10 @@ export const TopEvents = ({ events }) => {
           >
             {/* Event Image */}
             <img
-              src={event.urlImageFull}
+              src={event.urlImageFull ? event.urlImageFull : placeholderImage}
               alt={event.nameParty}
               className="w-40 h-32 object-cover rounded-lg"
+              onError={(e) => (e.target.src = placeholderImage)}
             />
 
             {/* Event Details */}
