@@ -13,6 +13,7 @@ import {AdminUsersChart} from "../pages/admin/admin-users-chart.jsx";
 import { AboutUs } from "../pages/aboutUs";
 import {AdminMap} from "../pages/admin/admin-map.jsx";
 import {Error404} from "../pages/error/error-404.jsx";
+import {WentWrong} from "../pages/error/went-wrong.jsx";
 
 export const router = createBrowserRouter([
   {
@@ -43,10 +44,6 @@ export const router = createBrowserRouter([
         path: "/register",
         element: <RegisterPage />,
       },
-      {
-          path: "*",
-          element: <Error404 />
-      }
     ],
   },
   {
@@ -56,6 +53,10 @@ export const router = createBrowserRouter([
         {
           path: "users",
           element: <AdminUsers />
+        },
+        {
+            path: "",
+            element: <AdminUsers />
         },
         {
           path: "events",
@@ -78,5 +79,13 @@ export const router = createBrowserRouter([
           element: <AdminMap />
         }
     ]
-  }
+  },
+    {
+        path: "*",
+        element: <Error404 />
+    },
+    // {
+    //     path: "*",
+    //     element: <WentWrong />
+    // }
 ]);
