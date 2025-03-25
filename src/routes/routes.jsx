@@ -11,11 +11,13 @@ import { AdminEvents } from "../pages/admin/admin-events.jsx";
 import { AdminRolesCategories } from "../pages/admin/admin-roles-categories.jsx";
 import { AdminUsersChart } from "../pages/admin/admin-users-chart.jsx";
 import { AboutUs } from "../pages/aboutUs";
+
 import ErrorBoundaryWrapper from "../layouts/ErrorLayout.jsx";
 import { AdminMap } from "../pages/admin/admin-map.jsx";
 import { Error404 } from "../pages/error/error-404.jsx";
 import { WentWrong } from "../pages/error/went-wrong.jsx";
 import { CreateEventPage } from "../pages/create-event.jsx";
+
 
 export const router = createBrowserRouter([
 
@@ -38,6 +40,14 @@ export const router = createBrowserRouter([
       {
         path: "/about",
         element: <AboutUs />,
+      },
+      {
+        path: "/today",
+        element: <TodayEventsPage />
+      },
+      {
+        path: "/week",
+        element: <WeekEventsPage />
       },
       {
         path: "/login",

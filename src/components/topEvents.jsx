@@ -17,7 +17,7 @@ export const TopEvents = ({ events }) => {
         {oddEvents.slice(0, visibleCount).map((event) => (
           <div
             key={event.id}
-            className="bg-gray-900 rounded-lg overflow-hidden flex items-center p-4"
+            className="top-card bg-gray-900 rounded-lg overflow-hidden flex flex-col xl:flex-row items-center xl:items-start p-4"
           >
             {/* Event Image */}
             <img
@@ -27,7 +27,7 @@ export const TopEvents = ({ events }) => {
             />
 
             {/* Event Details */}
-            <div className="ml-4 text-white">
+            <div className="mt-4 xl:mt-0 xl:ml-4 text-white text-center xl:text-left">
               <h3 className="text-lg font-bold">{event.nameParty}</h3>
               <p className="text-sm text-gray-300">{event.nameType}</p>
               <p className="text-sm">
@@ -39,7 +39,7 @@ export const TopEvents = ({ events }) => {
               </p>
 
               <Link to={`/parties/${event.id}`}>
-                <button className="mt-2 px-4 py-2 bg-purple-700 text-white rounded-lg hover:bg-opacity-80 transition cursor-pointer">
+                <button className="glow-button mt-2 px-4 py-2 bg-purple-700 text-white rounded-lg hover:bg-opacity-80 transition cursor-pointer">
                   Learn More
                 </button>
               </Link>
