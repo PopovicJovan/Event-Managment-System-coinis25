@@ -5,10 +5,13 @@ import {useNavigate} from "react-router-dom";
 import {usersService} from "../../services/users-service.js";
 import {SpinLoader} from "../../components/spin-loader.jsx";
 import {PaginationComponent} from "../../components/pagination-component.jsx";
+import {Button} from "antd";
+import {RegisterPopup} from "../../components/register-popup.jsx";
 
 
 export const AdminUsers = () => {
     const {users, loading} = useUsers();
+    const [userCreate, setUserCreate] = useState(false);
     const [page, setPage] = useState(1);
     const navigate = useNavigate();
     const itemsPerPage = 10;
@@ -21,16 +24,16 @@ export const AdminUsers = () => {
     const banUser = (id) => usersService.banUser(id);
 
 
-
-
     return (
         <>
-            <div className={"w-full overflow-x-auto"}>
-                {loading && <SpinLoader spinning={loading} />}
 
-
-
-                {!loading && <>
+            <div className={`w-full overflow-x-auto`}>
+                {userCreate && <RegisterPopup className={`bg-transparent fixed z-30 ${userCreate ? "backdrop-blur-md" : undefined}`}/>}
+                {userCreate && <Button className="my-5 z-50"  size={"large"} onClick={() => setUserCreate(false)}>EXIT</Button>}
+                {loading ? <SpinLoader spinning={loading} /> :
+                <>
+                    {!userCreate && <Button className="my-5" type="primary" size={"large"} onClick={() => setUserCreate(true)}>Create
+                        User</Button>}
                     <table className="w-full border-collapse rounded-lg shadow-lg table-auto bg-white ">
                         <thead>
                             <tr className="bg-green-600 text-white text-left">
