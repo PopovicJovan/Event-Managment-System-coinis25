@@ -14,11 +14,13 @@ import { AboutUs } from "../pages/aboutUs";
 import {AdminMap} from "../pages/admin/admin-map.jsx";
 import {Error404} from "../pages/error/error-404.jsx";
 import {WentWrong} from "../pages/error/went-wrong.jsx";
+import ErrorBoundaryWrapper from "../layouts/ErrorLayout.jsx";
 
 export const router = createBrowserRouter([
+
   {
     path: "/",
-    element: <RootLayout />,
+    element: <ErrorBoundaryWrapper><RootLayout /></ErrorBoundaryWrapper>,
     children: [
       {
         path: "/",
@@ -26,7 +28,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "/parties",
-        element: <PartiesPage />,
+        element: <PartiesPage />
       },
       {
         path: "/parties/:id",
@@ -48,7 +50,7 @@ export const router = createBrowserRouter([
   },
   {
     path: "/admin",
-    element: <AdminLayout />,
+    element: <ErrorBoundaryWrapper><AdminLayout /></ErrorBoundaryWrapper>,
     children:[
         {
           path: "users",
@@ -84,8 +86,8 @@ export const router = createBrowserRouter([
         path: "*",
         element: <Error404 />
     },
-    // {
-    //     path: "*",
-    //     element: <WentWrong />
-    // }
+    {
+        path: "/error",
+        element: <WentWrong />
+    }
 ]);
