@@ -1,18 +1,11 @@
 import { useState } from "react";
-import { useAuth } from "../hooks/use-auth";
 import registerImage from "../assets/undraw_login.svg";
 
 export const RegisterPage = () => {
-  const { user, setUser, register, message } = useAuth();
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
-
-  const handleRegister = () => {
-    if (user.password !== passwordConfirm) {
-      alert("Passwords do not match");
-      return;
-    }
-    register();
-  };
+  const [password, setPassword] = useState("");
 
   return (
     <div className="flex justify-center items-center h-screen bg-black">
@@ -24,29 +17,26 @@ export const RegisterPage = () => {
           <h1 className="text-2xl font-bold text-center text-white mb-6 uppercase">
             Register
           </h1>
-          {message && (
-            <p className="text-center text-red-500 mb-4">{message}</p>
-          )}
           <div>
             <input
               type="text"
               placeholder="Username"
-              value={user.username}
-              onChange={(e) => setUser({ ...user, username: e.target.value })}
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
               className="w-full p-3 border border-purple-700 rounded-md mb-4 text-white"
             />
             <input
               type="email"
               placeholder="Email"
-              value={user.email}
-              onChange={(e) => setUser({ ...user, email: e.target.value })}
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               className="w-full p-3 border border-purple-700 rounded-md mb-4 text-white"
             />
             <input
               type="password"
               placeholder="Password"
-              value={user.password}
-              onChange={(e) => setUser({ ...user, password: e.target.value })}
+              value={password}
+              onChange={(e) => setUser(e.target.value)}
               className="w-full p-3 border border-purple-700 rounded-md mb-4 text-white"
             />
             <input
@@ -57,10 +47,7 @@ export const RegisterPage = () => {
               className="w-full p-3 border border-purple-700 rounded-md mb-4 text-white"
             />
           </div>
-          <button
-            onClick={handleRegister}
-            className="w-full p-3  bg-purple-900 text-white rounded-md hover:bg-purple-800 transition-all duration-300 ease-in-out hover:cursor-pointer mb-4"
-          >
+          <button className="w-full p-3  bg-purple-900 text-white rounded-md hover:bg-purple-800 transition-all duration-300 ease-in-out hover:cursor-pointer mb-4">
             Register
           </button>
         </div>
