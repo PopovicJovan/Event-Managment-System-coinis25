@@ -1,4 +1,6 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
+
 import placeholderImage from "../assets/placeholder.png";
 
 export const CardComponent = ({
@@ -12,6 +14,12 @@ export const CardComponent = ({
   isAdmin = false,
   onDelete = () => {},
 }) => {
+  const [isFavorite, setIsFavorite] = useState(false);
+
+  const toggleFavorite = () => {
+    setIsFavorite((prev) => !prev);
+  };
+
   return (
     <div className="bg-gray-900 shadow-lg rounded-2xl overflow-hidden w-80 p-4 mx-auto mt-4 flex flex-col h-full">
       <img
@@ -28,22 +36,33 @@ export const CardComponent = ({
         <h4 className="font-semibold text-white">
           End Date: {new Date(dateEnd).toLocaleString()}
         </h4>
-        <div className={`mt-auto  w-full flex-col justify-between`}>
+        <div className="mt-auto w-full flex-col justify-between">
           <p className="text-xl text-lightGray mt-2 pt-2">{organizer}</p>
           <p className="text-xl text-lightGray mt-2 pt-2">{country}</p>
-          <button
-            className={`px-4 py-2 bg-purple-700 text-white rounded-lg hover:bg-opacity-80 transition cursor-pointer mt-2 ${
-              isAdmin ? "w-2/5" : "w-full"
-            }`}
-          >
-            <Link to={`/parties/${id}`}>Learn More</Link>
-          </button>
+          <div className="flex justify-between items-center w-full">
+            <button
+              className={`px-4 mx-auto py-2 bg-purple-700 text-white rounded-lg hover:bg-opacity-80 transition cursor-pointer mt-2 ${
+                isAdmin ? "w-2/5" : "w-full"
+              }`}
+            >
+              <Link to={`/parties/${id}`}>Learn More</Link>
+            </button>
+            {/* Favorite Button */}
+            <button
+              onClick={toggleFavorite}
+              className="px-4 py-2 mx-auto text-white rounded-lg hover:bg-opacity-80 transition cursor-pointer mt-2 flex items-center ml-auto"
+            >
+              {isFavorite ? (
+                <i className="fa-solid fa-heart text-purple-700"></i>
+              ) : (
+                <i className="fa-solid fa-heart"></i>
+              )}
+            </button>
+          </div>
           {isAdmin && (
             <button
               onClick={onDelete}
-              className={`px-4 py-2 bg-pink-500 text-white rounded-lg hover:bg-opacity-80 transition cursor-pointer ${
-                isAdmin ? "w-2/5" : "w-full"
-              }`}
+              className="px-4 py-2 bg-pink-500 text-white rounded-lg hover:bg-opacity-80 transition cursor-pointer w-2/5 mt-2"
             >
               Delete event
             </button>
