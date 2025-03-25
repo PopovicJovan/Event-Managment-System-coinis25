@@ -76,6 +76,7 @@ export const NavbarComponent = () => {
           <ul className="space-x-4 secondary-nav-list hidden md:block">
             {isAuthenticated ? (
               <>
+
                 <li className="inline text-md">
                   <button
                     className="text-white p-2 hover:text-purple-700 transition-all duration-300 ease-in-out cursor-pointer"
@@ -105,13 +106,14 @@ export const NavbarComponent = () => {
                       </ul>
                     </div>
                   )}
+
                 </li>
                 <li className="inline text-md">
                   <NavLink
                     className="text-white p-2 hover:text-purple-700 transition-all duration-300 ease-in-out"
                     to="/create-event"
                   >
-                    <i class="fa-solid fa-plus hover:text-purple-700"></i>
+                    <i className="fa-solid fa-plus hover:text-purple-700"></i>
                   </NavLink>
                 </li>
                 <li className="inline text-md">

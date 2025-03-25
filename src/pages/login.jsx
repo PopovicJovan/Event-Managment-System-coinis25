@@ -30,7 +30,7 @@ export const LoginPage = () => {
   const test = async (e) => {
     e.preventDefault();
     try {
-      const user = await getUser(); // Note the await
+      const user = await getUser();
       if (user) {
         console.log(user);
       }
