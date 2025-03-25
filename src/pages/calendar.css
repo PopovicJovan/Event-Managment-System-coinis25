@@ -83,4 +83,14 @@
   .rbc-show-more {
     color: #fff
   }
+
+ .rbc-show-more:hover{
+    background-color: #fff;
+    color: #8b5cf6;
+    
+}
   
+.rbc-event{
+    background-color: #9333ea;
+}
+

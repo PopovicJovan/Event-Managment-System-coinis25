@@ -1,10 +1,10 @@
-import { useMemo } from "react";
-import { Calendar, dateFnsLocalizer } from "react-big-calendar";
+import { useMemo, useState } from "react";
+import { Calendar, dateFnsLocalizer, Views } from "react-big-calendar";
 import format from "date-fns/format";
 import parse from "date-fns/parse";
 import startOfWeek from "date-fns/startOfWeek";
 import getDay from "date-fns/getDay";
-import enUS from "date-fns/locale/en-US"; // ← fixed import
+import enUS from "date-fns/locale/en-US";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import { useParties } from "../hooks/use-parties";
 import "./calendar.css";
@@ -24,6 +24,9 @@ const localizer = dateFnsLocalizer({
 export const CalendarPage = () => {
   const { parties, isLoading } = useParties();
 
+  const [view, setView] = useState(Views.MONTH);
+  const [currentDate, setCurrentDate] = useState(new Date());
+
   const events = useMemo(() => {
     return parties.map((party) => ({
       title: party.nameParty,
@@ -32,6 +35,14 @@ export const CalendarPage = () => {
       resource: party,
     }));
   }, [parties]);
+
+  const handleViewChange = (newView) => {
+    setView(newView);
+  };
+
+  const handleNavigate = (newDate) => {
+    setCurrentDate(newDate);
+  };
 
   return (
     <div className="min-h-screen bg-bgColor text-white p-6">
@@ -43,16 +54,25 @@ export const CalendarPage = () => {
         <p className="text-center text-white">Loading events...</p>
       ) : (
         <div className="calendar bg-gray-900 rounded-lg p-4">
-          <Calendar
-            localizer={localizer}
-            events={events}
-            startAccessor="start"
-            endAccessor="end"
-            style={{ height: 600 }}
-            className="text-purple-400"
-            popup
-          />
-        </div>
+  <Calendar
+    localizer={localizer}
+    events={events}
+    startAccessor="start"
+    endAccessor="end"
+    className="text-purple-400"
+    popup
+    view={view}
+    date={currentDate}
+    onView={handleViewChange}
+    onNavigate={handleNavigate}
+    style={{
+      height: "600px",
+      maxHeight: "600px",
+      overflowY: "auto",
+    }}
+  />
+</div>
+
       )}
     </div>
   );
