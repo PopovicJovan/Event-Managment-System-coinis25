@@ -2,9 +2,10 @@ import { useState } from "react";
 import { CardComponent } from "../components/card";
 import { useParties } from "../hooks/use-parties";
 import Pagination from "@mui/material/Pagination";
-import {PaginationComponent} from "../components/pagination-component.jsx";
+import { PaginationComponent } from "../components/pagination-component.jsx";
+import { FilterInput } from "../components/filter-inputs.jsx";
 
-export const PartiesPage = ({isAdmin=false}) => {
+export const PartiesPage = ({ isAdmin = false }) => {
   const {
     filteredParties,
     isLoading,
@@ -17,8 +18,7 @@ export const PartiesPage = ({isAdmin=false}) => {
     setOrganizerFilter,
     startDateFilter,
     setStartDateFilter,
-    endDateFilter,
-    setEndDateFilter,
+
     countryFilter,
     setCountryFilter,
   } = useParties();
@@ -40,73 +40,27 @@ export const PartiesPage = ({isAdmin=false}) => {
       {/* Search and Filter Bar */}
       <div className="flex flex-wrap justify-center my-6 gap-4">
         {/* Search Bar */}
-        <input
-          type="text"
+
+        <FilterInput
           placeholder="Search for a party..."
-          className="w-full sm:max-w-xs px-4 py-2 border border-gray-500 rounded-lg focus:outline-none focus:ring-2 focus:ring-primaryPurple bg-darkGray text-white"
           value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          onKeyDown={(e) => {
-            if (e.key === "Enter") {
-              applyFilter();
-            }
-          }}
+          onChange={setSearchTerm}
         />
-
-        {/* Country Filter */}
-        <input
-          type="text"
+        <FilterInput
           placeholder="Search by Country..."
-          className="w-full sm:max-w-xs px-4 py-2 border border-gray-500 rounded-lg focus:outline-none focus:ring-2 focus:ring-primaryPurple bg-darkGray text-white"
           value={countryFilter}
-          onChange={(e) => setCountryFilter(e.target.value)}
-          onKeyDown={(e) => {
-            if (e.key === "Enter") {
-              applyFilter();
-            }
-          }}
+          onChange={setCountryFilter}
         />
-
-        {/* Organizer Filter */}
-        <input
-          type="text"
+        <FilterInput
           placeholder="Search by Organizer..."
-          className="w-full sm:max-w-xs px-4 py-2 border border-gray-500 rounded-lg focus:outline-none focus:ring-2 focus:ring-primaryPurple bg-darkGray text-white"
           value={organizerFilter}
-          onChange={(e) => setOrganizerFilter(e.target.value)}
-          onKeyDown={(e) => {
-            if (e.key === "Enter") {
-              applyFilter();
-            }
-          }}
+          onChange={setOrganizerFilter}
         />
-
-        {/* Start Date Filter */}
-        <input
+        <FilterInput
           type="date"
-          className="w-full sm:max-w-xs px-4 py-2 border border-gray-500 rounded-lg focus:outline-none focus:ring-2 focus:ring-primaryPurple bg-darkGray text-white"
           value={startDateFilter}
-          onChange={(e) => setStartDateFilter(e.target.value)}
-          onKeyDown={(e) => {
-            if (e.key === "Enter") {
-              applyFilter();
-            }
-          }}
+          onChange={setStartDateFilter}
         />
-
-        {/* End Date Filter */}
-        <input
-          type="date"
-          className="w-full sm:max-w-xs px-4 py-2 border border-gray-500 rounded-lg focus:outline-none focus:ring-2 focus:ring-primaryPurple bg-darkGray text-white"
-          value={endDateFilter}
-          onChange={(e) => setEndDateFilter(e.target.value)}
-          onKeyDown={(e) => {
-            if (e.key === "Enter") {
-              applyFilter();
-            }
-          }}
-        />
-
         {/* Buttons */}
         <div className="flex gap-4 items-center">
           {isFiltered ? (
@@ -165,9 +119,13 @@ export const PartiesPage = ({isAdmin=false}) => {
           {/* Pagination */}
           {filteredParties.length > itemsPerPage && (
             <div className="flex justify-center my-6 text-white">
-              <PaginationComponent totalLength={filteredParties.length}
-                                   perPage={itemsPerPage} handlePageChange={handleChange}
-                                   currentPage={page}  className={"my-5"}/>
+              <PaginationComponent
+                totalLength={filteredParties.length}
+                perPage={itemsPerPage}
+                handlePageChange={handleChange}
+                currentPage={page}
+                className={"my-5"}
+              />
             </div>
           )}
         </>

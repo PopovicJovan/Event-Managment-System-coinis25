@@ -1,3 +1,5 @@
+import { EventInput } from "../components/event-input";
+
 export const CreateEventPage = () => {
   return (
     <div className="max-w-screen-lg mx-auto px-4 sm:px-6 py-10 bg-gray-900 text-white rounded-xl shadow-xl mt-3">
@@ -6,66 +8,40 @@ export const CreateEventPage = () => {
       </h1>
       <form className="space-y-6 text-lg text-lightGray">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-          <input
+          <EventInput
             type="text"
             name="nameParty"
             placeholder="Party Name"
-            className="p-3 rounded-lg w-full bg-gray-800 text-white"
             required
           />
-          <input
+          <EventInput
             type="url"
             name="urlImageFull"
             placeholder="Image URL"
-            className="p-3 rounded-lg w-full bg-gray-800 text-white"
             required
           />
-          <input
+          <EventInput
             type="text"
             name="nameOrganizer"
             placeholder="Organizer Name"
-            className="p-3 rounded-lg w-full bg-gray-800 text-white"
             required
           />
-          <input
-            type="datetime-local"
-            name="dateStart"
-            className="p-3 rounded-lg w-full bg-gray-800 text-white"
-            required
-          />
-          <input
-            type="datetime-local"
-            name="dateEnd"
-            className="p-3 rounded-lg w-full bg-gray-800 text-white"
-            required
-          />
-          <input
-            type="text"
-            name="nameTown"
-            placeholder="Town"
-            className="p-3 rounded-lg w-full bg-gray-800 text-white"
-            required
-          />
-          <input
+          <EventInput type="datetime-local" name="dateStart" required />
+          <EventInput type="datetime-local" name="dateEnd" required />
+          <EventInput type="text" name="nameTown" placeholder="Town" required />
+          <EventInput
             type="text"
             name="nameCountry"
             placeholder="Country"
-            className="p-3 rounded-lg w-full bg-gray-800 text-white"
             required
           />
-          <input
+          <EventInput
             type="text"
             name="nameType"
             placeholder="Event Type"
-            className="p-3 rounded-lg w-full bg-gray-800 text-white"
             required
           />
-          <input
-            type="text"
-            name="textEntryFee"
-            placeholder="Entry Fee"
-            className="p-3 rounded-lg w-full bg-gray-800 text-white"
-          />
+          <EventInput type="text" name="textEntryFee" placeholder="Entry Fee" />
         </div>
         <textarea
           name="textMore"
@@ -74,18 +50,12 @@ export const CreateEventPage = () => {
           rows="4"
         ></textarea>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-          <input
+          <EventInput
             type="url"
             name="urlOrganizer"
             placeholder="Organizer URL"
-            className="p-3 rounded-lg w-full bg-gray-800 text-white"
           />
-          <input
-            type="url"
-            name="urlParty"
-            placeholder="Event Page URL"
-            className="p-3 rounded-lg w-full bg-gray-800 text-white"
-          />
+          <EventInput type="url" name="urlParty" placeholder="Event Page URL" />
         </div>
         <button
           type="submit"
