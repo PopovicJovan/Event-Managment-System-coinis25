@@ -103,18 +103,20 @@ export const Slider = ({ parties }) => {
 
           {parties.length > visibleSlides && (
             <>
-              <button
-                onClick={handlePrevSlide}
-                className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-black/50 hover:bg-black/80 p-2 rounded-full"
-              >
-                <ChevronLeft size={24} />
-              </button>
-              <button
-                onClick={handleNextSlide}
-                className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-black/50 hover:bg-black/80 p-2 rounded-full"
-              >
-                <ChevronRight size={24} />
-              </button>
+             <button
+  onClick={handlePrevSlide}
+  className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-purple-700/50 hover:bg-purple-800/80 p-2 rounded-full"
+>
+  <ChevronLeft size={24} className="text-white" />
+</button>
+
+<button
+  onClick={handleNextSlide}
+  className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-purple-700/50 hover:bg-purple-800/80 p-2 rounded-full"
+>
+  <ChevronRight size={24} className="text-white" />
+</button>
+
             </>
           )}
         </div>
