@@ -4,7 +4,7 @@ import { useParties } from "../hooks/use-parties";
 import Pagination from "@mui/material/Pagination";
 import {PaginationComponent} from "../components/pagination-component.jsx";
 
-export const PartiesPage = () => {
+export const PartiesPage = ({isAdmin=false}) => {
   const {
     filteredParties,
     isLoading,
@@ -152,6 +152,7 @@ export const PartiesPage = () => {
                   dateEnd={party.dateEnd}
                   id={party.id}
                   country={party.nameCountry}
+                  isAdmin={isAdmin}
                 />
               ))
             ) : (
@@ -166,7 +167,7 @@ export const PartiesPage = () => {
             <div className="flex justify-center my-6 text-white">
               <PaginationComponent totalLength={filteredParties.length}
                                    perPage={itemsPerPage} handlePageChange={handleChange}
-                                   currentPage={page}  className={"mt-5"}/>
+                                   currentPage={page}  className={"my-5"}/>
             </div>
           )}
         </>
