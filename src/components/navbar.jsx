@@ -7,6 +7,7 @@ export const NavbarComponent = () => {
   const [isArrowVisible, setArrowVisible] = useState(false);
   const [isBurgerVisible, setBurgerVisible] = useState(false);
   const { isAuthenticated, logout } = useAuthContext();
+  const [isDropdownVisible, setDropdownVisible] = useState(false);
   useEffect(() => {
     const handleScroll = () => {
       setArrowVisible(window.scrollY > 100);
@@ -28,6 +29,10 @@ export const NavbarComponent = () => {
     { path: "/parties", label: "Parties" },
     { path: "/about", label: "About" },
   ];
+
+  const toggleDropdown = () => {
+    setDropdownVisible(!isDropdownVisible);
+  };
   const renderNavLink = (path, label, className = "", onClick = null) => (
     <NavLink
       className={({ isActive }) =>
@@ -44,8 +49,8 @@ export const NavbarComponent = () => {
   return (
     <>
       <nav className="navbar m-auto px-12 pt-8 pb-7 bg-gray-900">
-        <div className="list-container flex justify-between w-5/7 m-auto">
-          <div className="logo-container flex justify-between">
+        <div className="list-container flex justify-between w-5/7 m-auto md:items-center">
+          <div className="logo-container flex justify-between items-center">
             <Link to="/">
               <img className="w-25" src={logoImage} alt="Logo" />
             </Link>
@@ -71,15 +76,37 @@ export const NavbarComponent = () => {
           <ul className="space-x-4 secondary-nav-list hidden md:block">
             {isAuthenticated ? (
               <>
-                <li className="inline text-2xl">
-                  <NavLink
-                    className="text-white p-2 hover:text-purple-700 transition-all duration-300 ease-in-out"
-                    to="/create-event"
+                <li className="inline text-md">
+                  <button
+                    className="text-white p-2 hover:text-purple-700 transition-all duration-300 ease-in-out cursor-pointer"
+                    onClick={toggleDropdown}
                   >
                     <i class="fa-solid fa-user hover:text-purple-700"></i>
-                  </NavLink>
+                  </button>
+                  {isDropdownVisible && (
+                    <div className="absolute bg-gray-800 text-white rounded-md shadow-lg mt-2 p-4">
+                      <ul>
+                        <li>
+                          <NavLink
+                            className="block py-2 px-4 hover:bg-purple-700 text-sm cursor-pointer"
+                            to="/user"
+                          >
+                            Profile
+                          </NavLink>
+                        </li>
+                        <li>
+                          <button
+                            onClick={logout}
+                            className="block py-2 px-4 hover:bg-purple-700 text-sm cursor-pointer"
+                          >
+                            Logout
+                          </button>
+                        </li>
+                      </ul>
+                    </div>
+                  )}
                 </li>
-                <li className="inline text-2xl">
+                <li className="inline text-md">
                   <NavLink
                     className="text-white p-2 hover:text-purple-700 transition-all duration-300 ease-in-out"
                     to="/create-event"
@@ -87,7 +114,7 @@ export const NavbarComponent = () => {
                     <i class="fa-solid fa-plus hover:text-purple-700"></i>
                   </NavLink>
                 </li>
-                <li className="inline text-xl">
+                <li className="inline text-md">
                   <NavLink
                     className="text-white p-2 hover:text-purple-700 transition-all duration-300 ease-in-out"
                     to="/admin"
