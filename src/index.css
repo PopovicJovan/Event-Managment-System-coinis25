@@ -26,8 +26,7 @@ html {
   background-color: var(--bgColor);
 }
 
-
-.user-activity-graph{
+.user-activity-graph {
   width: 1000px !important;
   max-width: 100% !important;
   margin: 0 auto 0 auto;
@@ -39,25 +38,6 @@ html {
     oklch(0.381 0.176 304.987),
     var(--secondaryPurple)
   );
-}
-
-.nav-item {
-  padding: 10px 20px;
-  color: var(--lightGray);
-  transition: opacity 0.3s ease;
-}
-
-.nav-item:hover {
-  opacity: 0.5;
-}
-
-.active-nav {
-  color: var(--color-white);
-  border-bottom: solid 1px var(--secondaryPurple);
-}
-
-.fa-user {
-  color: var(--white);
 }
 
 .fa-toggle-off {
@@ -108,17 +88,9 @@ html {
     transition: opacity 0.3s ease;
   }
 
-  .nav-item:hover {
-    opacity: 0.5;
-  }
-
   .active-nav {
     color: var(--color-white);
     border-bottom: solid 1px var(--secondaryPurple);
-  }
-
-  .fa-user {
-    color: var(--white);
   }
 
   .fa-toggle-off {
