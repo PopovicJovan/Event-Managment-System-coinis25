@@ -5,11 +5,14 @@ import { useAuthContext } from "../context/auth-context";
 import loginImage from "../assets/undraw_login.svg";
 import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
 import {jwtDecode} from 'jwt-decode';
+import {faEye, faEyeSlash} from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 export const LoginPage = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const { login, getUser } = useAuthContext();
   const navigate = useNavigate();
 
@@ -60,13 +63,19 @@ export const LoginPage = () => {
               onChange={(e) => setUsername(e.target.value)}
               className="w-full p-3 border border-purple-700 rounded-md mb-4 text-white"
             />
-            <input
-              type="password"
-              placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="w-full p-3 border border-purple-700 rounded-md mb-4 text-white"
-            />
+            <div className={"relative"}>
+              <input
+                type={showPassword ? "text" : "password"}
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="w-full p-3 border border-purple-700 rounded-md mb-4 text-white"
+              />
+              {!showPassword ?
+                  <FontAwesomeIcon icon={faEye} className={"absolute end-0 mt-2 me-2"} size={"2xl"} onClick={() => setShowPassword(true)}/> :
+                  <FontAwesomeIcon icon={faEyeSlash} className={"absolute end-0 mt-2 me-2"} size={"2xl"} onClick={() => setShowPassword(false)}/>
+              }
+            </div>
           </div>
           <button
             onClick={handleLogin}

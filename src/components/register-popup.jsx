@@ -2,6 +2,8 @@ import React, {useState} from "react";
 import registerImage from "../assets/undraw_login.svg";
 import {GoogleLogin, GoogleOAuthProvider} from "@react-oauth/google";
 import {jwtDecode} from "jwt-decode";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faEye, faEyeSlash} from "@fortawesome/free-solid-svg-icons";
 
 
 export const RegisterPopup = ({className, isAdmin=false}) => {
@@ -9,7 +11,8 @@ export const RegisterPopup = ({className, isAdmin=false}) => {
     const [email, setEmail] = useState("");
     const [passwordConfirm, setPasswordConfirm] = useState("");
     const [password, setPassword] = useState("");
-
+    const [showPassword, setShowPassword]  = useState(false);
+    const [showConfirmPassword, setShowConfirmPassword]  = useState(false);
     const handleLoginSuccess = (response) => {
         const token = response.credential;
         const decoded = jwtDecode(token);
@@ -45,20 +48,32 @@ export const RegisterPopup = ({className, isAdmin=false}) => {
                             onChange={(e) => setEmail(e.target.value)}
                             className="w-full p-3 border border-purple-700 rounded-md mb-4 text-white"
                         />
-                        <input
-                            type="password"
-                            placeholder="Password"
-                            value={password}
-                            onChange={(e) => setUser(e.target.value)}
-                            className="w-full p-3 border border-purple-700 rounded-md mb-4 text-white"
-                        />
-                        <input
-                            type="password"
-                            placeholder="Confirm Password"
-                            value={passwordConfirm}
-                            onChange={(e) => setPasswordConfirm(e.target.value)}
-                            className="w-full p-3 border border-purple-700 rounded-md mb-4 text-white"
-                        />
+                        <div className={"relative"}>
+                            <input
+                                type={showPassword ? "text" : "password"}
+                                placeholder="Password"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                className="w-full p-3 border border-purple-700 rounded-md mb-4 text-white"
+                            />
+                            {!showPassword ?
+                                <FontAwesomeIcon icon={faEye} className={"absolute end-0 mt-2 me-2"} size={"2xl"} onClick={() => setShowPassword(true)}/> :
+                                <FontAwesomeIcon icon={faEyeSlash} className={"absolute end-0 mt-2 me-2"} size={"2xl"} onClick={() => setShowPassword(false)}/>
+                            }
+                        </div>
+                        <div className={"relative"}>
+                            <input
+                                type={showConfirmPassword ? "text" : "password"}
+                                placeholder="Confirm Password"
+                                value={passwordConfirm}
+                                onChange={(e) => setPasswordConfirm(e.target.value)}
+                                className="w-full p-3 border border-purple-700 rounded-md mb-4 text-white"
+                            />
+                            {!showConfirmPassword ?
+                                <FontAwesomeIcon icon={faEye} className={"absolute end-0 mt-2 me-2"} size={"2xl"} onClick={() => setShowConfirmPassword(true)}/> :
+                                <FontAwesomeIcon icon={faEyeSlash} className={"absolute end-0 mt-2 me-2"} size={"2xl"} onClick={() => setShowConfirmPassword(false)}/>
+                            }
+                        </div>
                     </div>
                     <button className="w-full p-3  bg-purple-900 text-white rounded-md hover:bg-purple-800 transition-all duration-300 ease-in-out hover:cursor-pointer mb-4">
                         Register
