@@ -18,10 +18,11 @@ import { AdminMap } from "../pages/admin/admin-map.jsx";
 import { Error404 } from "../pages/error/error-404.jsx";
 import { WentWrong } from "../pages/error/went-wrong.jsx";
 import { CreateEventPage } from "../pages/create-event.jsx";
-import {
-  TodayEventsPage,
-  WeekEventsPage,
-} from "../components/weekly-events.jsx";
+
+import {TodayEventsPage, WeekEventsPage} from "../components/weekly-events.jsx";
+import { CalendarPage } from "../pages/calendar.jsx";
+
+
 
 export const router = createBrowserRouter([
   {
@@ -55,6 +56,10 @@ export const router = createBrowserRouter([
       {
         path: "/week",
         element: <WeekEventsPage />,
+      },
+      {
+        path: "/calendar",
+        element: <CalendarPage />
       },
       {
         path: "/login",

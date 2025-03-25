@@ -1,4 +1,4 @@
-.home{
+.container{
     padding-left: 6vw;
     padding-right: 6vw;
 }
@@ -9,8 +9,8 @@
   }
   
   .glow-button:hover {
-    box-shadow: 0 0 15px 3px rgba(192, 132, 252, 0.6),
-                0 0 30px 6px rgba(255, 204, 83, 0.4);
+    box-shadow: 0 0 15px 3px rgba(192, 132, 252, 0.4),
+                0 0 30px 6px rgba(158, 107, 209, 0.4);
     transform: translateY(-2px);
   }
 
