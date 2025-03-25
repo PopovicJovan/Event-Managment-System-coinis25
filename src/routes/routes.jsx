@@ -11,20 +11,26 @@ import { AdminEvents } from "../pages/admin/admin-events.jsx";
 import { AdminRolesCategories } from "../pages/admin/admin-roles-categories.jsx";
 import { AdminUsersChart } from "../pages/admin/admin-users-chart.jsx";
 import { AboutUs } from "../pages/aboutUs";
+import { UserPage } from "../pages/user.jsx";
 
 import ErrorBoundaryWrapper from "../layouts/ErrorLayout.jsx";
 import { AdminMap } from "../pages/admin/admin-map.jsx";
 import { Error404 } from "../pages/error/error-404.jsx";
 import { WentWrong } from "../pages/error/went-wrong.jsx";
 import { CreateEventPage } from "../pages/create-event.jsx";
-import {TodayEventsPage, WeekEventsPage} from "../components/weekly-events.jsx";
-
+import {
+  TodayEventsPage,
+  WeekEventsPage,
+} from "../components/weekly-events.jsx";
 
 export const router = createBrowserRouter([
-
   {
     path: "/",
-    element: <ErrorBoundaryWrapper><RootLayout /></ErrorBoundaryWrapper>,
+    element: (
+      <ErrorBoundaryWrapper>
+        <RootLayout />
+      </ErrorBoundaryWrapper>
+    ),
     children: [
       {
         path: "/",
@@ -32,7 +38,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "/parties",
-        element: <PartiesPage />
+        element: <PartiesPage />,
       },
       {
         path: "/parties/:id",
@@ -44,11 +50,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "/today",
-        element: <TodayEventsPage />
+        element: <TodayEventsPage />,
       },
       {
         path: "/week",
-        element: <WeekEventsPage />
+        element: <WeekEventsPage />,
       },
       {
         path: "/login",
@@ -62,48 +68,56 @@ export const router = createBrowserRouter([
         path: "/create-event",
         element: <CreateEventPage />,
       },
+      {
+        path: "/user",
+        element: <UserPage />,
+      },
     ],
   },
   {
     path: "/admin",
-    element: <ErrorBoundaryWrapper><AdminLayout /></ErrorBoundaryWrapper>,
-    children:[
-        {
-          path: "users",
-          element: <AdminUsers />
-        },
-        {
-            path: "",
-            element: <AdminUsers />
-        },
-        {
-          path: "events",
-          element: <AdminEvents />
-        },
-        {
-          path: "categories",
-          element: <AdminRolesCategories />
-        },
-        {
-          path: "roles",
-          element: <AdminRolesCategories />
-        },
-        {
-          path: "users/chart",
-          element: <AdminUsersChart />
-        },
-        {
-          path: "map",
-          element: <AdminMap />
-        }
-    ]
+    element: (
+      <ErrorBoundaryWrapper>
+        <AdminLayout />
+      </ErrorBoundaryWrapper>
+    ),
+    children: [
+      {
+        path: "users",
+        element: <AdminUsers />,
+      },
+      {
+        path: "",
+        element: <AdminUsers />,
+      },
+      {
+        path: "events",
+        element: <AdminEvents />,
+      },
+      {
+        path: "categories",
+        element: <AdminRolesCategories />,
+      },
+      {
+        path: "roles",
+        element: <AdminRolesCategories />,
+      },
+      {
+        path: "users/chart",
+        element: <AdminUsersChart />,
+      },
+      {
+        path: "map",
+        element: <AdminMap />,
+      },
+    ],
   },
-    {
-        path: "*",
-        element: <Error404 />
-    },
-    {
-        path: "/error",
-        element: <WentWrong />
-    }
+  {
+    path: "*",
+    element: <Error404 />,
+  },
+  {
+    path: "/error",
+    element: <WentWrong />,
+  },
 ]);

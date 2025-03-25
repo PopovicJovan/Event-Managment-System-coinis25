@@ -74,9 +74,9 @@ export const NavbarComponent = () => {
                 <li className="inline text-2xl">
                   <NavLink
                     className="text-white p-2 hover:text-purple-700 transition-all duration-300 ease-in-out"
-                    to="/create-event"
+                    to="/user"
                   >
-                    <i class="fa-solid fa-user hover:text-purple-700"></i>
+                    <i className="fa-solid fa-user hover:text-purple-700"></i>
                   </NavLink>
                 </li>
                 <li className="inline text-2xl">
@@ -84,7 +84,7 @@ export const NavbarComponent = () => {
                     className="text-white p-2 hover:text-purple-700 transition-all duration-300 ease-in-out"
                     to="/create-event"
                   >
-                    <i class="fa-solid fa-plus hover:text-purple-700"></i>
+                    <i className="fa-solid fa-plus hover:text-purple-700"></i>
                   </NavLink>
                 </li>
                 <li className="inline text-xl">
