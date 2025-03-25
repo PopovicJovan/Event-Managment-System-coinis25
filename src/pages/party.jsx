@@ -1,12 +1,16 @@
 import { useParty } from "../hooks/use-party";
 import placeholderImage from "../assets/placeholder.png";
 import { PartyMap } from "../components/party-map";
-
+import { SpinLoader } from "../components/spin-loader";
 export const Party = () => {
   const { party, loading, error } = useParty();
 
   if (loading) {
-    return <h2 className="text-center text-xl text-purple-700">Loading...</h2>;
+    return (
+      <div className="h-100">
+        <SpinLoader />
+      </div>
+    );
   }
 
   if (error) {
@@ -74,11 +78,10 @@ export const Party = () => {
           </div>
 
           <PartyMap
-            latLongs={[[party.geoLat,party.geoLon] ]}
+            latLongs={[[party.geoLat, party.geoLon]]}
             names={[party.nameParty]}
             locations={[`${party.nameTown}, ${party.nameCountry}`]}
           />
-
         </div>
 
         {/* Description */}

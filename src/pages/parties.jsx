@@ -4,6 +4,7 @@ import { useParties } from "../hooks/use-parties";
 import Pagination from "@mui/material/Pagination";
 import { PaginationComponent } from "../components/pagination-component.jsx";
 import { FilterInput } from "../components/filter-inputs.jsx";
+import { SpinLoader } from "../components/spin-loader.jsx";
 
 export const PartiesPage = ({ isAdmin = false }) => {
   const {
@@ -91,7 +92,9 @@ export const PartiesPage = ({ isAdmin = false }) => {
 
       {/* Loading or Party Cards */}
       {isLoading ? (
-        <h1 className="text-center text-white">Loading ...</h1>
+        <div className="h-100">
+          <SpinLoader />
+        </div>
       ) : (
         <>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
