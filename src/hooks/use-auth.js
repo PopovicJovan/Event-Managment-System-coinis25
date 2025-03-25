@@ -1,47 +1,43 @@
 import { useState } from "react";
+import { AuthService } from "../services/auth-service";
 import { useNavigate } from "react-router-dom";
-import { authService } from "../services/auth-service";
 
 export const useAuth = () => {
+  const [isAuthenticated, setIsAuthenticated] = useState(
+    AuthService.isAuthenticated()
+  );
   const navigate = useNavigate();
-  const [user, setUser] = useState({
-    username: "",
-    email: "",
-    password: "",
-  });
-  const [message, setMessage] = useState(null);
 
-  const login = async () => {
+  const login = async (username, password) => {
     try {
-      await authService.login(user);
-      setMessage("Success");
-      navigate("/dashboard");
-    } catch (err) {
-      setMessage("Failed", err);
+      await AuthService.login(username, password);
+      setIsAuthenticated(true);
+      return true;
+    } catch (error) {
+      setIsAuthenticated(false);
+      return false;
     }
   };
 
   const logout = () => {
-    authService.logout();
-    navigate("/login");
+    AuthService.logout();
+    setIsAuthenticated(false);
+    navigate("/");
   };
 
-  const register = async () => {
+  const getUser = async () => {
     try {
-      await authService.register(user);
-      setMessage("Success");
-      navigate("/");
-    } catch (err) {
-      setMessage("Failed", err);
+      return await AuthService.getUser();
+    } catch (error) {
+      console.error("Error getting user", error);
+      return null;
     }
   };
 
   return {
-    user,
-    setUser,
-    message,
+    isAuthenticated,
     login,
-    register,
     logout,
+    getUser,
   };
 };
