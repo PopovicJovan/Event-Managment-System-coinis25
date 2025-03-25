@@ -72,7 +72,7 @@ export const Slider = ({ parties }) => {
                   style={{ width: `${100 / visibleSlides}%` }}
                 >
                   <div
-                    className="h-96 rounded-lg overflow-hidden flex flex-col justify-center items-center text-center p-4 relative"
+                    className="h-96 rounded-lg overflow-hidden flex flex-col justify-between items-center text-center p-4 relative"
                     style={{
                       backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(${party.urlImageFull})`,
                       backgroundSize: "cover",
