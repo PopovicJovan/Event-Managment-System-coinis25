@@ -10,6 +10,10 @@
   --darkGray: #1a1a1a;
 }
 
+.cont-padding{
+  padding: 3svw 6svw;
+}
+
 .bg-darkGray {
   background-color: var(--darkGray);
 }
