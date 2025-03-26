@@ -28,7 +28,7 @@ export const TodayEventsPage = () => {
 
   return (
     <div
-      className="container mx-auto px-4 py-8 text-white min-h-screen"
+      className="container-fluid mx-auto px-4 py-8 text-white min-h-screen"
       style={{
         backgroundColor:
           theme === "light" ? "var(--lightBgColor)" : "var(--bgColor)",
@@ -69,7 +69,7 @@ export const WeekEventsPage = () => {
 
   return (
     <div
-      className="container mx-auto px-4 py-8 text-white min-h-screen"
+      className="container-fluid mx-auto px-4 py-8 text-white min-h-screen"
       style={{
         backgroundColor:
           theme === "light" ? "var(--lightBgColor)" : "var(--bgColor)",
