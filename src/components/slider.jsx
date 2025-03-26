@@ -92,7 +92,7 @@ export const Slider = ({ parties }) => {
                     </p>
                     <button
                       onClick={() => openModal(party)}
-                      className="bg-purple-700 hover:bg-purple-800 text-white py-2 px-6 rounded-full transition duration-300 mt-4 cursor-pointer"
+                      className="primary-button secondaryPurple text-white py-2 px-6 rounded-full transition duration-300 mt-4 cursor-pointer"
                     >
                       Learn More
                     </button>
@@ -122,7 +122,7 @@ export const Slider = ({ parties }) => {
           )}
         </div>
       ) : (
-        <div className="bg-gray-900 rounded-lg p-8 text-center text-white">
+        <div className="bg-primaryGray rounded-lg p-8 text-center text-white">
           No events available.
         </div>
       )}

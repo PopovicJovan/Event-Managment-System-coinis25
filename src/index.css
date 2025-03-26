@@ -8,10 +8,30 @@
   --secondaryPurple: #8200db;
   --white: #ffffff;
   --darkGray: #1a1a1a;
+  --primaryGray: #101828;
 }
 
 .cont-padding{
   padding: 3svw 6svw;
+}
+
+.primary-button {
+  background-color: #8200db;
+  color: #ffffff;
+ 
+  border: 1px solid #8200db;
+  border-radius: 0.5rem;
+  padding: 0.5rem 1.25rem;
+  font-weight: 500;
+  transition: all 0.3s ease-in-out;
+  box-sizing: border-box;
+}
+
+.primary-button:hover {
+  background-color: #ffffff;
+  color: #8200db;
+  transform: translateY(-2px);
+  border: 1px solid #8200db;
 }
 
 .bg-darkGray {

@@ -20,7 +20,8 @@ export const TopEvents = ({ events }) => {
         {oddEvents.slice(0, visibleCount).map((event) => (
           <div
             key={event.id}
-            className="top-card bg-gray-900 rounded-lg overflow-hidden flex xl:flex-row flex-col items-center xl:items-start p-4"
+            className="top-card rounded-lg overflow-hidden flex xl:flex-row flex-col items-center xl:items-start p-4"
+            style={{ backgroundColor: "var(--primaryGray)" }}
           >
             {/* Image Section */}
             <div className="w-full xl:w-[40%] aspect-square shrink-0">
@@ -45,7 +46,7 @@ export const TopEvents = ({ events }) => {
 
               <div className="mt-auto">
                 <Link to={`/parties/${event.id}`}>
-                  <button className="glow-button w-full px-4 py-2 bg-purple-700 text-white rounded-lg hover:bg-opacity-80 transition cursor-pointer">
+                  <button className="primary-button w-full px-4 py-2 text-white rounded-lg transition cursor-pointer">
                     Learn More
                   </button>
                 </Link>
@@ -60,7 +61,7 @@ export const TopEvents = ({ events }) => {
         <div className="mt-6 flex flex-col items-center">
           <button
             onClick={handleLoadMore}
-            className="mb-4 px-6 py-2 bg-purple-700 text-white rounded-lg hover:bg-opacity-80 transition cursor-pointer"
+            className="primary-button mb-4 px-6 py-2 text-white rounded-lg transition cursor-pointer"
           >
             Load More
           </button>
@@ -70,7 +71,8 @@ export const TopEvents = ({ events }) => {
             {oddEvents.slice(visibleCount, visibleCount + 3).map((event) => (
               <div
                 key={event.id}
-                className="top-card bg-gray-900 rounded-lg overflow-hidden flex xl:flex-row flex-col items-center xl:items-start p-4"
+                className="top-card rounded-lg overflow-hidden flex xl:flex-row flex-col items-center xl:items-start p-4"
+                style={{ backgroundColor: "var(--primaryGray)" }}
               >
                 {/* Image Section */}
                 <div className="w-full xl:w-[40%] aspect-square shrink-0">
@@ -95,7 +97,7 @@ export const TopEvents = ({ events }) => {
 
                   <div className="mt-auto">
                     <Link to={`/parties/${event.id}`}>
-                      <button className="glow-button w-full px-4 py-2 bg-purple-700 text-white rounded-lg hover:bg-opacity-80 transition cursor-pointer">
+                      <button className="primary-button w-full px-4 py-2 text-white rounded-lg transition cursor-pointer">
                         Learn More
                       </button>
                     </Link>

@@ -4,6 +4,7 @@ export const Modal = ({ isOpen, onClose, party }) => {
     return (
       <div className="fixed inset-0 bg-#333 bg-opacity-70 backdrop-blur-sm flex justify-center items-center z-50">
         <div className="bg-gray-900 rounded-lg shadow-xl w-full max-w-2xl p-6 relative">
+       
           <button
             onClick={onClose}
             className="absolute top-2 right-2 text-white font-bold text-xl hover:text-purple-700 cursor-pointer"
