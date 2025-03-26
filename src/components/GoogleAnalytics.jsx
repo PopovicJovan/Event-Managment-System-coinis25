@@ -4,8 +4,7 @@ import axios from "axios";
 const PROPERTY_ID = "properties/464662106"; // Zameni sa tvojim Google Analytics ID-jem
 import dayjs from 'dayjs';
 // const refreshToken = "1//04QMuvuUEVIvrCgYIARAAGAQSNwF-L9Iru3WP6pFPRKUR44NySHr_uKn8N32Qnj-d7ZAZlWTzObk_DAyC5hBBcxWf-sQQMtlma-s";
-const ACCESS_TOKEN = "ya29.a0AeXRPp78A_2FOHJ3COgJYyIDsJNrWrujx96x55_sw1pyg5DeNiwVdY2vsMZ7V_d10fIvkB9Ee6aWfx4V2Mb-h6BgZ-MB_snA8n1PT0sLa3O7uxeQA2851VR36S9D3jLc18k2cQhWZ2hNYDRz27RMD0JtOkRhUHOS9xQvlgcjaCgYKAV4SARESFQHGX2MiVI_BO_upAkl0iRlcbvGEzA0175";
-
+const ACCESS_TOKEN = "ya29.a0AeXRPp6nmMvJKsrDShpVr0GYOdqkHiGQbU38lmLnZLKQlvtYdP5luS8gbIgGnpEvzjU0FEKZmKKVjqieuEkSMMFobJjFirB0u_ln9VnlGWLAOfLXvaUwBeL6zMS71vjsQnx6yTimHf2eYFJh_2n2mTMid_og7VdEDyNssmCeaCgYKAXASARESFQHGX2MiqfzeFD4pIrqd6xiKcNuaWw0175";
 
 
 
