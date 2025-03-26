@@ -60,7 +60,8 @@ export const WeekEventsPage = () => {
   );
 
   return (
-    <div className="container mx-auto px-4 py-8 text-white min-h-screen bg-bgColor">
+    <div className="container mx-auto px-4 py-8 text-white min-h-screen"
+    style={{ backgroundColor: "var(--bgColor)" }}>
       <h1 className="text-3xl font-bold mb-6 text-center text-purple-400">
         Events This Week
       </h1>
