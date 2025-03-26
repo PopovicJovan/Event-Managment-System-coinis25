@@ -30,9 +30,7 @@ export const PartiesPage = ({ isAdmin = false }) => {
   const handleChange = (event, value) => {
     setPage(value);
   };
-  const handleType = () => {
-    setInputType("date");
-  };
+
   const paginatedParties = filteredParties.slice(
     (page - 1) * itemsPerPage,
     page * itemsPerPage
@@ -64,7 +62,7 @@ export const PartiesPage = ({ isAdmin = false }) => {
           placeholder="Enter date"
           value={startDateFilter}
           onChange={setStartDateFilter}
-          onFocus={handleType}
+          onFocus={() => setInputType("date")}
           onBlur={() => setInputType("text")}
         />
 
