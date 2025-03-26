@@ -104,7 +104,7 @@ export const NavbarComponent = () => {
   return (
     <>
       <nav
-        className={`m-auto px-12 pt-8 pb-7 text-white`}
+        className={`m-auto px-12 pt-8 md:pb-7 text-white`}
         style={{
           backgroundColor:
             theme === "light" ? "var(--secondaryGray)" : "var(--primaryGray)",
@@ -182,7 +182,7 @@ export const NavbarComponent = () => {
               </DropMenuComponent>
             </li>
           </ul>
-          <ul className="space-x-4 secondary-nav-list hidden md:block">
+          <ul className="space-x-4 secondary-nav-list hidden md:block ml-6">
             {isAuthenticated ? (
               <>
                 <li className="inline text-md" ref={userDropRef}>
@@ -261,7 +261,7 @@ export const NavbarComponent = () => {
         </div>
       </nav>
       <div
-        className={`mobile-nav bg-gray-800 transition-all duration-300 ease-in-out ${
+        className={`mobile-nav bg-gray-800 transition-all duration-300 ease-in-out text-white ${
           isBurgerVisible
             ? "max-h-128 opacity-100 visible"
             : "opacity-0 invisible max-h-0"
@@ -305,6 +305,9 @@ export const NavbarComponent = () => {
               </li>
             </>
           )}
+          <li className="py-2">
+            <ThemeToggleButton />
+          </li>
         </ul>
       </div>
 
