@@ -1,9 +1,9 @@
 
 import { useParties } from "../hooks/use-parties";
 import { Slider } from "../components/slider.jsx";
-import { NewsFeed } from "../components/newsFeed.jsx";
-import { UpcomingEvents } from "../components/upcomingEvents.jsx";
-import { TopEvents } from "../components/topEvents.jsx";
+import { NewsFeed } from "../components/news-feed.jsx";
+import { UpcomingEvents } from "../components/upcoming-events.jsx";
+import { TopEvents } from "../components/top-events.jsx";
 import { SpinLoader } from "../components/spin-loader.jsx";
 import './home.css';
 
