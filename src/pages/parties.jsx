@@ -5,6 +5,7 @@ import Pagination from "@mui/material/Pagination";
 import { PaginationComponent } from "../components/pagination-component.jsx";
 import { FilterInput } from "../components/filter-inputs.jsx";
 import { SpinLoader } from "../components/spin-loader.jsx";
+import { useTheme } from "../context/theme-context.jsx";
 
 export const PartiesPage = ({ isAdmin = false }) => {
   const {
@@ -23,6 +24,7 @@ export const PartiesPage = ({ isAdmin = false }) => {
     countryFilter,
     setCountryFilter,
   } = useParties();
+  const { theme } = useTheme();
 
   const [page, setPage] = useState(1);
   const itemsPerPage = 6;
@@ -37,9 +39,15 @@ export const PartiesPage = ({ isAdmin = false }) => {
   );
 
   return (
-    <div className="container mx-auto px-4">
+    <div
+      className="mx-auto px-4 min-h-screen"
+      style={{
+        backgroundColor:
+          theme === "light" ? "var(--lightBgColor)" : "var(--bgColor)",
+      }}
+    >
       {/* Search and Filter Bar */}
-      <div className="flex flex-wrap justify-center my-6 gap-4">
+      <div className="flex flex-wrap justify-center py-6 gap-4">
         {/* Search Bar */}
 
         <FilterInput
@@ -123,7 +131,7 @@ export const PartiesPage = ({ isAdmin = false }) => {
 
           {/* Pagination */}
           {filteredParties.length > itemsPerPage && (
-            <div className="flex justify-center my-6 text-white">
+            <div className="flex justify-center text-white">
               <PaginationComponent
                 totalLength={filteredParties.length}
                 perPage={itemsPerPage}

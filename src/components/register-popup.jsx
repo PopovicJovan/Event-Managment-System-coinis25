@@ -4,6 +4,7 @@ import { GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google";
 import { jwtDecode } from "jwt-decode";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import { useTheme } from "../context/theme-context";
 
 export const RegisterPopup = ({ className, isAdmin = false }) => {
   const [username, setUsername] = useState("");
@@ -12,6 +13,7 @@ export const RegisterPopup = ({ className, isAdmin = false }) => {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const { theme } = useTheme();
 
   const handleLoginSuccess = (response) => {
     const token = response.credential;
@@ -25,11 +27,19 @@ export const RegisterPopup = ({ className, isAdmin = false }) => {
 
   return (
     <div
-      className={
-        "flex justify-center items-center h-screen bg-black " + className
-      }
+      className={"flex justify-center items-center h-screen " + className}
+      style={{
+        backgroundColor:
+          theme == "light" ? "var(--lightBgColor)" : "var(--bgColor)",
+      }}
     >
-      <div className="w-5/6 md:w-3/6 bg-gray-900 p-8 rounded-lg shadow-lg flex items-center">
+      <div
+        className="w-5/6 md:w-3/6 bg-gray-900 p-8 rounded-lg shadow-lg flex items-center"
+        style={{
+          backgroundColor:
+            theme === "light" ? "var(--secondaryGray)" : "var(--primaryGray)",
+        }}
+      >
         <div className="w-1/2 hidden xl:block">
           <img src={registerImage} alt="" />
         </div>

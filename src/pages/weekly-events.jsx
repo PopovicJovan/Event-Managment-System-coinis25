@@ -1,5 +1,6 @@
 import { useParties } from "../hooks/use-parties";
 import { CardComponent } from "../components/card";
+import { useTheme } from "../context/theme-context";
 
 const isSameDay = (date1, date2) => {
   return (
@@ -19,13 +20,20 @@ const isWithinNext7Days = (date) => {
 export const TodayEventsPage = () => {
   const { parties, isLoading } = useParties();
   const today = new Date();
+  const { theme } = useTheme();
 
   const todayEvents = parties.filter((party) =>
     isSameDay(new Date(party.dateStart), today)
   );
 
   return (
-    <div className="container mx-auto px-4 py-8 text-white min-h-screen bg-bgColor">
+    <div
+      className="container mx-auto px-4 py-8 text-white min-h-screen"
+      style={{
+        backgroundColor:
+          theme === "light" ? "var(--lightBgColor)" : "var(--bgColor)",
+      }}
+    >
       <h1 className="text-3xl font-bold mb-6 text-center text-purple-400">
         Events Today
       </h1>
@@ -54,14 +62,19 @@ export const TodayEventsPage = () => {
 
 export const WeekEventsPage = () => {
   const { parties, isLoading } = useParties();
-
+  const { theme } = useTheme();
   const weekEvents = parties.filter((party) =>
     isWithinNext7Days(new Date(party.dateStart))
   );
 
   return (
-    <div className="container mx-auto px-4 py-8 text-white min-h-screen"
-    style={{ backgroundColor: "var(--bgColor)" }}>
+    <div
+      className="container mx-auto px-4 py-8 text-white min-h-screen"
+      style={{
+        backgroundColor:
+          theme === "light" ? "var(--lightBgColor)" : "var(--bgColor)",
+      }}
+    >
       <h1 className="text-3xl font-bold mb-6 text-center text-purple-400">
         Events This Week
       </h1>

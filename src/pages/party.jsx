@@ -2,9 +2,10 @@ import { useParty } from "../hooks/use-party";
 import placeholderImage from "../assets/placeholder.png";
 import { PartyMap } from "../components/party-map";
 import { SpinLoader } from "../components/spin-loader";
+import { useTheme } from "../context/theme-context";
 export const Party = () => {
   const { party, loading, error } = useParty();
-
+  const { theme } = useTheme();
   if (loading) {
     return (
       <div className="h-100">
@@ -28,7 +29,13 @@ export const Party = () => {
   }
 
   return (
-    <div className="max-w-screen-lg mx-auto px-4 sm:px-6 py-10 bg-gray-900 text-white rounded-xl shadow-xl mt-3">
+    <div
+      className="max-w-screen-lg mx-auto px-4 sm:px-6 py-10 rounded-xl shadow-xl mt-3 mb-5"
+      style={{
+        backgroundColor:
+          theme === "light" ? "var(--secondaryGray)" : "var(--primaryGray)",
+      }}
+    >
       {/* Party Title and Image */}
       <div className="text-center mb-8">
         <h1 className="text-3xl sm:text-4xl font-bold text-primaryPurple bg-clip-text text-transparent mb-4">

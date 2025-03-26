@@ -7,6 +7,7 @@ import { jwtDecode } from "jwt-decode";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { AuthInput } from "../components/auth-input";
+import { useTheme } from "../context/theme-context";
 
 export const LoginPage = () => {
   const [username, setUsername] = useState("");
@@ -15,6 +16,7 @@ export const LoginPage = () => {
   const [showPassword, setShowPassword] = useState(false);
   const { login } = useAuthContext();
   const navigate = useNavigate();
+  const { theme } = useTheme();
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -43,8 +45,20 @@ export const LoginPage = () => {
   };
 
   return (
-    <div className="flex justify-center items-center h-screen bg-black">
-      <div className="w-5/6 md:w-1/2 bg-gray-900 p-8 rounded-lg shadow-lg flex items-center justify-between">
+    <div
+      className="flex justify-center items-center h-screen"
+      style={{
+        backgroundColor:
+          theme === "light" ? "var(--lightBgColor)" : "var(--bgColor)",
+      }}
+    >
+      <div
+        className="w-5/6 md:w-1/2 p-8 rounded-lg shadow-lg flex items-center justify-between"
+        style={{
+          backgroundColor:
+            theme === "light" ? "var(--secondaryGray)" : "var(--primaryGray)",
+        }}
+      >
         <div className="w-1/2 hidden xl:block">
           <img src={loginImage} alt="" />
         </div>

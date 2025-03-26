@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useTheme } from "../context/theme-context";
 
 import placeholderImage from "../assets/placeholder.png";
 
@@ -15,13 +16,20 @@ export const CardComponent = ({
   onDelete = () => {},
 }) => {
   const [isFavorite, setIsFavorite] = useState(false);
+  const { theme } = useTheme();
 
   const toggleFavorite = () => {
     setIsFavorite((prev) => !prev);
   };
 
   return (
-    <div className="bg-gray-900 shadow-lg rounded-2xl overflow-hidden w-80 p-4 mx-auto mt-4 flex flex-col h-full">
+    <div
+      className=" shadow-lg rounded-2xl overflow-hidden w-80 p-4 mx-auto mt-4 flex flex-col h-full"
+      style={{
+        backgroundColor:
+          theme === "light" ? "var(--secondaryGray)" : "var(--primaryGray)",
+      }}
+    >
       <img
         src={image ? image : placeholderImage}
         alt={title}
@@ -41,7 +49,7 @@ export const CardComponent = ({
           <p className="text-xl text-lightGray mt-2 pt-2">{country}</p>
           <div className="flex  justify-between items-center w-full">
             <button
-              className={`px-4 mx-auto py-2 bg-purple-700 text-white rounded-lg hover:bg-opacity-80 transition cursor-pointer mt-2 ${
+              className={`px-4 mx-auto py-2 primary-button text-white rounded-lg hover:bg-opacity-80 transition cursor-pointer mt-2 ${
                 isAdmin ? "w-2/5" : "w-full"
               }`}
             >
