@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import placeholderImage from "../assets/placeholder.png";
 
 export const UpcomingEvents = ({ parties }) => {
   const upcomingParties = parties
@@ -15,7 +16,7 @@ export const UpcomingEvents = ({ parties }) => {
          {/* Image takes up more vertical space */}
          <div className="h-64 overflow-hidden">
            <img
-             src={party.urlImageMedium}
+             src={party.urlImageMedium || placeholderImage}
              alt={party.nameParty}
              className="w-full h-full object-cover"
            />

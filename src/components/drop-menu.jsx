@@ -1,6 +1,6 @@
 import { Link, NavLink } from "react-router-dom";
 import { useState, useEffect } from "react";
-import logoImage from "../assets/logo.png";
+import logoImage from "../assets/logoES-nobg.png";
 import { useAuthContext } from "../context/auth-context";
 
 export const DropMenuComponent = ({ onclick, isdrop, children, icon }) => {
