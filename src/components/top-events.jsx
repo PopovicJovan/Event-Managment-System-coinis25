@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useTheme } from "../context/theme-context.jsx";
 import placeholderImage from "../assets/placeholder.png";
 
 export const TopEvents = ({ events }) => {
   const oddEvents = events.filter((_, index) => index % 2 !== 0); // Get only odd-indexed events
   const [visibleCount, setVisibleCount] = useState(6);
+  const { theme } = useTheme();
 
   const handleLoadMore = () => {
     setVisibleCount((prevCount) => prevCount + 3);
@@ -12,7 +14,11 @@ export const TopEvents = ({ events }) => {
 
   return (
     <div className="mx-auto mt-8">
-      <h2 className="text-2xl font-bold mb-6 text-white text-center">
+      <h2
+        className={`text-2xl font-bold mb-6 text-center ${
+          theme == "light" ? "text-purple-900" : "text-white"
+        }`}
+      >
         Top Events
       </h2>
 
@@ -21,7 +27,12 @@ export const TopEvents = ({ events }) => {
           <div
             key={event.id}
             className="top-card rounded-lg overflow-hidden flex xl:flex-row flex-col items-center xl:items-start p-4"
-            style={{ backgroundColor: "var(--primaryGray)" }}
+            style={{
+              backgroundColor:
+                theme === "light"
+                  ? "var(--secondaryGray)"
+                  : "var(--primaryGray)",
+            }}
           >
             {/* Image Section */}
             <div className="w-full xl:w-[40%] aspect-square shrink-0">
