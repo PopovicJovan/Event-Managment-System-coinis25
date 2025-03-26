@@ -1,19 +1,19 @@
-// import { useAuth } from "../hooks/use-auth";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "../context/auth-context";
 import loginImage from "../assets/undraw_login.svg";
-import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
-import {jwtDecode} from 'jwt-decode';
-import {faEye, faEyeSlash} from "@fortawesome/free-solid-svg-icons";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
+import { jwtDecode } from "jwt-decode";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { AuthInput } from "../components/auth-input";
 
 export const LoginPage = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const { login, getUser } = useAuthContext();
+  const { login } = useAuthContext();
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
@@ -28,7 +28,7 @@ export const LoginPage = () => {
         setError("Invalid username or password");
       }
     } catch (err) {
-      setError("An error has occurred during login");
+      setError("An error has occurred during login", err);
     }
   };
 
@@ -39,7 +39,7 @@ export const LoginPage = () => {
   };
 
   const handleLoginFailure = (error) => {
-    console.error('Login Failed:', error);
+    console.error("Login Failed:", error);
   };
 
   return (
@@ -56,25 +56,36 @@ export const LoginPage = () => {
             <div className="text-red-500 text-center mb-5">{error}</div>
           )}
           <div>
-            <input
+            {/* Use AuthInput for username */}
+            <AuthInput
               type="text"
               placeholder="Username"
               value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              className="w-full p-3 border border-purple-700 rounded-md mb-4 text-white"
+              setValue={setUsername}
             />
             <div className={"relative"}>
-              <input
+              {/* Use AuthInput for password */}
+              <AuthInput
                 type={showPassword ? "text" : "password"}
                 placeholder="Password"
                 value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="w-full p-3 border border-purple-700 rounded-md mb-4 text-white"
+                setValue={setPassword}
               />
-              {!showPassword ?
-                  <FontAwesomeIcon icon={faEye} className={"absolute end-0 mt-2 me-2"} size={"2xl"} onClick={() => setShowPassword(true)}/> :
-                  <FontAwesomeIcon icon={faEyeSlash} className={"absolute end-0 mt-2 me-2"} size={"2xl"} onClick={() => setShowPassword(false)}/>
-              }
+              {!showPassword ? (
+                <FontAwesomeIcon
+                  icon={faEye}
+                  className={"absolute end-0 mt-2 me-2"}
+                  size={"2xl"}
+                  onClick={() => setShowPassword(true)}
+                />
+              ) : (
+                <FontAwesomeIcon
+                  icon={faEyeSlash}
+                  className={"absolute end-0 mt-2 me-2"}
+                  size={"2xl"}
+                  onClick={() => setShowPassword(false)}
+                />
+              )}
             </div>
           </div>
           <button
@@ -86,9 +97,9 @@ export const LoginPage = () => {
           <GoogleOAuthProvider clientId="471502448680-s13pqot74qatipr3l7jlng4f0dvkqa8h.apps.googleusercontent.com">
             <div className="App">
               <GoogleLogin
-                  onSuccess={handleLoginSuccess}
-                  onError={handleLoginFailure}
-                  useOneTap
+                onSuccess={handleLoginSuccess}
+                onError={handleLoginFailure}
+                useOneTap
               />
             </div>
           </GoogleOAuthProvider>

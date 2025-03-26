@@ -59,9 +59,11 @@ export const PartiesPage = ({ isAdmin = false }) => {
         />
         <FilterInput
           type="date"
+          placeholder="Enter date"
           value={startDateFilter}
           onChange={setStartDateFilter}
         />
+
         {/* Buttons */}
         <div className="flex gap-4 items-center">
           {isFiltered ? (
