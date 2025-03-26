@@ -1,27 +1,29 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import registerImage from "../assets/undraw_login.svg";
-import {GoogleLogin, GoogleOAuthProvider} from "@react-oauth/google";
-import {jwtDecode} from "jwt-decode";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faEye, faEyeSlash} from "@fortawesome/free-solid-svg-icons";
+import { GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google";
+import { jwtDecode } from "jwt-decode";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import { AuthInput } from "../components/auth-input";
 
+export const RegisterPopup = ({ className, isAdmin = false }) => {
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [passwordConfirm, setPasswordConfirm] = useState("");
+  const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-export const RegisterPopup = ({className, isAdmin=false}) => {
-    const [username, setUsername] = useState("");
-    const [email, setEmail] = useState("");
-    const [passwordConfirm, setPasswordConfirm] = useState("");
-    const [password, setPassword] = useState("");
-    const [showPassword, setShowPassword]  = useState(false);
-    const [showConfirmPassword, setShowConfirmPassword]  = useState(false);
-    const handleLoginSuccess = (response) => {
-        const token = response.credential;
-        const decoded = jwtDecode(token);
-        console.log(decoded);
-    };
+  const handleLoginSuccess = (response) => {
+    const token = response.credential;
+    const decoded = jwtDecode(token);
+    console.log(decoded);
+  };
 
-    const handleLoginFailure = (error) => {
-        console.error('Login Failed:', error);
-    };
+  const handleLoginFailure = (error) => {
+    console.error("Login Failed:", error);
+  };
+
 
     return (
         <div className={"flex justify-center items-center h-screen bg-black " + className}>
@@ -89,7 +91,25 @@ export const RegisterPopup = ({className, isAdmin=false}) => {
                         </div>
                     </GoogleOAuthProvider>}
                 </div>
+
             </div>
+          </div>
+          <button className="w-full p-3 bg-purple-900 text-white rounded-md hover:bg-purple-800 transition-all duration-300 ease-in-out hover:cursor-pointer mb-4">
+            Register
+          </button>
+          {!isAdmin && (
+            <GoogleOAuthProvider clientId="471502448680-s13pqot74qatipr3l7jlng4f0dvkqa8h.apps.googleusercontent.com">
+              <div className="App">
+                <GoogleLogin
+                  onSuccess={handleLoginSuccess}
+                  onError={handleLoginFailure}
+                  useOneTap
+                />
+              </div>
+            </GoogleOAuthProvider>
+          )}
         </div>
-    );
-}
+      </div>
+    </div>
+  );
+};
