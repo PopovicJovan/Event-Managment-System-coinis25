@@ -12,8 +12,9 @@ export const UpcomingEvents = ({ parties }) => {
       <h2 className="text-2xl font-bold mb-6">Upcoming Events</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {upcomingParties.map((party) => (
-         <div key={party.id} className="bg-gray-900 rounded-lg overflow-hidden flex flex-col h-full">
-         {/* Image takes up more vertical space */}
+         <div key={party.id} className="rounded-lg overflow-hidden flex flex-col h-full"
+         style={{ backgroundColor: "var(--primaryGray)" }}>
+        
          <div className="h-64 overflow-hidden">
            <img
              src={party.urlImageMedium || placeholderImage}
@@ -34,7 +35,7 @@ export const UpcomingEvents = ({ parties }) => {
                {new Date(party.dateStart).toLocaleDateString()}
              </p>
              <Link to={`/parties/${party.id}`}>
-               <button className="bg-purple-700 hover:bg-purple-800 text-white py-2 px-4 rounded-full transition duration-300 w-full cursor-pointer">
+               <button className="primary-button text-white py-2 px-4 rounded-full transition duration-300 w-full cursor-pointer">
                  View Details
                </button>
              </Link>

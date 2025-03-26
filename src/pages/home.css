@@ -2,22 +2,14 @@
   padding: 3svw 6svw;
 } */
 
-.glow-button {
-    transition: all 0.3s ease-in-out;
-    box-shadow: 0 0 0 rgba(0, 0, 0, 0);
-  }
-  
-  .glow-button:hover {
-    box-shadow: 0 0 15px 3px rgba(192, 132, 252, 0.4),
-                0 0 30px 6px rgba(158, 107, 209, 0.4);
-    transform: translateY(-2px);
-  }
+
+
 
 
  
   
   .top-card:hover{
-    transition: all 0.3s;
+    transition: all 0.3s ease-in-out;
     transform: translateY(-2px);
   }
 
