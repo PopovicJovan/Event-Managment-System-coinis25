@@ -104,8 +104,11 @@ export const NavbarComponent = () => {
   return (
     <>
       <nav
-        className={`m-auto px-12 pt-8 pb-7 bg-gray-900`}
-        style={{ backgroundColor: "var(--lightBg)" }}
+        className={`m-auto px-12 pt-8 pb-7 text-white`}
+        style={{
+          backgroundColor:
+            theme === "light" ? "var(--secondaryGray)" : "var(--primaryGray)",
+        }}
       >
         <div className="list-container flex justify-between w-5/7 m-auto md:items-center">
           <div className="logo-container flex justify-between items-center">
