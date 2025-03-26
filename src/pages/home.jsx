@@ -21,7 +21,8 @@ export const HomePage = () => {
   
 
   return (
-    <div className="cont-padding mx-auto min-h-screen bg-bgColor text-white overflow-hidden">
+    <div className="cont-padding mx-auto min-h-screen text-white overflow-hidden"
+    style={{ backgroundColor: "var(--bgColor)" }}>
 
       {/* Header */}
       <header className="mb-12">

@@ -8,6 +8,7 @@ import enUS from "date-fns/locale/en-US";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import { useParties } from "../hooks/use-parties";
 import { SpinLoader } from "../components/spin-loader";
+import { CustomToolbar } from "../components/custom-toolbar";
 import "./calendar.css";
 
 const locales = {
@@ -58,22 +59,22 @@ export const CalendarPage = () => {
       ) : (
         <div className="bg-gray-900 rounded-lg p-4">
   <Calendar
-    localizer={localizer}
-    events={events}
-    startAccessor="start"
-    endAccessor="end"
-    className="text-purple-400"
-    popup
-    view={view}
-    date={currentDate}
-    onView={handleViewChange}
-    onNavigate={handleNavigate}
-    style={{
-      height: "600px",
-      maxHeight: "600px",
-      overflowY: "auto",
-    }}
-  />
+  localizer={localizer}
+  events={events}
+  startAccessor="start"
+  endAccessor="end"
+  style={{ height: 600 }}
+  popup
+  view={view}
+  date={currentDate}
+  onView={handleViewChange}
+  onNavigate={handleNavigate}
+  components={{
+    
+      toolbar: (props) => <CustomToolbar {...props} />
+    
+  }}
+/>
 </div>
 
       )}

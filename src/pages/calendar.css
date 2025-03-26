@@ -90,10 +90,13 @@
     
 }
 
-  .rbc-button-link{
-    text-decoration: none;
-    color: #fff;
-  }
+.rbc-show-more:focus{
+  background-color: #fff;
+  color: #8b5cf6;
+}
+
+  
+  
   
 .rbc-event{
     background-color: #9333ea;
