@@ -19,18 +19,20 @@ export const PartiesPage = ({ isAdmin = false }) => {
     setOrganizerFilter,
     startDateFilter,
     setStartDateFilter,
-
     countryFilter,
     setCountryFilter,
   } = useParties();
+
   const [inputType, setInputType] = useState("text");
   const [page, setPage] = useState(1);
   const itemsPerPage = 6;
 
+  // Handle page change for pagination
   const handleChange = (event, value) => {
     setPage(value);
   };
 
+  // Paginated parties based on the current page
   const paginatedParties = filteredParties.slice(
     (page - 1) * itemsPerPage,
     page * itemsPerPage
@@ -41,7 +43,6 @@ export const PartiesPage = ({ isAdmin = false }) => {
       {/* Search and Filter Bar */}
       <div className="flex flex-wrap justify-center my-6 gap-4">
         {/* Search Bar */}
-
         <FilterInput
           placeholder="Search for a party..."
           value={searchTerm}
@@ -72,13 +73,13 @@ export const PartiesPage = ({ isAdmin = false }) => {
             <>
               <button
                 className="px-4 py-2 bg-primaryPurple text-white rounded-lg hover:bg-purple-700 transition"
-                onClick={applyFilter}
+                onClick={applyFilter} // Apply filter on button click
               >
                 Apply Filter
               </button>
               <button
                 className="px-4 py-2 bg-primaryPurple text-white rounded-lg hover:bg-purple-700 transition"
-                onClick={deleteFilter}
+                onClick={deleteFilter} // Remove filter on button click
               >
                 Remove Filter
               </button>
@@ -86,7 +87,7 @@ export const PartiesPage = ({ isAdmin = false }) => {
           ) : (
             <button
               className="px-4 py-2 bg-primaryPurple text-white rounded-lg hover:bg-purple-700 transition"
-              onClick={applyFilter}
+              onClick={applyFilter} // Apply filter on button click
             >
               Apply Filter
             </button>

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { partiesService } from "../services/parties-service";
 
 export const useParties = () => {
@@ -9,7 +9,6 @@ export const useParties = () => {
   const [isFiltered, setIsFiltered] = useState(false);
   const [organizerFilter, setOrganizerFilter] = useState("");
   const [startDateFilter, setStartDateFilter] = useState("");
-
   const [countryFilter, setCountryFilter] = useState("");
 
   useEffect(() => {
@@ -27,7 +26,7 @@ export const useParties = () => {
     fetchParties();
   }, []);
 
-  const applyFilter = () => {
+  const filteredPartiesMemo = useMemo(() => {
     let filtered = parties;
 
     if (searchTerm) {
@@ -43,6 +42,7 @@ export const useParties = () => {
           .includes(organizerFilter.toLowerCase())
       );
     }
+
     if (countryFilter) {
       filtered = filtered.filter((party) =>
         party.nameCountry.toLowerCase().includes(countryFilter.toLowerCase())
@@ -57,7 +57,11 @@ export const useParties = () => {
       );
     }
 
-    setFilteredParties(filtered);
+    return filtered;
+  }, [parties, searchTerm, organizerFilter, countryFilter, startDateFilter]);
+
+  const applyFilter = () => {
+    setFilteredParties(filteredPartiesMemo);
     setIsFiltered(true);
   };
 
@@ -67,7 +71,6 @@ export const useParties = () => {
     setSearchTerm("");
     setOrganizerFilter("");
     setStartDateFilter("");
-
     setCountryFilter("");
   };
 
@@ -84,7 +87,6 @@ export const useParties = () => {
     setOrganizerFilter,
     startDateFilter,
     setStartDateFilter,
-
     countryFilter,
     setCountryFilter,
   };
