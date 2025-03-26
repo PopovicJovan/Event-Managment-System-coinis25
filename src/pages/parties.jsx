@@ -23,14 +23,16 @@ export const PartiesPage = ({ isAdmin = false }) => {
     countryFilter,
     setCountryFilter,
   } = useParties();
-
+  const [inputType, setInputType] = useState("text");
   const [page, setPage] = useState(1);
   const itemsPerPage = 6;
 
   const handleChange = (event, value) => {
     setPage(value);
   };
-
+  const handleType = () => {
+    setInputType("date");
+  };
   const paginatedParties = filteredParties.slice(
     (page - 1) * itemsPerPage,
     page * itemsPerPage
@@ -58,10 +60,12 @@ export const PartiesPage = ({ isAdmin = false }) => {
           onChange={setOrganizerFilter}
         />
         <FilterInput
-          type="date"
+          type={inputType}
           placeholder="Enter date"
           value={startDateFilter}
           onChange={setStartDateFilter}
+          onFocus={handleType}
+          onBlur={() => setInputType("text")}
         />
 
         {/* Buttons */}
