@@ -1,8 +1,10 @@
 import { Link, NavLink } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
-import logoImage from "../assets/logoEs-nobg.png";
+import logoImage from "../assets/logoES-nobg.png";
 import { useAuthContext } from "../context/auth-context";
 import { DropMenuComponent } from "./drop-menu";
+import { ThemeToggleButton } from "./ThemeToggleButton";
+import { useTheme } from "../context/theme-context";
 
 export const NavbarComponent = () => {
   const [isArrowVisible, setArrowVisible] = useState(false);
@@ -10,6 +12,8 @@ export const NavbarComponent = () => {
   const { isAuthenticated, logout } = useAuthContext();
   const [isUserDropVisible, setUserDropVisible] = useState(false);
   const [isArrowDropVisible, setArrowDropVisible] = useState(false);
+  const [isLightTheme, setLightTheme] = useState(false);
+  const { theme } = useTheme();
 
   // Refs for dropdown menus
   const arrowDropRef = useRef(null);
@@ -88,7 +92,7 @@ export const NavbarComponent = () => {
       className={({ isActive }) =>
         `${
           isActive ? "border-b-purple-700 border-b-2" : ""
-        } text-white p-2 hover:text-purple-700 transition-all duration-300 ease-in-out ${className}`
+        } p-2 hover:text-purple-700 transition-all duration-300 ease-in-out ${className}`
       }
       to={path}
       onClick={onClick}
@@ -99,7 +103,10 @@ export const NavbarComponent = () => {
 
   return (
     <>
-      <nav className="navbar m-auto px-12 pt-8 pb-7 bg-gray-900">
+      <nav
+        className={`m-auto px-12 pt-8 pb-7 bg-gray-900`}
+        style={{ backgroundColor: "var(--lightBg)" }}
+      >
         <div className="list-container flex justify-between w-5/7 m-auto md:items-center">
           <div className="logo-container flex justify-between items-center">
             <Link to="/">
@@ -228,7 +235,7 @@ export const NavbarComponent = () => {
               <>
                 <li className="inline">
                   <NavLink
-                    className="nav-item p-2 text-white font-bold outline-purple-700 outline-2 rounded-2xl hover:bg-purple-700"
+                    className="nav-item px-4 py-2 font-bold outline-purple-700 outline-2 rounded-2xl hover:bg-purple-700"
                     to="/login"
                   >
                     Login
@@ -236,11 +243,14 @@ export const NavbarComponent = () => {
                 </li>
                 <li className="inline">
                   <NavLink
-                    className="nav-item p-2 text-white font-bold bg-purple-700 rounded-2xl hover:outline-purple-900 hover:outline-2 hover:bg-transparent"
+                    className="nav-item px-4 py-2 font-bold bg-purple-700 rounded-2xl hover:outline-purple-900 hover:outline-2 hover:bg-transparent"
                     to="/register"
                   >
                     Register
                   </NavLink>
+                </li>
+                <li className="inline">
+                  <ThemeToggleButton />
                 </li>
               </>
             )}
