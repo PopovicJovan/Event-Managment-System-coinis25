@@ -58,12 +58,19 @@ export const CreateEventPage = () => {
             type="datetime-local"
             {...register("dateEnd", {
               required: "End Date is required.",
-              validate: (value, { dateStart }) =>
-                new Date(value) > new Date(dateStart) ||
-                "End date must be after start date.",
+              validate: (value, { dateStart }) => {
+                const startDateTime = new Date(dateStart);
+                const endDateTime = new Date(value);
+
+                return (
+                  endDateTime > startDateTime ||
+                  "End date and time must be after start date and time."
+                );
+              },
             })}
             error={errors.dateEnd?.message}
           />
+
           <EventInput
             type="text"
             placeholder="Town"
