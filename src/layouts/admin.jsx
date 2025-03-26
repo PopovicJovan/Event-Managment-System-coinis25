@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCalendar, faList, faUserTie, faInbox, faBell, faComment, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 import {AdminSideBarButton} from "../components/AdminSideBarButton.jsx";
 import {useEffect, useState} from "react";
-import {Input} from "antd";
+import {Button, Input} from "antd";
 
 export const AdminLayout = () => {
     const [open, setOpen] = useState(true);
@@ -40,7 +40,7 @@ export const AdminLayout = () => {
             {
                 open && (
                     <div id={"side-bar"}
-                         className={"fixed start-0 top-0 w-3xs h-full px-2 py-5 bg-neutral-800 flex flex-col gap-3 z-10 "}>
+                         className={"fixed start-0 top-0 w-3xs h-full px-2 py-5 bg-neutral-800 flex flex-col gap-3 z-50 "}>
                         <span className="text-2xl font-bold tracking-wide text-white mx-auto">ADMIN</span>
                         <AdminSideBarButton
                             label="Users"
@@ -91,7 +91,10 @@ export const AdminLayout = () => {
                 )
             }
             <div id="navigation" className={`bg-neutral-300 h-14 flex justify-between items-center pe-6 ps-6 ${open ? "lg:ps-72" : undefined}`}>
-                <MenuOutlined onClick={handleSideBarOpen} className={"text-4xl"}/>
+                <div className={"flex items-center gap-x-2"}>
+                    <MenuOutlined onClick={handleSideBarOpen} className={"text-4xl"}/>
+                    <Button onClick={() => navigate("/")}>HOME</Button>
+                </div>
                 <div className={"flex justify-between gap-x-6"}>
                     <FontAwesomeIcon icon={faMagnifyingGlass} size={"2xl"} className={"me-5"} onClick={() => setSearchActive(!searchActive)}/>
                     {searchActive && <Input placeholder="Outlined" size={"middle"}/>}

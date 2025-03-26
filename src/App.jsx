@@ -9,7 +9,9 @@ function App() {
     ReactGA.send("pageview");
   }, []);
   return (
-        <RouterProvider router={router} />
+        <>
+          <RouterProvider router={router} />
+          </>
   );
 }
 
