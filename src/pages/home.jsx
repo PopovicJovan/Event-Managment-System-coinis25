@@ -1,9 +1,9 @@
 
 import { useParties } from "../hooks/use-parties";
 import { Slider } from "../components/slider.jsx";
-import { NewsFeed } from "../components/newsFeed.jsx";
-import { UpcomingEvents } from "../components/upcomingEvents.jsx";
-import { TopEvents } from "../components/topEvents.jsx";
+import { NewsFeed } from "../components/news-feed.jsx";
+import { UpcomingEvents } from "../components/upcoming-events.jsx";
+import { TopEvents } from "../components/top-events.jsx";
 import { SpinLoader } from "../components/spin-loader.jsx";
 import './home.css';
 
@@ -21,7 +21,7 @@ export const HomePage = () => {
   
 
   return (
-    <div className="container mx-auto px-4 py-8 min-h-screen bg-bgColor text-white overflow-hidden">
+    <div className="cont-padding mx-auto min-h-screen bg-bgColor text-white overflow-hidden">
 
       {/* Header */}
       <header className="mb-12">

@@ -1,6 +1,5 @@
 .calendar{
-    padding-left: 6vw;
-    padding-right: 6vw;
+    padding: 3svw 6svw;
 }
 
 /* Base calendar wrapper */
@@ -81,7 +80,8 @@
   }
 
   .rbc-show-more {
-    color: #fff
+    color: #fff;
+    text-decoration: none;
   }
 
  .rbc-show-more:hover{
@@ -89,6 +89,11 @@
     color: #8b5cf6;
     
 }
+
+  .rbc-button-link{
+    text-decoration: none;
+    color: #fff;
+  }
   
 .rbc-event{
     background-color: #9333ea;

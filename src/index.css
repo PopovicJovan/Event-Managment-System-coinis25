@@ -5,9 +5,13 @@
   --bgColor: #0d0c1d;
   --lightGray: #b0b0b0;
   --primaryPurple: #8a42f4;
-  --secondaryPurple: oklch(0.496 0.265 301.924);
+  --secondaryPurple: #8200db;
   --white: #ffffff;
   --darkGray: #1a1a1a;
+}
+
+.cont-padding{
+  padding: 3svw 6svw;
 }
 
 .bg-darkGray {

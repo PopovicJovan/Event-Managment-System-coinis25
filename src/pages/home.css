@@ -1,7 +1,6 @@
-.container{
-    padding-left: 6vw;
-    padding-right: 6vw;
-}
+/* .container{
+  padding: 3svw 6svw;
+} */
 
 .glow-button {
     transition: all 0.3s ease-in-out;

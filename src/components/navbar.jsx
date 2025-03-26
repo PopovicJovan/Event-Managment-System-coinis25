@@ -1,13 +1,20 @@
 import { Link, NavLink } from "react-router-dom";
-import { useState, useEffect } from "react";
-import logoImage from "../assets/logo.png";
+import { useState, useEffect, useRef } from "react";
+import logoImage from "../assets/logoEs-nobg.png";
 import { useAuthContext } from "../context/auth-context";
+import { DropMenuComponent } from "./drop-menu";
 
 export const NavbarComponent = () => {
   const [isArrowVisible, setArrowVisible] = useState(false);
   const [isBurgerVisible, setBurgerVisible] = useState(false);
   const { isAuthenticated, logout } = useAuthContext();
-  const [isDropdownVisible, setDropdownVisible] = useState(false);
+  const [isUserDropVisible, setUserDropVisible] = useState(false);
+  const [isArrowDropVisible, setArrowDropVisible] = useState(false);
+
+  // Refs for dropdown menus
+  const arrowDropRef = useRef(null);
+  const userDropRef = useRef(null);
+
   useEffect(() => {
     const handleScroll = () => {
       setArrowVisible(window.scrollY > 100);
@@ -15,24 +22,67 @@ export const NavbarComponent = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  // Click outside handler for dropdowns
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      // Check Arrow Dropdown
+      if (
+        isArrowDropVisible &&
+        arrowDropRef.current &&
+        !arrowDropRef.current.contains(event.target)
+      ) {
+        setArrowDropVisible(false);
+      }
+
+      // Check User Dropdown
+      if (
+        isUserDropVisible &&
+        userDropRef.current &&
+        !userDropRef.current.contains(event.target)
+      ) {
+        setUserDropVisible(false);
+      }
+    };
+
+    // Add click event listener to document
+    document.addEventListener("mousedown", handleClickOutside);
+
+    // Cleanup the event listener
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isArrowDropVisible, isUserDropVisible]);
+
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
       behavior: "smooth",
     });
   };
+
   const handleBurgerClick = () => {
     setBurgerVisible(!isBurgerVisible);
   };
+
   const navItems = [
     { path: "/", label: "Home" },
     { path: "/parties", label: "Parties" },
     { path: "/about", label: "About" },
   ];
 
-  const toggleDropdown = () => {
-    setDropdownVisible(!isDropdownVisible);
+  const toggleUserDrop = () => {
+    setUserDropVisible(!isUserDropVisible);
   };
+
+  const toggleArrowDrop = () => {
+    setArrowDropVisible(!isArrowDropVisible);
+  };
+
+  const handleDropdownItemClick = (dropdownSetter) => {
+    dropdownSetter(false);
+  };
+
   const renderNavLink = (path, label, className = "", onClick = null) => (
     <NavLink
       className={({ isActive }) =>
@@ -46,6 +96,7 @@ export const NavbarComponent = () => {
       {label}
     </NavLink>
   );
+
   return (
     <>
       <nav className="navbar m-auto px-12 pt-8 pb-7 bg-gray-900">
@@ -72,41 +123,89 @@ export const NavbarComponent = () => {
                 {renderNavLink(item.path, item.label)}
               </li>
             ))}
+            <li className="inline" ref={arrowDropRef}>
+              <DropMenuComponent
+                onclick={toggleArrowDrop}
+                isdrop={isArrowDropVisible}
+                icon={
+                  <>
+                    Schedule
+                    <i className="fa-solid fa-caret-down pl-3"></i>
+                  </>
+                }
+              >
+                <ul>
+                  <li>
+                    <NavLink
+                      className="block py-2 px-4 hover:bg-purple-700 text-sm cursor-pointer w-full text-left"
+                      to="/today"
+                      onClick={() =>
+                        handleDropdownItemClick(setArrowDropVisible)
+                      }
+                    >
+                      Today
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink
+                      className="block py-2 px-4 hover:bg-purple-700 text-sm cursor-pointer w-full text-left"
+                      to="/week"
+                      onClick={() =>
+                        handleDropdownItemClick(setArrowDropVisible)
+                      }
+                    >
+                      Week
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink
+                      className="block py-2 px-4 hover:bg-purple-700 text-sm cursor-pointer w-full text-left"
+                      to="/calendar"
+                      onClick={() =>
+                        handleDropdownItemClick(setArrowDropVisible)
+                      }
+                    >
+                      Calendar
+                    </NavLink>
+                  </li>
+                </ul>
+              </DropMenuComponent>
+            </li>
           </ul>
           <ul className="space-x-4 secondary-nav-list hidden md:block">
             {isAuthenticated ? (
               <>
-
-                <li className="inline text-md">
-                  <button
-                    className="text-white p-2 hover:text-purple-700 transition-all duration-300 ease-in-out cursor-pointer"
-                    onClick={toggleDropdown}
+                <li className="inline text-md" ref={userDropRef}>
+                  <DropMenuComponent
+                    onclick={toggleUserDrop}
+                    isdrop={isUserDropVisible}
+                    icon={<i className="fa-solid fa-user"></i>}
                   >
-                    <i class="fa-solid fa-user hover:text-purple-700"></i>
-                  </button>
-                  {isDropdownVisible && (
-                    <div className="absolute bg-gray-800 text-white rounded-md shadow-lg mt-2 p-4">
-                      <ul>
-                        <li>
-                          <NavLink
-                            className="block py-2 px-4 hover:bg-purple-700 text-sm cursor-pointer"
-                            to="/user"
-                          >
-                            Profile
-                          </NavLink>
-                        </li>
-                        <li>
-                          <button
-                            onClick={logout}
-                            className="block py-2 px-4 hover:bg-purple-700 text-sm cursor-pointer"
-                          >
-                            Logout
-                          </button>
-                        </li>
-                      </ul>
-                    </div>
-                  )}
-
+                    <ul>
+                      <li>
+                        <NavLink
+                          className="block py-2 px-4 hover:bg-purple-700 text-sm cursor-pointer w-full text-left"
+                          to="/user"
+                          onClick={() =>
+                            handleDropdownItemClick(setUserDropVisible)
+                          }
+                        >
+                          Profile
+                        </NavLink>
+                      </li>
+                      <li>
+                        <button
+                          onClick={() => {
+                            handleDropdownItemClick(setUserDropVisible);
+                            logout();
+                          }}
+                          className="block py-2 px-4 hover:bg-purple-700 text-sm cursor-pointer w-full text-left"
+                        >
+                          Logout
+                        </button>
+                      </li>
+                    </ul>
+                  </DropMenuComponent>
                 </li>
                 <li className="inline text-md">
                   <NavLink
@@ -121,7 +220,7 @@ export const NavbarComponent = () => {
                     className="text-white p-2 hover:text-purple-700 transition-all duration-300 ease-in-out"
                     to="/admin"
                   >
-                    <i class="fa-solid fa-lock"></i>
+                    <i className="fa-solid fa-lock"></i>
                   </NavLink>
                 </li>
               </>

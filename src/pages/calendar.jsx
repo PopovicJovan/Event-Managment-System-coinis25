@@ -7,6 +7,7 @@ import getDay from "date-fns/getDay";
 import enUS from "date-fns/locale/en-US";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import { useParties } from "../hooks/use-parties";
+import { SpinLoader } from "../components/spin-loader";
 import "./calendar.css";
 
 const locales = {
@@ -51,7 +52,9 @@ export const CalendarPage = () => {
       </h1>
 
       {isLoading ? (
-        <p className="text-center text-white">Loading events...</p>
+        <div className="flex justify-center items-center min-h-screen bg-bgColor">
+                <SpinLoader />
+              </div>
       ) : (
         <div className="bg-gray-900 rounded-lg p-4">
   <Calendar

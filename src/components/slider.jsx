@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { Modal } from "./modal"; // Adjust path if needed
+import { Modal } from "./modal"; 
+import placeholderImage from "../assets/placeholder.png";
 
 export const Slider = ({ parties }) => {
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
@@ -74,7 +75,7 @@ export const Slider = ({ parties }) => {
                   <div
                     className="h-96 rounded-lg overflow-hidden flex flex-col justify-between items-center text-center p-4 relative"
                     style={{
-                      backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(${party.urlImageFull})`,
+                      backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(${party.urlImageFull || placeholderImage})`,
                       backgroundSize: "cover",
                       backgroundPosition: "center",
                       color: "white",

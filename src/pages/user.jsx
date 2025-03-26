@@ -29,7 +29,7 @@ export const UserPage = () => {
         (console.log(user),
         (
           <>
-            <div className="flex items-center justify-center min-h-200 bg-black">
+            <div className="flex items-center justify-center min-h-200 bg-bgColor">
               <div className="w-full max-w-lg bg-gray-900 shadow-lg rounded-xl p-6 text-center">
                 <div className="mx-auto mb-4">
                   <img
