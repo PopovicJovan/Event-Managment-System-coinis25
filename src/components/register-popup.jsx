@@ -25,7 +25,7 @@ export const RegisterPopup = ({className, isAdmin=false}) => {
 
     return (
         <div className={"flex justify-center items-center h-screen bg-black " + className}>
-            <div className="w-5/6 md:w-3/6 bg-gray-900 p-8 rounded-lg shadow-lg flex items-center">
+            <div className=" w-5/6 md:w-3/6 bg-gray-900 p-8 rounded-lg shadow-lg flex items-center">
                 <div className="w-1/2 hidden xl:block">
                     <img src={registerImage} alt="" />
                 </div>

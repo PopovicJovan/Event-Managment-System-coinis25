@@ -13,6 +13,7 @@ export const AdminMap = () => {
                         names={parties.map(p => p.nameParty)}
                         locations={parties.map(p => [[p.nameTown, p.nameCountry]])}
                         isAdmin={true}
+                        className={"z-10"}
                     />
                 )
             }

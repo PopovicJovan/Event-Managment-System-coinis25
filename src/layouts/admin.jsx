@@ -40,7 +40,7 @@ export const AdminLayout = () => {
             {
                 open && (
                     <div id={"side-bar"}
-                         className={"fixed start-0 top-0 w-3xs h-full px-2 py-5 bg-neutral-800 flex flex-col gap-3 z-10 "}>
+                         className={"fixed start-0 top-0 w-3xs h-full px-2 py-5 bg-neutral-800 flex flex-col gap-3 z-50 "}>
                         <span className="text-2xl font-bold tracking-wide text-white mx-auto">ADMIN</span>
                         <AdminSideBarButton
                             label="Users"

@@ -27,9 +27,9 @@ export const AdminUsers = () => {
     return (
         <>
 
-            <div className={`w-full overflow-x-auto`}>
-                {userCreate && <RegisterPopup isAdmin={true} className={`bg-transparent fixed z-30 ${userCreate ? "backdrop-blur-md" : undefined}`}/>}
-                {userCreate && <Button className="my-5 z-50"  size={"large"} onClick={() => setUserCreate(false)}>EXIT</Button>}
+            <div className={`w-full overflow-x-auto relative`}>
+                {userCreate && <RegisterPopup isAdmin={true} className={`w-full bg-transparent absolute m-auto z-30 ${userCreate ? "backdrop-blur-md" : undefined}`}/>}
+                {userCreate && <Button className="my-5 z-40"  size={"large"} onClick={() => setUserCreate(false)}>EXIT</Button>}
                 {loading ? <SpinLoader spinning={loading} /> :
                 <>
                     {!userCreate && <Button className="my-5" type="primary" size={"large"} onClick={() => setUserCreate(true)}>Create
