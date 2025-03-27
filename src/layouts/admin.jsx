@@ -5,6 +5,8 @@ import { faCalendar, faList, faUserTie, faInbox, faBell, faComment, faMagnifying
 import {AdminSideBarButton} from "../components/AdminSideBarButton.jsx";
 import {useEffect, useState} from "react";
 import {Button, Input} from "antd";
+import {AuthProvider} from "../context/auth-context.jsx";
+import {ThemeProvider} from "../context/theme-context.jsx";
 
 export const AdminLayout = () => {
     const [open, setOpen] = useState(true);
@@ -36,76 +38,80 @@ export const AdminLayout = () => {
     }, []);
 
     return (
-        <div className={"w-full h-svh"} onClick={(e) => handleClickOutsideSideBar(e)}>
-            {
-                open && (
-                    <div id={"side-bar"}
-                         className={"fixed start-0 top-0 w-3xs h-full px-2 py-5 bg-neutral-800 flex flex-col gap-3 z-50 "}>
-                        <span className="text-2xl font-bold tracking-wide text-white mx-auto">ADMIN</span>
-                        <AdminSideBarButton
-                            label="Users"
-                            icon={<UserOutlined/>}
-                            onClick={(e) => handleButtonClick(e, "/admin/users")}
-                        />
-                        <AdminSideBarButton
-                            label="Events"
-                            icon={<FontAwesomeIcon icon={faCalendar}/>}
-                            onClick={(e) => handleButtonClick(e, "/admin/events")}
-                        />
-                        <AdminSideBarButton
-                            label="Categories"
-                            icon={<FontAwesomeIcon icon={faList}/>}
-                            onClick={(e) => handleButtonClick(e, "/admin/categories")}
-                        />
-                        <AdminSideBarButton
-                            label="Roles"
-                            icon={<FontAwesomeIcon icon={faUserTie}/>}
-                            onClick={(e) => handleButtonClick(e, "/admin/roles")}
-                        />
-                        <hr className={"mt-2"}/>
-                        <AdminSideBarButton
-                            className={"mt-2"}
-                            label={"Users chart"}
-                            onClick={(e) => {handleButtonClick(e, "/admin/users/chart")}}
-                            color={"danger"}
-                        />
-                        <AdminSideBarButton
-                            label={"Events chart"}
-                            onClick={(e) => {handleButtonClick(e, "/admin/events/chart")}}
-                            color={"danger"}
-                        />
-                        <AdminSideBarButton
-                            label={"User activity chart"}
-                            className={"mb-2"}
-                            onClick={(e) => {handleButtonClick(e, "/admin/users/chart")}}
-                            color={"danger"}
-                        />
-                        <hr />
-                        <AdminSideBarButton
-                            className={"mt-2"}
-                            label={"Events map tracking"}
-                            onClick={(e) => {handleButtonClick(e, "/admin/map")}}
-                            color={"black"}
-                        />
+        <AuthProvider>
+            <ThemeProvider>
+                <div className={"w-full h-svh"} onClick={(e) => handleClickOutsideSideBar(e)}>
+                    {
+                        open && (
+                            <div id={"side-bar"}
+                                 className={"fixed start-0 top-0 w-3xs h-full px-2 py-5 bg-neutral-800 flex flex-col gap-3 z-50 "}>
+                                <span className="text-2xl font-bold tracking-wide text-white mx-auto">ADMIN</span>
+                                <AdminSideBarButton
+                                    label="Users"
+                                    icon={<UserOutlined/>}
+                                    onClick={(e) => handleButtonClick(e, "/admin/users")}
+                                />
+                                <AdminSideBarButton
+                                    label="Events"
+                                    icon={<FontAwesomeIcon icon={faCalendar}/>}
+                                    onClick={(e) => handleButtonClick(e, "/admin/events")}
+                                />
+                                <AdminSideBarButton
+                                    label="Categories"
+                                    icon={<FontAwesomeIcon icon={faList}/>}
+                                    onClick={(e) => handleButtonClick(e, "/admin/categories")}
+                                />
+                                <AdminSideBarButton
+                                    label="Roles"
+                                    icon={<FontAwesomeIcon icon={faUserTie}/>}
+                                    onClick={(e) => handleButtonClick(e, "/admin/roles")}
+                                />
+                                <hr className={"mt-2"}/>
+                                <AdminSideBarButton
+                                    className={"mt-2"}
+                                    label={"Users chart"}
+                                    onClick={(e) => {handleButtonClick(e, "/admin/users/chart")}}
+                                    color={"danger"}
+                                />
+                                <AdminSideBarButton
+                                    label={"Events chart"}
+                                    onClick={(e) => {handleButtonClick(e, "/admin/events/chart")}}
+                                    color={"danger"}
+                                />
+                                <AdminSideBarButton
+                                    label={"User activity chart"}
+                                    className={"mb-2"}
+                                    onClick={(e) => {handleButtonClick(e, "/admin/users/chart")}}
+                                    color={"danger"}
+                                />
+                                <hr />
+                                <AdminSideBarButton
+                                    className={"mt-2"}
+                                    label={"Events map tracking"}
+                                    onClick={(e) => {handleButtonClick(e, "/admin/map")}}
+                                    color={"black"}
+                                />
+                            </div>
+                        )
+                    }
+                    <div id="navigation" className={`bg-neutral-300 h-14 flex justify-between items-center pe-6 ps-6 ${open ? "lg:ps-72" : undefined}`}>
+                        <div className={"flex items-center gap-x-2"}>
+                            <MenuOutlined onClick={handleSideBarOpen} className={"text-4xl"}/>
+                            <Button onClick={() => navigate("/")}>HOME</Button>
+                        </div>
+                        <div className={"flex justify-between gap-x-6"}>
+                            <FontAwesomeIcon icon={faMagnifyingGlass} size={"2xl"} className={"me-5"} onClick={() => setSearchActive(!searchActive)}/>
+                            {searchActive && <Input placeholder="Outlined" size={"middle"}/>}
+                            <FontAwesomeIcon icon={faInbox} size={"2xl"} />
+                            <FontAwesomeIcon icon={faBell}  size={"2xl"}/>
+                            <FontAwesomeIcon icon={faComment}  size={"2xl"}/>
+                        </div>
                     </div>
-                )
-            }
-            <div id="navigation" className={`bg-neutral-300 h-14 flex justify-between items-center pe-6 ps-6 ${open ? "lg:ps-72" : undefined}`}>
-                <div className={"flex items-center gap-x-2"}>
-                    <MenuOutlined onClick={handleSideBarOpen} className={"text-4xl"}/>
-                    <Button onClick={() => navigate("/")}>HOME</Button>
+                    <div className={`w-full pt-4 px-0 sm:px-6 ${open ? "lg:ps-72" : undefined}`}>
+                        <Outlet/>
+                    </div>
                 </div>
-                <div className={"flex justify-between gap-x-6"}>
-                    <FontAwesomeIcon icon={faMagnifyingGlass} size={"2xl"} className={"me-5"} onClick={() => setSearchActive(!searchActive)}/>
-                    {searchActive && <Input placeholder="Outlined" size={"middle"}/>}
-                    <FontAwesomeIcon icon={faInbox} size={"2xl"} />
-                    <FontAwesomeIcon icon={faBell}  size={"2xl"}/>
-                    <FontAwesomeIcon icon={faComment}  size={"2xl"}/>
-                </div>
-            </div>
-            <div className={`w-full pt-4 px-0 sm:px-6 ${open ? "lg:ps-72" : undefined}`}>
-                <Outlet/>
-            </div>
-        </div>
+            </ThemeProvider>
+        </AuthProvider>
     )
 }

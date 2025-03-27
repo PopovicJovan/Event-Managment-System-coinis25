@@ -24,7 +24,8 @@ export const PartiesPage = ({ isAdmin = false }) => {
     countryFilter,
     setCountryFilter,
   } = useParties();
-  const { theme } = useTheme();
+  let { theme } = useTheme();
+  if(isAdmin) theme = "dark";
 
   const [page, setPage] = useState(1);
   const itemsPerPage = 6;
@@ -39,6 +40,8 @@ export const PartiesPage = ({ isAdmin = false }) => {
   );
 
   return (
+
+
     <div
       className="mx-auto px-4 min-h-screen"
       style={{

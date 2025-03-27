@@ -81,9 +81,9 @@ export const router = createBrowserRouter([
   {
     path: "/admin",
     element: (
-      <ErrorBoundaryWrapper>
+      // <ErrorBoundaryWrapper>
         <AdminLayout />
-      </ErrorBoundaryWrapper>
+      // </ErrorBoundaryWrapper>
     ),
     children: [
       {
