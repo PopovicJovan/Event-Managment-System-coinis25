@@ -19,6 +19,19 @@ export const AuthService = {
     }
   },
 
+  register: async (data) => {
+    try {
+      const response = await authClient.post("/auth/register", data);
+      console.log(response);
+      // localStorage.setItem("accessToken", response.data.accessToken);
+      //
+      // return response.data;
+    } catch (error) {
+      console.error("Login failed", error);
+      throw error;
+    }
+  },
+
   logout: () => {
     localStorage.removeItem("accessToken");
   },

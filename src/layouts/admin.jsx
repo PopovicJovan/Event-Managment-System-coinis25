@@ -40,7 +40,7 @@ export const AdminLayout = () => {
     return (
         <AuthProvider>
             <ThemeProvider>
-                <div className={"w-full h-screen overflow-y-hidden"} onClick={(e) => handleClickOutsideSideBar(e)}>
+                <div className={"w-full  overflow-y-hidden"} onClick={(e) => handleClickOutsideSideBar(e)}>
                     {
                         open && (
                             <div id={"side-bar"}

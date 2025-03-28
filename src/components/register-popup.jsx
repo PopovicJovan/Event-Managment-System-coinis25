@@ -1,19 +1,29 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 import registerImage from "../assets/undraw_login.svg";
 import { GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google";
 import { jwtDecode } from "jwt-decode";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { useTheme } from "../context/theme-context";
+import {AuthService} from "/src/services/auth-service.js";
+import {AuthInput} from "./auth-input.jsx";
+
+const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
 
 export const RegisterPopup = ({ className, isAdmin = false }) => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
   const [password, setPassword] = useState("");
-  const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [registerClicked, setRegisterClicked] = useState(false);
   const { theme } = useTheme();
+
+  const [errors, setErrors] = useState({});
+  const handleError = (name, value) => {
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      [name]: value,
+    }));
+  };
 
   const handleLoginSuccess = (response) => {
     const token = response.credential;
@@ -25,12 +35,40 @@ export const RegisterPopup = ({ className, isAdmin = false }) => {
     console.error("Login Failed:", error);
   };
 
+  const handleRegister = async () => {
+    setRegisterClicked(true);
+    if (password.trim() !== passwordConfirm.trim()){
+      handleError("general", "Passwords do not match!");
+      return;
+    }
+    if (!emailRegex.test(email) && !errors.email){
+      handleError("email", "Email adress is not valid");
+      return;
+    }
+    if (Object.keys(errors).every(key => errors[key].trim() !== "")) return;
+    try{
+        await AuthService.register({
+          username: username,
+          password: password,
+          email: email,
+          password_confirmation: passwordConfirm
+      })
+    }catch (error){
+      if (Array.isArray(error?.response?.data?.detail)){
+        error.response.data.detail.forEach((err) => {
+          handleError(err.loc[1] ?? err.loc[0], err.msg)
+        });
+      }
+      handleError('general', error?.response?.data?.detail?.msg)
+    }
+  }
+
   return (
     <div
       className={"flex justify-center items-center h-screen " + className}
       style={{
         backgroundColor:
-          theme == "light" ? "var(--lightBgColor)" : "var(--bgColor)",
+          theme === "light" ? "var(--lightBgColor)" : "var(--bgColor)",
       }}
     >
       <div
@@ -44,79 +82,38 @@ export const RegisterPopup = ({ className, isAdmin = false }) => {
           <img src={registerImage} alt="" />
         </div>
         <div className={"w-full sm:w-2/3 xl:w-1/2 mx-auto xl:mx-0"}>
-          <h1 className="text-2xl font-bold text-center text-white mb-6 uppercase">
+          <h1 className="text-2xl font-bold text-center text-white uppercase">
             Register
           </h1>
+          {
+            <p className={"text-red-700 text-center h-7"}>{errors.general}</p>
+          }
           <div>
-            <input
-              type="text"
-              placeholder="Username"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              className="w-full p-3 border border-purple-700 rounded-md mb-4 text-white"
-            />
-            <input
-              type="email"
-              placeholder="Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="w-full p-3 border border-purple-700 rounded-md mb-4 text-white"
-            />
-            <div className={"relative"}>
-              <input
-                type={showPassword ? "text" : "password"}
-                placeholder="Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="w-full p-3 border border-purple-700 rounded-md mb-4 text-white"
-              />
-              {!showPassword ? (
-                <FontAwesomeIcon
-                  icon={faEye}
-                  className={"absolute end-0 mt-2 me-2"}
-                  size={"2xl"}
-                  onClick={() => setShowPassword(true)}
-                />
-              ) : (
-                <FontAwesomeIcon
-                  icon={faEyeSlash}
-                  className={"absolute end-0 mt-2 me-2"}
-                  size={"2xl"}
-                  onClick={() => setShowPassword(false)}
-                />
-              )}
-            </div>
-            <div className={"relative"}>
-              <input
-                type={showConfirmPassword ? "text" : "password"}
-                placeholder="Confirm Password"
-                value={passwordConfirm}
-                onChange={(e) => setPasswordConfirm(e.target.value)}
-                className="w-full p-3 border border-purple-700 rounded-md mb-4 text-white"
-              />
-              {!showConfirmPassword ? (
-                <FontAwesomeIcon
-                  icon={faEye}
-                  className={"absolute end-0 mt-2 me-2"}
-                  size={"2xl"}
-                  onClick={() => setShowConfirmPassword(true)}
-                />
-              ) : (
-                <FontAwesomeIcon
-                  icon={faEyeSlash}
-                  className={"absolute end-0 mt-2 me-2"}
-                  size={"2xl"}
-                  onClick={() => setShowConfirmPassword(false)}
-                />
-              )}
-            </div>
+            <AuthInput value={username} setValue={setUsername}
+                       type={"text"} placeholder={"Username"}
+                       error={errors.username} setError={handleError}
+                       name={"username"} required={true} showError={registerClicked}/>
+            <AuthInput value={email} setValue={setEmail}
+                       type={"email"} placeholder={"Email"}
+                       error={errors.email} name={"email"}
+                       setError={handleError}  required={true} showError={registerClicked}/>
+            <AuthInput value={password} setValue={setPassword}
+                         type="password" name={"password"}
+                       setError={handleError} placeholder={"Password"}
+                       error={errors.password}  required={true} showError={registerClicked}/>
+            <AuthInput value={passwordConfirm} setValue={setPasswordConfirm}
+                         type="password" name={"password_confirmation"}
+                         placeholder={"Password confirmation"} setError={handleError}
+                         error={errors.password_confirmation}  required={true} showError={registerClicked}/>
           </div>
-          <button className="w-full p-3 bg-purple-900 text-white rounded-md hover:bg-purple-800 transition-all duration-300 ease-in-out hover:cursor-pointer mb-4">
+          <button className="w-full p-3 bg-purple-900 text-white rounded-md
+           hover:bg-purple-800 transition-all duration-300 ease-in-out hover:cursor-pointer "
+          onClick={handleRegister}>
             Register
           </button>
           {!isAdmin && (
             <GoogleOAuthProvider clientId="471502448680-s13pqot74qatipr3l7jlng4f0dvkqa8h.apps.googleusercontent.com">
-              <div className="App">
+              <div className="App mt-2">
                 <GoogleLogin
                   onSuccess={handleLoginSuccess}
                   onError={handleLoginFailure}

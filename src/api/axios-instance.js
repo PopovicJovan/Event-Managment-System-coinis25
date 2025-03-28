@@ -8,7 +8,7 @@ export const apiClient = axios.create({
 });
 
 export const authClient = axios.create({
-  baseURL: "https://dummyjson.com/",
+  baseURL: "http://localhost:8001/api/v1",
   headers: {
     "Content-Type": "application/json",
   },
