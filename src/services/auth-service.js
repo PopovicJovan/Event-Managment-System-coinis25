@@ -7,11 +7,7 @@ export const AuthService = {
         username: username,
         password: password,
       });
-
-      console.log(response.data);
-
-      localStorage.setItem("accessToken", response.data.accessToken);
-
+      AuthService.setToken(response.data.token.token);
       return response.data;
     } catch (error) {
       console.error("Login failed", error);
@@ -22,10 +18,7 @@ export const AuthService = {
   register: async (data) => {
     try {
       const response = await authClient.post("/auth/register", data);
-      console.log(response);
-      // localStorage.setItem("accessToken", response.data.accessToken);
-      //
-      // return response.data;
+      AuthService.setToken(response.data.token.token);
     } catch (error) {
       console.error("Login failed", error);
       throw error;
@@ -34,6 +27,10 @@ export const AuthService = {
 
   logout: () => {
     localStorage.removeItem("accessToken");
+  },
+
+  setToken: (token) => {
+    localStorage.setItem("accessToken", token)
   },
 
   getUser: async () => {

@@ -5,8 +5,8 @@ import { jwtDecode } from "jwt-decode";
 import { useTheme } from "../context/theme-context";
 import {AuthService} from "/src/services/auth-service.js";
 import {AuthInput} from "./auth-input.jsx";
+import {useAuth} from "../hooks/use-auth.js";
 
-const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
 
 export const RegisterPopup = ({ className, isAdmin = false }) => {
@@ -16,6 +16,7 @@ export const RegisterPopup = ({ className, isAdmin = false }) => {
   const [password, setPassword] = useState("");
   const [registerClicked, setRegisterClicked] = useState(false);
   const { theme } = useTheme();
+  const { register } = useAuth();
 
   const [errors, setErrors] = useState({});
   const handleError = (name, value) => {
@@ -36,30 +37,10 @@ export const RegisterPopup = ({ className, isAdmin = false }) => {
   };
 
   const handleRegister = async () => {
-    setRegisterClicked(true);
-    if (password.trim() !== passwordConfirm.trim()){
-      handleError("general", "Passwords do not match!");
-      return;
-    }
-    if (!emailRegex.test(email) && !errors.email){
-      handleError("email", "Email adress is not valid");
-      return;
-    }
-    if (Object.keys(errors).every(key => errors[key].trim() !== "")) return;
     try{
-        await AuthService.register({
-          username: username,
-          password: password,
-          email: email,
-          password_confirmation: passwordConfirm
-      })
-    }catch (error){
-      if (Array.isArray(error?.response?.data?.detail)){
-        error.response.data.detail.forEach((err) => {
-          handleError(err.loc[1] ?? err.loc[0], err.msg)
-        });
-      }
-      handleError('general', error?.response?.data?.detail?.msg)
+      await register({username, email, password, passwordConfirm}, setRegisterClicked, handleError, errors)
+    }catch (err){
+      console.log(err)
     }
   }
 
