@@ -3,7 +3,6 @@ import registerImage from "../assets/undraw_login.svg";
 import { GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google";
 import { jwtDecode } from "jwt-decode";
 import { useTheme } from "../context/theme-context";
-import {AuthService} from "/src/services/auth-service.js";
 import {AuthInput} from "./auth-input.jsx";
 import {useAuth} from "../hooks/use-auth.js";
 

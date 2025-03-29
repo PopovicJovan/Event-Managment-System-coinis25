@@ -1,36 +1,40 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "../context/auth-context";
 import loginImage from "../assets/undraw_login.svg";
 import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
 import { jwtDecode } from "jwt-decode";
-import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { AuthInput } from "../components/auth-input";
 import { useTheme } from "../context/theme-context";
 
 export const LoginPage = () => {
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
-  const [showPassword, setShowPassword] = useState(false);
   const { login } = useAuthContext();
   const navigate = useNavigate();
   const { theme } = useTheme();
 
+
+  const [loginButtonClicked, setLoginButtonCLicked] = useState(false)
+  const [errors, setErrors] = useState({});
+  const handleError = (name, value) => {
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      [name]: value,
+    }));
+  };
+
+
   const handleLogin = async (e) => {
     e.preventDefault();
-    setError("");
 
     try {
-      const success = await login(username, password);
+      const success = await login({email, password}, setLoginButtonCLicked, handleError, errors);
       if (success) {
-        navigate("/parties");
-      } else {
-        setError("Invalid username or password");
+        navigate("/");
       }
     } catch (err) {
-      setError("An error has occurred during login", err);
+      handleError("general", err);
     }
   };
 
@@ -66,40 +70,33 @@ export const LoginPage = () => {
           <h1 className="text-2xl font-bold text-center text-white mb-6 uppercase">
             Login
           </h1>
-          {error && (
-            <div className="text-red-500 text-center mb-5">{error}</div>
-          )}
+          {<p className={"text-red-700 text-center h-7"}>{errors.general}</p>}
           <div>
             {/* Use AuthInput for username */}
             <AuthInput
-              type="text"
-              placeholder="Username"
-              value={username}
-              setValue={setUsername}
+              type="email"
+              placeholder="Email"
+              value={email}
+              setValue={setEmail}
+              error={errors.email}
+              setError={handleError}
+              name={"email"}
+              required={true}
+              showError={loginButtonClicked}
             />
             <div className={"relative"}>
               {/* Use AuthInput for password */}
               <AuthInput
-                type={showPassword ? "text" : "password"}
+                type={"password"}
                 placeholder="Password"
                 value={password}
                 setValue={setPassword}
+                error={errors.password}
+                setError={handleError}
+                name={"password"}
+                required={true}
+                showError={loginButtonClicked}
               />
-              {!showPassword ? (
-                <FontAwesomeIcon
-                  icon={faEye}
-                  className={"absolute end-0 mt-2 me-2"}
-                  size={"2xl"}
-                  onClick={() => setShowPassword(true)}
-                />
-              ) : (
-                <FontAwesomeIcon
-                  icon={faEyeSlash}
-                  className={"absolute end-0 mt-2 me-2"}
-                  size={"2xl"}
-                  onClick={() => setShowPassword(false)}
-                />
-              )}
             </div>
           </div>
           <button

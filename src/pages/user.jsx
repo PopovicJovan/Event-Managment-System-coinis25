@@ -12,6 +12,11 @@ export const UserPage = () => {
   const handleGetUser = async () => {
     try {
       const userData = await getUser();
+      userData.created_at = new Intl.DateTimeFormat('en-GB', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+      }).format(new Date());
       setUser(userData);
     } catch (err) {
       setError(err.message);
@@ -43,7 +48,7 @@ export const UserPage = () => {
                   {user.firstName}
                 </h2>
 
-                <p className="text-white font-medium mb-4">@{user.firstName}</p>
+                <p className="text-white font-medium mb-4">@{user.username}</p>
 
                 <div className="space-y-3 text-left px-4">
                   <div className="flex items-center text-gray-700">
@@ -53,7 +58,7 @@ export const UserPage = () => {
 
                   <div className="flex items-center text-gray-700">
                     <Calendar className="mr-3 text-purple-700" size={20} />
-                    <span className="text-white">Joined {user.birthDate}</span>
+                    <span className="text-white">Joined {user.created_at}</span>
                   </div>
                 </div>
 

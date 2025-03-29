@@ -11,12 +11,26 @@ export const useAuth = () => {
   );
   const navigate = useNavigate();
 
-  const login = async (username, password) => {
+  const login = async (data, setLoginButtonCLicked, handleError, errors) => {
+    setLoginButtonCLicked(true)
+    if (!emailRegex.test(data.email) && !errors.email){
+      handleError("email", "Email adress is not valid");
+      return;
+    }
+    if (Object.keys(errors).some(key => errors[key].trim() !== "")){
+      return;
+    }
     try {
-      await AuthService.login(username, password);
+      await AuthService.login(data.email, data.password);
       setIsAuthenticated(true);
       return true;
     } catch (error) {
+      if (Array.isArray(error?.response?.data?.detail)){
+        error.response.data.detail.forEach((err) => {
+          handleError(err.loc[1] ?? err.loc[0], err.msg)
+        });
+      }
+      handleError('general', error?.response?.data?.detail?.msg)
       setIsAuthenticated(false);
       return false;
     }
@@ -32,15 +46,16 @@ export const useAuth = () => {
       handleError("email", "Email adress is not valid");
       return;
     }
-    if (Object.keys(errors).every(key => errors[key].trim() !== "")) return;
+    if (Object.keys(errors).some(key => errors[key].trim() !== "")) return;
     try{
-      await AuthService.register({
+      const success = await AuthService.register({
         username: data.username,
         password: data.password,
         email: data.email,
         password_confirmation: data.passwordConfirm
       })
       setIsAuthenticated(true);
+      if (success) navigate("/");
     }catch (error){
       if (Array.isArray(error?.response?.data?.detail)){
         error.response.data.detail.forEach((err) => {

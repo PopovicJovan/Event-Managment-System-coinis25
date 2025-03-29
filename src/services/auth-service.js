@@ -1,10 +1,10 @@
 import { authClient } from "../api/axios-instance";
 
 export const AuthService = {
-  login: async (username, password) => {
+  login: async (email, password) => {
     try {
       const response = await authClient.post("/auth/login", {
-        username: username,
+        email: email,
         password: password,
       });
       AuthService.setToken(response.data.token.token);
@@ -19,6 +19,7 @@ export const AuthService = {
     try {
       const response = await authClient.post("/auth/register", data);
       AuthService.setToken(response.data.token.token);
+      return true;
     } catch (error) {
       console.error("Login failed", error);
       throw error;
@@ -36,6 +37,7 @@ export const AuthService = {
   getUser: async () => {
     try {
       const token = localStorage.getItem("accessToken");
+      console.log(token);
       if (!token) {
         throw new Error("No access token found");
       }
@@ -45,6 +47,7 @@ export const AuthService = {
           Authorization: `Bearer ${token}`,
         },
       });
+      console.log(response)
 
       return response.data;
     } catch (error) {

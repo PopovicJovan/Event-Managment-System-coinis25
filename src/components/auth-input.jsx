@@ -41,8 +41,9 @@ export const AuthInput = ({
 
   const handleChange = (e) => {
     if (error) setError(name, "");
-    if (e.target.value.trim() === '' && required)
+    if (e.target.value.trim() === '' && required){
       setError(name, `Field is required`);
+    }
     setValue(e.target.value);
     setError('general', "");
   }
