@@ -5,6 +5,7 @@ import { jwtDecode } from "jwt-decode";
 import { useTheme } from "../context/theme-context";
 import {AuthInput} from "./auth-input.jsx";
 import {useAuth} from "../hooks/use-auth.js";
+import {useNavigate} from "react-router-dom";
 
 
 
@@ -16,6 +17,7 @@ export const RegisterPopup = ({ className, isAdmin = false }) => {
   const [registerClicked, setRegisterClicked] = useState(false);
   const { theme } = useTheme();
   const { register } = useAuth();
+  const navigate = useNavigate();
 
   const [errors, setErrors] = useState({});
   const handleError = (name, value) => {
@@ -38,6 +40,7 @@ export const RegisterPopup = ({ className, isAdmin = false }) => {
   const handleRegister = async () => {
     try{
       await register({username, email, password, passwordConfirm}, setRegisterClicked, handleError, errors)
+      navigate(0);
     }catch (err){
       console.log(err)
     }

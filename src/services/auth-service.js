@@ -15,6 +15,20 @@ export const AuthService = {
     }
   },
 
+  googleLogin: async (token) => {
+    try {
+      const response = await authClient.post("/auth/google/login", {}, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+      AuthService.setToken(response.data.token.token);
+    } catch (error) {
+      console.error("Login failed", error);
+      throw error;
+    }
+  },
+
   register: async (data) => {
     try {
       const response = await authClient.post("/auth/register", data);

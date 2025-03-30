@@ -36,6 +36,19 @@ export const useAuth = () => {
     }
   };
 
+  const googleLogin = async (token, handleError) => {
+    try{
+      await AuthService.googleLogin(token);
+      setIsAuthenticated(true);
+      return true;
+    }catch (e){
+      handleError('general', e);
+      return false;
+    }
+  };
+
+
+
   const register = async (data, setRegisterClicked, handleError, errors) => {
     setRegisterClicked(true);
     if (data.password.trim() !== data.passwordConfirm.trim()){
@@ -86,6 +99,7 @@ export const useAuth = () => {
     login,
     logout,
     getUser,
-    register
+    register,
+    googleLogin
   };
 };

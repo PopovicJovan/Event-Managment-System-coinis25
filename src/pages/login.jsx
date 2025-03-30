@@ -3,14 +3,13 @@ import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "../context/auth-context";
 import loginImage from "../assets/undraw_login.svg";
 import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
-import { jwtDecode } from "jwt-decode";
 import { AuthInput } from "../components/auth-input";
 import { useTheme } from "../context/theme-context";
 
 export const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { login } = useAuthContext();
+  const { login, googleLogin } = useAuthContext();
   const navigate = useNavigate();
   const { theme } = useTheme();
 
@@ -38,10 +37,10 @@ export const LoginPage = () => {
     }
   };
 
-  const handleLoginSuccess = (response) => {
+  const handleLoginSuccess = async (response) => {
     const token = response.credential;
-    const decoded = jwtDecode(token);
-    console.log(decoded);
+    await googleLogin(token, handleError)
+    navigate("/");
   };
 
   const handleLoginFailure = (error) => {
@@ -106,13 +105,11 @@ export const LoginPage = () => {
             Login
           </button>
           <GoogleOAuthProvider clientId="471502448680-s13pqot74qatipr3l7jlng4f0dvkqa8h.apps.googleusercontent.com">
-            <div className="App">
-              <GoogleLogin
-                onSuccess={handleLoginSuccess}
-                onError={handleLoginFailure}
-                useOneTap
-              />
-            </div>
+            <GoogleLogin
+              onSuccess={handleLoginSuccess}
+              onError={handleLoginFailure}
+              useOneTap
+            />
           </GoogleOAuthProvider>
         </div>
       </div>
