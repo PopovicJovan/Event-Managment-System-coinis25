@@ -17,7 +17,7 @@ export const AuthService = {
 
   googleLogin: async (token) => {
     try {
-      const response = await authClient.post("/auth/google/login", {}, {
+      const response = await authClient.post("/auth/google/auth", {}, {
         headers: {
           'Authorization': `Bearer ${token}`
         }

@@ -1,11 +1,10 @@
 import React, {useState} from "react";
 import registerImage from "../assets/undraw_login.svg";
 import { GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google";
-import { jwtDecode } from "jwt-decode";
 import { useTheme } from "../context/theme-context";
 import {AuthInput} from "./auth-input.jsx";
-import {useAuth} from "../hooks/use-auth.js";
 import {useNavigate} from "react-router-dom";
+import {useAuthContext} from "../context/auth-context.jsx";
 
 
 
@@ -16,7 +15,7 @@ export const RegisterPopup = ({ className, isAdmin = false }) => {
   const [password, setPassword] = useState("");
   const [registerClicked, setRegisterClicked] = useState(false);
   const { theme } = useTheme();
-  const { register } = useAuth();
+  const { register, googleLogin } = useAuthContext();
   const navigate = useNavigate();
 
   const [errors, setErrors] = useState({});
@@ -27,10 +26,11 @@ export const RegisterPopup = ({ className, isAdmin = false }) => {
     }));
   };
 
-  const handleLoginSuccess = (response) => {
+  const handleLoginSuccess = async (response) => {
     const token = response.credential;
-    const decoded = jwtDecode(token);
-    console.log(decoded);
+    console.log("token-google:", token)
+    await googleLogin(token, handleError)
+    navigate("/");
   };
 
   const handleLoginFailure = (error) => {
