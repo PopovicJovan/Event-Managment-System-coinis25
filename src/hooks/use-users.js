@@ -9,7 +9,8 @@ export const useUsers = () => {
         const fetchUsers = async () => {
             try{
                 const response = await usersService.getUsers();
-                setUsers(response.users);
+                console.log("resp:  ",response);
+                setUsers(response);
             }catch (err) {
                 console.error(err);
             } finally {

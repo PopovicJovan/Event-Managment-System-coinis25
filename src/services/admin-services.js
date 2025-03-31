@@ -1,5 +1,5 @@
-import {adminClient, apiClient} from "../api/axios-instance";
-export const usersService = {
+import {adminClient} from "../api/axios-instance";
+export const adminService = {
     async getUsers() {
         try {
             const response = await adminClient.get("/users", {
@@ -7,7 +7,6 @@ export const usersService = {
                     "Authorization": `Bearer ${localStorage.getItem("accessToken")}`
                 }
             });
-            console.log("users:",response);
             return response.data;
         } catch (error) {
             console.error(error);
@@ -16,7 +15,7 @@ export const usersService = {
 
     async getUserById(id) {
         try {
-            const response = await apiClient.get(`https://dummyjson.com/users/${id}`);
+            const response = await adminClient.get(`/users/${id}`);
             return response.data;
         } catch (error) {
             console.error(error);

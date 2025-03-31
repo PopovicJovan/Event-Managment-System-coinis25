@@ -51,7 +51,6 @@ export const AuthService = {
   getUser: async () => {
     try {
       const token = localStorage.getItem("accessToken");
-      console.log(token);
       if (!token) {
         throw new Error("No access token found");
       }
@@ -61,7 +60,6 @@ export const AuthService = {
           Authorization: `Bearer ${token}`,
         },
       });
-      console.log(response)
 
       return response.data;
     } catch (error) {
@@ -71,6 +69,6 @@ export const AuthService = {
   },
 
   isAuthenticated: () => {
-    return localStorage.getItem("accessToken");
+    return !!localStorage.getItem("accessToken");
   },
 };

@@ -23,6 +23,8 @@ import {UserPage} from "../pages/user.jsx";
 import PrivateRoute from "../layouts/PrivateRoute.jsx";
 import {AuthProvider} from "../context/auth-context.jsx";
 import {ThemeProvider} from "../context/theme-context.jsx";
+import {AdminSingleUserPage} from "../pages/admin/admin-single-user.jsx";
+import {AdminProvider} from "../context/admin-context.jsx";
 
 
 export const router = createBrowserRouter([
@@ -91,9 +93,11 @@ export const router = createBrowserRouter([
     path: "/admin",
     element: (
         <AuthProvider>
-          <ThemeProvider>
-            <AdminLayout />
-          </ThemeProvider>
+          <AdminProvider>
+            <ThemeProvider>
+                <AdminLayout />
+            </ThemeProvider>
+          </AdminProvider>
         </AuthProvider>
     ),
     children: [
@@ -125,6 +129,10 @@ export const router = createBrowserRouter([
         path: "map",
         element: <AdminMap />,
       },
+      {
+        path: "users/:id",
+        element: <AdminSingleUserPage />
+      }
     ],
   },
   {
