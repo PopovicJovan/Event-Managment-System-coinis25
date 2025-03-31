@@ -1,20 +1,24 @@
-import {Outlet, useNavigate} from "react-router-dom";
+import {Navigate, Outlet, useNavigate} from "react-router-dom";
 import {UserOutlined, MenuOutlined} from "@ant-design/icons";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCalendar, faList, faUserTie, faInbox, faBell, faComment, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 import {AdminSideBarButton} from "../components/AdminSideBarButton.jsx";
 import {useEffect, useState} from "react";
 import {Button, Input} from "antd";
-import {AuthProvider} from "../context/auth-context.jsx";
+import {AuthProvider, useAuthContext} from "../context/auth-context.jsx";
 import {ThemeProvider} from "../context/theme-context.jsx";
 
 export const AdminLayout = () => {
+    const {isAuthenticated, getUser} = useAuthContext()
+    const [isAdmin, setIsAdmin] = useState(null);
+    const [loading, setLoading] = useState(true);
     const [open, setOpen] = useState(true);
     const [searchActive, setSearchActive] = useState(false);
     const navigate = useNavigate();
-    const handleSideBarOpen = () => {
-        setOpen(!open);
-    }
+
+
+    const handleSideBarOpen = () => setOpen(!open);
+
     function handleClickOutsideSideBar(event) {
         if (!isSmallScreen) return;
         const sideBar = document.getElementById("side-bar");
@@ -22,6 +26,17 @@ export const AdminLayout = () => {
             setOpen(false);
         }
     }
+
+    const handleGetUser = async () => {
+        try {
+            const userData = await getUser();
+            setIsAdmin(userData.admin);
+            setLoading(false);
+        } catch (err) {
+            console.log(err)
+        }
+    };
+
     const handleButtonClick = (e, path) => {
         e.stopPropagation();
         navigate(path);
@@ -30,16 +45,18 @@ export const AdminLayout = () => {
     const [isSmallScreen, setIsSmallScreen] = useState(window.matchMedia("(max-width: 1024px)").matches);
 
     useEffect(() => {
+        handleGetUser();
         const mediaQuery = window.matchMedia("(max-width: 1024px)");
         const handleChange = (e) => setIsSmallScreen(e.matches);
-
         mediaQuery.addEventListener("change", handleChange);
         return () => mediaQuery.removeEventListener("change", handleChange);
     }, []);
 
+
     return (
         <AuthProvider>
             <ThemeProvider>
+                {!loading && !(isAuthenticated && isAdmin) && <Navigate to="/" />}
                 <div className={"w-full  overflow-y-hidden"} onClick={(e) => handleClickOutsideSideBar(e)}>
                     {
                         open && (

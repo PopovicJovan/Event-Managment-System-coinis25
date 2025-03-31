@@ -21,6 +21,8 @@ import {TodayEventsPage, WeekEventsPage} from "../pages/weekly-events.jsx";
 import { CalendarPage } from "../pages/calendar.jsx";
 import {UserPage} from "../pages/user.jsx";
 import PrivateRoute from "../layouts/PrivateRoute.jsx";
+import {AuthProvider} from "../context/auth-context.jsx";
+import {ThemeProvider} from "../context/theme-context.jsx";
 
 
 export const router = createBrowserRouter([
@@ -88,9 +90,11 @@ export const router = createBrowserRouter([
   {
     path: "/admin",
     element: (
-      // <ErrorBoundaryWrapper>
-        <AdminLayout />
-      // </ErrorBoundaryWrapper>
+        <AuthProvider>
+          <ThemeProvider>
+            <AdminLayout />
+          </ThemeProvider>
+        </AuthProvider>
     ),
     children: [
       {
