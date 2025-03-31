@@ -20,6 +20,7 @@ import { CreateEventPage } from "../pages/create-event.jsx";
 import {TodayEventsPage, WeekEventsPage} from "../pages/weekly-events.jsx";
 import { CalendarPage } from "../pages/calendar.jsx";
 import {UserPage} from "../pages/user.jsx";
+import PrivateRoute from "../layouts/PrivateRoute.jsx";
 
 
 export const router = createBrowserRouter([
@@ -69,13 +70,19 @@ export const router = createBrowserRouter([
         element: <RegisterPage />,
       },
       {
-        path: "/create-event",
-        element: <CreateEventPage />,
-      },
-      {
-        path: "/user",
-        element: <UserPage />,
-      },
+        path: "",
+        element: <PrivateRoute />,
+        children:[
+          {
+            path: "/create-event",
+            element: <CreateEventPage />,
+          },
+          {
+            path: "/user",
+            element: <UserPage />,
+          },
+        ]
+      }
     ],
   },
   {
